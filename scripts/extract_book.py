@@ -264,7 +264,7 @@ def extract_dialogues(text: str, chapter_id: int) -> list[dict]:
         prompt = " ".join(scenario).strip()
         if hints:
             prompt += "\n\n" + "\n".join(hints)
-        dialogues.append({"num": num, "prompt_sv": prompt, "model_fi": ""})
+        dialogues.append({"num": num, "prompt_sv": prompt, "model_sv": ""})
 
     dialogues.sort(key=lambda d: d["num"])
     return dialogues
@@ -343,7 +343,7 @@ def extract_chapter(pages: list[str], chapter_id: int) -> dict:
 
 
 def merge_curated(base: dict, curated_path: Path | None) -> dict:
-    """If curated book.json exists, preserve model_fi and other hand-edited fields."""
+    """If curated book.json exists, preserve model_sv and other hand-edited fields."""
     if curated_path is None or not curated_path.exists():
         return base
 
@@ -356,8 +356,8 @@ def merge_curated(base: dict, curated_path: Path | None) -> dict:
     hand = curated_chapters[cid]
     for d in base.get("dialogues", []):
         for hd in hand.get("dialogues", []):
-            if hd["num"] == d["num"] and hd.get("model_fi"):
-                d["model_fi"] = hd["model_fi"]
+            if hd["num"] == d["num"] and hd.get("model_sv"):
+                d["model_sv"] = hd["model_sv"]
     return base
 
 
@@ -374,12 +374,12 @@ def main() -> None:
         "--merge",
         type=Path,
         default=None,
-        help="Existing curated book.json to merge model_fi from",
+        help="Existing curated book.json to merge model_sv from",
     )
     parser.add_argument(
         "--raw",
         action="store_true",
-        help="Keep _meta and empty model_fi (for inspection)",
+        help="Keep _meta and empty model_sv (for inspection)",
     )
     args = parser.parse_args()
 

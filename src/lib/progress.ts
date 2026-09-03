@@ -164,8 +164,8 @@ export async function recordBossComplete(chapterId: number): Promise<{ xpGained:
   return applyStudyProgress(XP_REWARDS.boss)
 }
 
-export async function updateCardBack(cardId: number, backFi: string): Promise<void> {
-  await db.cards.update(cardId, { backFi, updatedAt: Date.now() })
+export async function updateCardBack(cardId: number, backSv: string): Promise<void> {
+  await db.cards.update(cardId, { backSv, updatedAt: Date.now() })
   await markStudyActivity()
 }
 
@@ -214,7 +214,7 @@ export async function saveWritingEntry(
 
   if (existing?.id) {
     await db.writingEntries.update(existing.id, {
-      contentFi: entry.contentFi,
+      contentSv: entry.contentSv,
       checklist: entry.checklist,
       completedAt: entry.completedAt,
       updatedAt: now,

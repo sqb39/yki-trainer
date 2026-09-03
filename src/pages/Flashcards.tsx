@@ -88,15 +88,15 @@ export function Flashcards() {
     if (!current?.id) return
     await updateCardBack(current.id, backDraft.trim())
     setEditingBack(false)
-    const updated = { ...current, backFi: backDraft.trim() }
+    const updated = { ...current, backSv: backDraft.trim() }
     setQueue((q) => q.map((c, i) => (i === index ? updated : c)))
   }
 
   useEffect(() => {
     setFlipped(false)
     setEditingBack(false)
-    setBackDraft(current?.backFi ?? '')
-  }, [index, current?.id, current?.backFi])
+    setBackDraft(current?.backSv ?? '')
+  }, [index, current?.id, current?.backSv])
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -169,7 +169,7 @@ export function Flashcards() {
           ) : (
             <>
               <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
-                Finska
+                Modellsvar
               </p>
               {editingBack ? (
                 <div className="mt-2 space-y-2" onClick={(e) => e.stopPropagation()}>
@@ -178,7 +178,7 @@ export function Flashcards() {
                     onChange={(e) => setBackDraft(e.target.value)}
                     rows={4}
                     className="w-full rounded-lg border border-slate-300 px-3 py-2 text-lg"
-                    placeholder="Skriv din översättning eller anteckning…"
+                    placeholder="Skriv ditt svar, förklaring eller exempelmening…"
                     autoFocus
                   />
                   <div className="flex gap-2">
@@ -193,7 +193,7 @@ export function Flashcards() {
                       type="button"
                       onClick={() => {
                         setEditingBack(false)
-                        setBackDraft(current.backFi)
+                        setBackDraft(current.backSv)
                       }}
                       className="rounded-lg px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100"
                     >
@@ -204,15 +204,15 @@ export function Flashcards() {
               ) : (
                 <>
                   <p className="mt-2 text-xl text-slate-800 whitespace-pre-wrap">
-                    {current.backFi || (
-                      <span className="italic text-slate-400">Ingen översättning ännu</span>
+                    {current.backSv || (
+                      <span className="italic text-slate-400">Inget modellsvar ännu</span>
                     )}
                   </p>
                   <button
                     type="button"
                     onClick={(e) => {
                       e.stopPropagation()
-                      setBackDraft(current.backFi)
+                      setBackDraft(current.backSv)
                       setEditingBack(true)
                     }}
                     className="mt-3 text-sm text-indigo-600 hover:text-indigo-800"
@@ -297,7 +297,7 @@ export function Flashcards() {
       <header>
         <h1 className="text-2xl font-bold text-slate-900">Flashcards</h1>
         <p className="mt-1 text-slate-600">
-          SM-2 repetition — svenska på framsidan, finska på baksidan
+          SM-2 repetition — fråga på framsidan, modellsvar på baksidan
         </p>
       </header>
 

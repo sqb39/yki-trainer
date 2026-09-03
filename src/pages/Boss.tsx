@@ -85,10 +85,10 @@ export function Boss() {
     const dialogue = pickRandom(chapter!.dialogues)
     const opinion = pickRandom(chapter!.asikt)
     const writing = pickRandom(chapter!.writing)
-    setDialoguePrompt(dialogue?.prompt_sv ?? 'Öva en dialog från kapitlet på finska.')
+    setDialoguePrompt(dialogue?.prompt_sv ?? 'Öva en dialog från kapitlet på svenska.')
     setOpinionPrompt(opinion ?? 'Uttryck din åsikt om ett tema från kapitlet.')
     setWritingPrompt(
-      writing?.prompt_sv ?? 'Skriv en kort text (meddelande, e-post eller klagomål) på finska.',
+      writing?.prompt_sv ?? 'Skriv en kort text (meddelande, e-post eller klagomål) på svenska.',
     )
     setStep('dialogue')
     setRevealed(false)
@@ -144,7 +144,7 @@ export function Boss() {
   }
 
   if (step === 'dialogue') {
-    const modelFi = chapter.dialogues.find((d) => d.prompt_sv === dialoguePrompt)?.model_fi
+    const modelSv = chapter.dialogues.find((d) => d.prompt_sv === dialoguePrompt)?.model_sv
     return (
       <div className="mx-auto max-w-2xl space-y-6">
         <p className="text-sm font-medium text-amber-700">Steg 1/3 — Dialog</p>
@@ -152,19 +152,19 @@ export function Boss() {
         <div className="rounded-xl border border-slate-200 bg-white p-6">
           <p className="whitespace-pre-wrap text-slate-800">{dialoguePrompt}</p>
         </div>
-        {!revealed && modelFi && (
+        {!revealed && modelSv && (
           <button
             type="button"
             onClick={() => setRevealed(true)}
             className="rounded-lg border border-slate-300 px-4 py-2 text-sm"
           >
-            Visa MODELL (finska)
+            Visa MODELL (svenska)
           </button>
         )}
-        {revealed && modelFi && (
+        {revealed && modelSv && (
           <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-4">
             <p className="text-sm font-medium text-emerald-800">MODELL</p>
-            <p className="mt-2 whitespace-pre-wrap text-slate-800">{modelFi}</p>
+            <p className="mt-2 whitespace-pre-wrap text-slate-800">{modelSv}</p>
           </div>
         )}
         <button
@@ -213,7 +213,7 @@ export function Boss() {
           <p className="whitespace-pre-wrap text-slate-800">{writingPrompt}</p>
         </div>
         <p className="text-sm text-slate-600">
-          Skriv på finska i Skriv-läget eller på papper. Markera klar när du är färdig.
+          Skriv på svenska i Skriv-läget eller på papper. Markera klar när du är färdig.
         </p>
         <button
           type="button"

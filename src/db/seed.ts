@@ -6,7 +6,7 @@ export interface BookChapter {
   vocabulary: string[]
   verbs: Array<{ sv: string; prompt_sv: string }>
   vilket_ord: Array<{ question_sv: string; answer_sv: string }>
-  dialogues: Array<{ num: number; prompt_sv: string; model_fi: string }>
+  dialogues: Array<{ num: number; prompt_sv: string; model_sv: string }>
   reagera: string[]
   beratta: string[]
   asikt: string[]
@@ -37,7 +37,7 @@ function cardsFromChapter(chapter: BookChapter): Omit<Card, 'id'>[] {
     chapterId: chapter.id,
     type: 'vocab',
     frontSv: word,
-    backFi: '',
+    backSv: '',
   }))
 
   const verbCards: Omit<Card, 'id'>[] = chapter.verbs.map((verb) => ({
@@ -45,7 +45,7 @@ function cardsFromChapter(chapter: BookChapter): Omit<Card, 'id'>[] {
     chapterId: chapter.id,
     type: 'verb',
     frontSv: `${verb.sv} — ${verb.prompt_sv}`,
-    backFi: '',
+    backSv: '',
   }))
 
   const dialogueCards: Omit<Card, 'id'>[] = chapter.dialogues.map((d) => ({
@@ -53,7 +53,7 @@ function cardsFromChapter(chapter: BookChapter): Omit<Card, 'id'>[] {
     chapterId: chapter.id,
     type: 'dialogue',
     frontSv: d.prompt_sv,
-    backFi: d.model_fi,
+    backSv: d.model_sv,
     contextSv: `Dialog ${d.num}`,
   }))
 
@@ -68,7 +68,7 @@ function cardsFromChapter(chapter: BookChapter): Omit<Card, 'id'>[] {
     chapterId: chapter.id,
     type: 'speaking',
     frontSv: p.text,
-    backFi: '',
+    backSv: '',
     contextSv: p.kind,
   }))
 

@@ -110,9 +110,9 @@ export function Dialogues() {
 
         <div className="rounded-2xl border border-slate-200 bg-white p-6">
           <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
-            MODELL (finska)
+            MODELL (svenska)
           </p>
-          <p className="mt-3 whitespace-pre-wrap text-slate-800">{current.model_fi}</p>
+          <p className="mt-3 whitespace-pre-wrap text-slate-800">{current.model_sv}</p>
         </div>
 
         <div>
@@ -166,7 +166,7 @@ export function Dialogues() {
         {!revealed ? (
           <div className="space-y-3 text-center">
             <p className="text-sm text-slate-600">
-              Svara högt på finska enligt instruktionerna. Ta den tid du behöver.
+              Svara högt på svenska enligt instruktionerna. Ta den tid du behöver.
             </p>
             <button
               type="button"

@@ -34,7 +34,7 @@ export function Dashboard() {
     <div className="space-y-8">
       <header>
         <h1 className="text-2xl font-bold text-slate-900">YKI B1 Trainer</h1>
-        <p className="mt-1 text-slate-600">Förbered dig för allmän språkexamen</p>
+        <p className="mt-1 text-slate-600">Förbered dig för allmän språkexamen — på svenska</p>
       </header>
 
       <SyncBanner settings={settings} />

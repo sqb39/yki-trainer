@@ -13,7 +13,7 @@ const CATEGORY_LABELS: Record<SpeakingCategory, string> = {
 }
 
 const CATEGORY_DESCRIPTIONS: Record<SpeakingCategory, string> = {
-  reagera: 'Reagera på en situation — svara spontant på finska',
+  reagera: 'Reagera på en situation — svara spontant på svenska',
   berätta: 'Berätta en historia eller erfarenhet',
   åsikt: 'Uttryck din åsikt och argumentera',
 }
@@ -132,7 +132,7 @@ export function Speaking() {
         <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-8">
           <p className="text-4xl">✓</p>
           <h2 className="mt-2 text-xl font-bold text-slate-900">Talövning klar!</h2>
-          <p className="mt-2 text-slate-600">Bra jobbat med att öva muntligt finska.</p>
+          <p className="mt-2 text-slate-600">Bra jobbat med att öva muntligt på svenska.</p>
           <p className="mt-1 text-sm font-medium text-indigo-600">+{lastXp} XP</p>
         </div>
         <div className="flex justify-center gap-3">
@@ -185,7 +185,7 @@ export function Speaking() {
           key={timerKey}
           duration={duration}
           autoStart
-          label="Tala på finska"
+          label="Tala på svenska"
           onComplete={() => setTimerDone(true)}
         />
 

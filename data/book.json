@@ -233,57 +233,57 @@
         {
           "num": 1,
           "prompt_sv": "En vän kommer på besök.\n\n(Svara.)\n(Svara jakande)\n(Svara och bjud din vän på något att dricka.)\n(Svara och berätta hur ditt hem ser ut.)\n(Svara och berätta vad som är bra i lägenheten och vad som skulle kunna vara bättre.)\n(Svara.)",
-          "model_fi": "Hei! Kiva nähdä sinut taas.\nOlen todella iloinen, että olet täällä. Haluatko juotavaa?\nKyllä, minulla on kahvia. Teen sinulle kupin kahvia.\nOlen iloinen, että pidät asunnostani. Vaimoni ja minä olemme aina halunneet tämänkaltaisen asunnon. Asuntoni on kahdeksankymmentä neliötä.\nMuutimme uuteen asuntoomme kolme kuukautta sitten, tammikuussa.\nOlemme tyytyväisiä asuntoon. Alue on siisti ja lähellä on kaunis puisto. Mutta täytyy ostaa auto, jos haluaa asua täällä."
+          "model_sv": "Hej! Trevligt att se dig igen.\nJag är väldigt glad att du är här. Vill du dricka något?\nJa, jag har kaffe. Jag ska göra en kopp kaffe åt dig.\nJag är glad att du gillar min lägenhet. Min fru och jag har alltid velat ha en lägenhet som denna. Lägenheten är åttio kvadratmeter.\nVi flyttade in i vår nya lägenhet för 3 månader sedan, i januari.\nVi är nöjda med lägenheten. Området är rent och det finns en vacker park i närheten.\nMen man måste köpa en bil om man vill bo här."
         },
         {
           "num": 2,
           "prompt_sv": "En vän har varit på besök hos dig och åker nu.\n\n(Svara och fråga din vän om deras planer för de kommande dagarna.)\n(Svara nekande och förklara varför tidpunkten inte är lämplig.)\n(Erbjud din vän skjuts.)\n(Svara.)",
-          "model_fi": "Mitä sinulla on suunnitelmissa lähiaikoina? Entä ensi lauantai, tulisitko meille?\nValitettavasti lauantai ei sovi minulle, minulla on silloin työmeno.\nHaluatko kyydin? Voin viedä sinut keskustaan autolla.\nEi se mitään vaivaa. Ole hyvä vain!"
+          "model_sv": "Vad har du för planer de närmaste dagarna? Vad sägs om nästa lördag, skulle du vilja komma till oss?\nTyvärr passar inte lördag för mig, jag har då en viktig sak på jobbet.\nVill du ha skjuts? Jag kan köra dig in till stan.\nDet vore jättesnällt, tack så mycket!"
         },
         {
           "num": 3,
           "prompt_sv": "Du har hört att din vän har fått ett nytt jobb. Ring och gratulera dem.\n\n(Presentera dig själv och berätta vad du vill säga.)\n(Fråga något om det nya jobbet.)\n(Svara och berätta vilken tid du kan bli uppringd.)\n(Svara och avsluta samtal.)",
-          "model_fi": "Hei, tässä Pekka. Soitan onnitellakseni sinua uudesta työpaikasta! Kuulin siitä eilen.\nMillaista uusi työ on? Oletko tyytyväinen?\nSoita minulle tänä iltana kello seitsemän, se sopii minulle hyvin.\nHienoa, puhutaan lisää illalla. Mukavaa päivää!"
+          "model_sv": "Hej, det är Pekka. Jag ringer för att gratulera dig till det nya jobbet! Jag hörde om det igår.\nHur är det nya jobbet? Är du nöjd?\nRing mig ikväll klockan sju, det passar mig bra.\nToppen, vi pratar mer ikväll. Ha en bra dag!"
         },
         {
           "num": 4,
           "prompt_sv": "Du har blivit inbjuden till en stor fest. Din kollega ringer och vill veta hur man ska klä sig till festen.\n\n(Svara.)\n(Svara.)\n(Svara.)\n(Berätta din åsikt.)",
-          "model_fi": "Hei! Yrityksen juhlissa lukee tumma puku, eli parhaat vaatteet päälle.\nMiehillä se tarkoittaa tummaa pukua ja naisilla pitkää iltapukua.\nLyhyttä mekkoa ei kannata valita, se ei ole tarpeeksi juhlallinen.\nVoit ostaa puvun Stockmannilta tai Sokokselta. Voin tulla mukaan sovittamaan, jos haluat."
+          "model_sv": "Åh nej! Det stämmer. För kvinnor innebär det en lång aftonklänning och jag har inte ens en sådan. Jag undrar om jag kan bära den korta klänningen?\nJust det, ja. Men jag skulle inte vilja vara helt underklädd. Man måste visa respekt. Jag antar att jag måste gå och handla.\nDet låter bra! Vill du följa med mig som provsmakare?\nOkej, men tack! Nu måste jag gå."
         },
         {
           "num": 5,
           "prompt_sv": "Din vän ser trött ut. Du är orolig för honom/henne.\n\n(Berätta för din vän hur hen ser ut.)\n(Erbjud dig att hjälpa din vän. Ta reda på själv vad du kan göra.)\n(Ge din vän råd om hur hen kan sova bättre.)\n(Svara.)",
-          "model_fi": "Huomenta. Näytät todella väsyneeltä tänään, silmäsi ovat punaiset.\nVoinko auttaa jotenkin? Ehkä voin hoitaa lapset hetken, jotta saat levätä.\nKokeile mennä nukkumaan aikaisemmin ja välttää kofeiinia illalla. Myös kävely ennen nukkumaanmenoa auttaa.\nKiitos, yritän. On hyvä, että minulla on ystävä kuten sinä."
+          "model_sv": "God morgon. Du ser verkligen trött ut idag, dina ögon är röda.\nKan jag hjälpa på något sätt? Kanske kan jag passa barnen en stund så du får vila.\nProva att gå och lägga dig tidigare och undvik kaffe på kvällen.\nTack, jag ska försöka. Det är skönt att ha en vän som du."
         },
         {
           "num": 6,
           "prompt_sv": "Du träffar en ny person. Hen vill träffa dig igen, men du är inte intresserad av det.\n\n(Tacka och kommentera mötet.)\n(Tacka artigt nej.)\n(Svara och berätta varför du inte längre vill träffas.)\n(Trösta bekanta och berätta något positivt om dem.)",
-          "model_fi": "Kiitos, oli mukava tavata sinut. Olet mielenkiintoinen ihminen.\nKiitos kutsusta, mutta en valitettavasti voi tulla illalliselle.\nOlen pahoillani, mutta en etsi parisuhdetta juuri nyt. Minulla on paljon töitä.\nÄlä ota sitä henkilökohtaisesti. Olet todella mukava ja varmasti löydät sopivan kumppanin."
+          "model_sv": "Tack, det var trevligt att träffas. Du verkar vara en intressant person.\nTack för inbjudan, men tyvärr kan jag inte komma på middag.\nJag söker inte ett förhållande just nu. Jag har mycket att göra på jobbet.\nTa det inte personligt. Du är verkligen trevlig."
         },
         {
           "num": 7,
           "prompt_sv": "Din vän har skiljt sig. Hen är ledsen och upprörd.\n\n(Reagera på ett sätt som är lämpligt i förhållande till situationen.)\n(Reagera och fråga något om barnen.)\n(Du har bråttom. Avsluta samtalet på ett artigt sätt.)\n(Fråga om din väns mående.)\n(Erbjuda att hjälpa din vän.)",
-          "model_fi": "Olen todella pahoillani kuullessani tästä. Tämä on varmasti vaikeaa sinulle.\nMiten lapset voivat? Missä he asuvat nyt?\nMinun täytyy nyt lähteä töihin, mutta soitetaan pian uudelleen.\nMiten sinä voit? Oletko nukkunut yöllä?\nVoin tulla luoksesi viikonloppuna ja auttaa vaikka ruoanlaitossa."
+          "model_sv": "Jag är verkligen ledsen att höra detta. Det måste vara väldigt svårt för dig.\nHur mår barnen? Var bor de nu?\nJag måste tyvärr skynda mig till jobbet nu, men vi hörs snart igen.\nHur mår du? Har du kunnat sova?\nJag kan komma över på helgen och hjälpa till med maten om du vill."
         },
         {
           "num": 8,
           "prompt_sv": "Du organiserar en fest (du bestämmer vad som ska firas). Ring en vän och bjud in dem till festen.\n\n(Berätta varför du ringer.)\n(Svara på frågan.)\n(Tacka artigt nej och avsluta samtalet.)\n(Svara.)\n(Svara.)",
-          "model_fi": "Hei! Soitan kutsuakseni sinut syntymäpäiväjuhliini ensi lauantaina.\nJuhlat ovat kotona meillä kello kuudelta, osoitteessa Mannerheimintie 12.\nTulen mielelläni! Tarvitsetko apua järjestelyissä?\nVahvistan osallistumiseni viimeistään perjantaina.\nLahjaa ei tarvitse tuoda, pelkkä läsnäolosi riittää."
+          "model_sv": "Hej! Jag ringer för att bjuda in dig till min födelsedagsfest nästa lördag.\nFesten är hemma hos mig klockan sex.\nTack så mycket! Behöver du hjälp med förberedelserna?\nJag bekräftar senast på fredag om jag kan komma.\nDu behöver inte ta med någon present."
         },
         {
           "num": 9,
           "prompt_sv": "Du vill renovera ditt kök. Du ringer till affären och ber om en offert.\n\n(Hälsa och berätta varför du ringer.)\n(Svara och berätta vad du vill renovera.)\n(Svara och be om ett pris.)\n(Svara nekande och förklara varför. Föreslå en ny tid.)\n(Svara.)\n(Svara.)\n(Tacka och avsluta samtalet.)",
-          "model_fi": "Hei, soitan Remont-Alexista. Haluaisin tarjouksen keittiöremontista.\nHaluaisin uudet kaapit, työtasot ja uuden liesituulettimen. Keittiö on noin kymmenen neliötä.\nPaljonko remontti suunnilleen maksaisi?\nPerjantai aamu ei sovi, mutta maanantai aamupäivä sopisi hyvin.\nBudjettini on noin viisitoista tuhatta euroa.\nHaluaisin remontin valmiiksi ennen joulua.\nKiitos paljon, kuulemiin!"
+          "model_sv": "Hej, jag skulle vilja ha en offert på en köksrenovering.\nJag vill ha nya skåp, bänkskivor och en ny fläkt. Köket är ungefär tio kvadratmeter.\nHur mycket skulle renoveringen kosta ungefär?\nFredag morgon passar tyvärr inte, men måndag förmiddag skulle fungera.\nMin budget är ungefär femton tusen euro.\nJag skulle vilja att renoveringen är klar före jul.\nTack så mycket, hejdå!"
         },
         {
           "num": 10,
           "prompt_sv": "När du kommer hem väntar detta meddelande på dig:\n«Hej! Det finns ett paket till dig som inte ryms i din brevlåda. Vi försökte leverera den till dig i dag, mutta du var inte hemma. Kan du ringa tillbaka så kan vi komma överens om en tid då jag kan hämta paketet.»\n\n(Presentera dig själv och berätta din situation.)\n(Svara på frågan.)\n(Svara på frågan.)\n(Svara på frågan.)\n(Avsluta samtalet artigt.)",
-          "model_fi": "Hei, tässä Matti Virtanen, Mannerheimintie 5 B 12. Soitan paketin toimituksesta.\nKyllä, olin töissä tänään. Milloin voitte tuoda paketin uudelleen?\nHuomenna iltapäivä sopii hyvin, olen kotona kello kolmesta eteenpäin.\nKyllä, tästä numerosta tavoitatte minut ennen toimitusta.\nKiitos, kuulemiin!"
+          "model_sv": "Hej, jag heter Matti Virtanen, Mannerheimintie 5 B 12. Jag ringer angående paketet.\nJa, jag var på jobbet idag. När kan ni leverera paketet igen?\nImorgon eftermiddag passar bra, jag är hemma från klockan tre.\nJa, ni når mig på det här numret före leveransen.\nTack, hejdå!"
         },
         {
           "num": 11,
           "prompt_sv": "En granne har klagat på oljud från din lägenhet. Disponenten kommer att ringa dig om det. OBS! Börja samtalet genom att svara i telefonen.\n\n(Svara i telefonen.)\n(Svara på frågan.)\n(Svara på frågan.)\n(Svara på frågan.)\n(Du håller inte med.)\n(Svara och berätta vilken typ av fest du anordnade.)\n(Svara.)",
-          "model_fi": "Virtanen, hei.\nKyllä, meillä oli pienet syntymäpäiväjuhlat lauantaina.\nVieraat lähtivät kello yhdentoista, en kello viiteen.\nEn ole aiemmin saanut valituksia naapureilta.\nAsun vuokralla tässä asunnossa.\nJuhlat olivat pienet, vain lähimmät ystävät ja perhe. Musiikki ei ollut kovaa.\nYmmärrän huolen. Ensi kerralla ilmoitan naapureille etukäteen."
+          "model_sv": "Virtanen, hej.\nJa, vi hade en liten födelsedagsfest i lördags.\nGästerna gick hem vid elva, inte vid fem på morgonen.\nJag har inte fått klagomål från grannarna tidigare.\nJag hyr lägenheten.\nDet var en liten fest med närmaste vänner och familj. Musiken var inte hög.\nJag förstår er oro. Nästa gång sätter jag upp en lapp i trapphuset i förväg."
         }
       ],
       "reagera": [
@@ -382,47 +382,47 @@
         {
           "num": 1,
           "prompt_sv": "Rita en bild av dig själv som konsument och berätta om den. Vilka är dina konsumtionsvanor? Var köper du mat/kläder/andra saker och hur ofta? Vad går dina pengar till? Är du sparsam eller slösaktig? Är pengar viktiga för dig? Hur skulle du ändra dina vanor om du kunde? Du har varit på gymmet och glömt något (hitta själv på vad). Ring till gymmet och fråga om det glömda föremålet. Kvinna: 20 sek 10 sek 15 sek 10 sek 20 sek (Svara på frågan, ange minst två egenskaper hos saken.) Vardagsliv MODELL: Dialog 1. Vardagsliv Olet ollut liikuntahallilla ja unohtanut sinne jotain (keksi itse, mitä). Soita hallille ja tiedustele unohtunutta tavaraa. Nainen Sinä Ilona Idrottscentrum, hur kan jag hjälpa till? Vad synd! Kan du vara mer specifik om hurdan den är? Hmm. Den här kundtjänsten har i alla fall inte tagit in sådana saker nu. När tappade du den? Okej. Jag sätter upp en lapp och hoppas att den dyker upp. Okej, den kanske fortfarande finns kvar. Jag kan sätta upp en lapp på anslagstavlan om att en av dessa har försvunnit. Skulle det vara okej för dig? Vem kontaktar vi om vi gör det? Vardagsliv\n\n(Presentera dig själv och förklara varför du ringer)\n(Svara på frågan.)\n(Svara ja och ge dina kontaktuppgifter.)\n(Avsluta samtalet artigt.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 2,
           "prompt_sv": "Du befinner dig i en frisörsalong. Du vill klippa och färga ditt hår. Frisör: (Du håller inte med. Berätta varför frisyren på bilden inte passar dig.) 10 sek 20 sek 10 sek 10 sek 10 sek 25 sek (Svara och berätta vilken slags frisyr du vill ha.) Vardagsliv\n\n(Säg hej och svara på frågan.)\n(Svara.)\n(Svara och berätta vad du vill göra.)\n(Svara.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 2,
           "prompt_sv": "Du befinner dig i en frisörsalong. Du vill klippa och färga ditt hår. Frisör: Hej! Ni har visst en tid bokad hos mig. Kom hit och sätt dig. Är det här första gången du är här? Okej. Vad tänkte du att vi skulle göra i dag? Okej, jag ska se. Här är ett exempel i denna tidning. Skulle det vara bra? Ah, ja. Nu tror jag att jag förstår. Vill du ha något att dricka? Okej. På bordet där borta finns några tidningar att läsa och vi har Wi-Fi här om du vill surfa. Ja, ja. Jag ska gå och hämta lite redskap och sedan kan vi börja. Vardagsliv",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 3,
           "prompt_sv": "Du befinner dig på ett kafé. Det är något fel på kaffet (hitta själv på vad). (Svara nekande och berätta vad problemet med kaffet är.) (Svara och be om en annan dryck från listan.) 15 sek 15 sek 10 sek 15 sek 10 sek 20 sek (Svara nekande och berätta varför du inte vill ha en kopp till.) Vardagsliv\n\n(Berätta vad du tycker om bullen.)\n(Tacka och beröm betjäningen.)\n(Avsluta samtalet artigt.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 3,
           "prompt_sv": "Du befinner dig på ett kafé. Det är något fel på kaffet (hitta själv på vad). Hej! Smakar kaffet bra? Ah, äsch då! Jag är ledsen. Jag kan givetvis byta ut kaffet och ge dig ett nytt i stället. Ja, det är förstås förståeligt. Skulle en annan dryck vara bättre? Okej, jag tar en av dem. Jag är verkligen ledsen för kaffet. Vi har färska bullar här också, får jag ge dig en gratis? Tack för att du säger det. Många kunder dricker bara det dåliga kaffet och kommer sedan aldrig tillbaka eller talar illa om kaféet till andra. Kundernas feedback är mycket viktig för oss. Okej, här är den här drinken. Och jag ber om ursäkt för det som hände. Vardagsliv",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 4,
           "prompt_sv": "Du har gått vilse i en främmande stad. Ta reda på själv vilken plats du söker. Du ber om råd på gatan. Man: (Be om hjälp av personen som kommer emot dig.) (Berätta vilken färgs byggnad du ser.) 10 sek 10 sek 15 sek 10 sek 10 sek Vardagsliv Man: Ja, självklart. Vart är du på väg? Tur att du är i närheten. Ser du den stora byggnaden där borta? Ja, det är det. Först går du rakt fram hela vägen till den byggnaden. Sväng sedan till vänster och gå två kvarter rakt fram så är du framme. Jag är säker på att du hittar dit. Det är inte långt bort, kanske ungefär en halv kilometer härifrån. Det var så lite så!\n\n(Svara.)\n(Svara och upprepa instruktionen.)\n(Svara och tacka.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 4,
           "prompt_sv": "Du har gått vilse i en främmande stad. Ta reda på själv vilken plats du söker. Du ber om råd på gatan. Vardagsliv",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 5,
           "prompt_sv": "Du har köpt en hushållsapparat (hitta själv på vilken). Det är något fel på den och du returnerar den till butiken. (Du vill inte ha samma produkt. Berätta varför.) (Svara och tala om vilken produkt du vill ha som ersättning.) Vardagsliv\n\n(Svara och berätta din situation.)\n(Svara och ge kvittot.)\n(Svara och tacka.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 5,
           "prompt_sv": "Du har köpt en hushållsapparat (hitta själv på vilken). Det är något fel på den och du returnerar den till butiken. Säljare: Finns det något jag kan hjälpa dig med? Åh ja! Har du kvittot? Ja, tack. Som tur är gäller garantin fortfarande, så det finns inga problem. Jag kan ge dig en ny produkt som ersätter den. Ah. Ja, det kan man förstå. Tyvärr kan jag inte betala tillbaka pengarna, men finns det något annat från den här tillverkaren som du skulle kunna vara intresserad av? Ja, så länge det är samma märke kan ett utbyte göras. Vi går till denna avdelning och ser vilken typ av modell som skulle vara bra. Vardagsliv",
-          "model_fi": ""
+          "model_sv": ""
         }
       ],
       "reagera": [
@@ -535,17 +535,17 @@
         {
           "num": 1,
           "prompt_sv": "Du har gått vilse i skogen. Du ringer en vän. Natur och miljö (Svara nekande och berätta vilka kläder du har.)\n\n(Säg hej och berätta vad ditt problem är.)\n(Svara på frågan.)\n(Svara på frågan.)\n(Tacka och lägg på.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 2,
           "prompt_sv": "Du vill fiska, men du har inget fisketillstånd. Du ringer och frågar. Tjänsteman: Natur och miljö\n\n(Säg hej och berätta vad du har att säga.)\n(Svara på frågan.)\n(Fråga efter priset.)\n(Fråga efter adressen till webbplatsen.)\n(Tacka och avsluta samtalet.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 2,
           "prompt_sv": "Du vill fiska, men du har inget fisketillstånd. Du ringer och frågar. Tjänsteman: Skogsförvaltningen, hur kan jag hjälpa dig? Ja, ja. Var ska du fiska? Jaså. Priset för tillståndet beror också på syftet med fisket och vilka redskap du använder. Ett fritidsfisketillstånd för ett vattenområde kostar cirka 63 euro per år, men sedan behövs ett separat fisketillstånd för ett lockbete, vars pris beror på fiskarens ålder. Det är en ganska komplicerad process i telefonen, men du kan köpa tillstånd på nätet. Till exempel är fisketillstand.net en bra adress. Du kan se vilken utrustning som är avgiftsbelagd. Fiske på vintern kräver ingen licens. Natur och miljö",
-          "model_fi": ""
+          "model_sv": ""
         }
       ],
       "reagera": [
@@ -628,22 +628,22 @@
         {
           "num": 1,
           "prompt_sv": "Du ser en ung kvinna ligga på gatan. Du försöker väcka henne, men hon svarar inte. Du ringer nödnumret. Tjänsteman Ge råd till din vän när: • Det känns som om hen blir trött när läraren talar • Hen gråter • Hen är irriterad på chefen på jobbet. • Hen har svindel och huvudvärk. • Hen har tråkigt på jobbet. • Hen är rädd för döden. • Hen är törstig, men det finns inget att dricka. • Hen är arg för att hen betalade så mycket. • Hen är deprimerad på grund av vintern. • Hen har en dålig syn. • Hen har en “mans förkylning” • Hen har hård mage eller förstoppning • Hen har mycket övervikt • Hen är på väg på operation. 1. Hälsa och välmående\n\n(Presentera dig själv och förklara varför du ringer.)\n(Svara och ange om kvinnan har några skador.)\n(Svara.)\n(Svara.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 1,
           "prompt_sv": "Du ser en ung kvinna ligga på gatan. Du försöker väcka henne, men hon svarar inte. Du ringer nödnumret. Tjänsteman: 112, hur kan jag hjälpa dig? Andas personen? Blöder hen? Vet du vad som hände? Vi skickar hjälp dit. Kan du ge oss adressen igen? Tack för att du ringde. Vänligen vänta utan att lägga på. Hjälp är på väg. Hälsa och välmående\n\n(Svara.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 2,
           "prompt_sv": "Du har hört att din vän har varit med om en olycka och nu ligger på sjukhus. Du ringer honom/henne. 1. Hälsa och välmående\n\n(Presentera dig och förklara varför du ringer.)\n(Reagera och frågar något mer)\n(Erbjud vännen hjälp.)\n(Svara och be platsen.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 2,
           "prompt_sv": "Du har hört att din vän har varit med om en olycka och nu ligger på sjukhus. Du ringer honom/henne. Maija Ja, det var jag. Jag cyklade till jobbet och var på Algatan då en bil körde på mig på övergångsstället. Ja, tack. Det skulle vara bra. Du är en riktigt bra vän. När kan du komma på besök? Jag är här på universitetssjukhuset. Avdelning 10. Tack så mycket och vi ses snart. Tja, jag vet inte än, men min arm är bruten och tydligen är det något fel på ryggen, för den är riktigt öm. De kommer att göra en magnetröntgenundersökning i dag. Som tur var hade jag en hjälm på mig. Hälsa och välmående",
-          "model_fi": ""
+          "model_sv": ""
         }
       ],
       "reagera": [
@@ -955,42 +955,42 @@
         {
           "num": 1,
           "prompt_sv": "Du är sjuk. Berätta för din chef. Chef: (Presentera dig själv och berätta vad du har att säga.) Arbete och utbildning\n\n(Svara.)\n(Svara.)\n(Svara.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 1,
           "prompt_sv": "Du är sjuk. Berätta för din chef. Chef: Nieminen. Ah... ja, det går inte att hjälpa. Har du ringt företagshälsovården än? Okej. Har du något viktigt arbete att utföra och behöver en ersättare? Okej. Krya på dig nu snart. Säg till när du vet hur lång din sjukskrivning blir. 3. Arbete och utbildning",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 2,
           "prompt_sv": "Du sitter på ett seminarium tillsammans med en kollega och lyssnar på presentationer. Under pausen talar du med din kollega om vad du tyckte om dagens presentationer. (Kommentera och fråga efter tid och plats för nästa presentation.) Arbete och utbildning\n\n(Svara. Berätta vad du tyckte om presentationen.)\n(Svara.)\n(Svara.)\n(Svara.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 2,
           "prompt_sv": "Du sitter på ett seminarium tillsammans med en kollega och lyssnar på presentationer. Under pausen talar du med din kollega om vad du tyckte om dagens presentationer. Vilken bra prestation den andra var i dag! Gillade du den? Jag kommer inte ihåg hens namn. Jag vet inte vad hen heter. Vänta lite. Minns du vilken tid hens show var? Ja, här! Helena Roihu. Hon är en riktigt bra talare! Hon är en mycket trevlig talare. I Jag blev i alla fall inspirerad när jag lyssnade. Hur är det med dig? Den tredje talaren var också bra, men ämnet var inte så intressant. Ja! Vänta, det är där borta i rum 3. Presentationen börjar klockan om fem minuter. Ska vi hämta lite kaffe med till den? 3. Arbete och utbildning",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 3,
           "prompt_sv": "Din kollega vill boka ett möte. (Svara och berätta varför du är upptagen på jobbet.) Arbete och utbildning\n\n(Svara och föreslå en tid under nästa vecka.)\n(Svara nekande och förklara varför.)\n(Svara.)\n(Svara jakande och föreslå en tid.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 3,
           "prompt_sv": "Din kollega vill boka ett möte. Lyssna, vi måste träffas och prata om det här projektet. När har du tid? Jag har en fulltecknad kalender, men låt mig kolla. Hmmm. Det är det passar inte. Inte en chans. Vad sägs om fredag morgon? Det passar för mig vilken tid som helst. Då kommer den att flyttas fram ett par veckor. Vad sägs om tisdag den tjugofemte? Ja, det går bra. Vad det är svårt att hitta en tidpunkt som passar oss båda. Det måste vara den mest hektiska tiden på året. Ja, det är så det är. Men det är i alla fall bra att ha en tid i kalendern nu. Jag bokar en bil åt oss och skickar ett meddelande till dig om var vi kan träffas. 3. Arbete och utbildning",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 4,
           "prompt_sv": "Du har varit på affärsresa. Du talar med dina kollegor i kafferummet efter din affärsresa. Arbete och utbildning\n\n(Svara och berätta var du var på affärsresa.)\n(Svara och berätta vad du gjorde på din affärsresa.)\n(Svara.)\n(Svara.)\n(Svara.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 4,
           "prompt_sv": "Du har varit på affärsresa. Du talar med dina kollegor i kafferummet efter din affärsresa. Det var länge sedan vi sågs. Var har du varit? Ja, ja. Hur var din resa? Det stämmer. Var det ett bra arrangemang? Hotell och sådant? Det låter bra! Hur var frukosten på hotellet? Det är trevligt att åka på resa ibland, men affärsresor är också ganska jobbiga. Hur känner du dig nu? Japp, japp. Men nu måste jag återgå till arbetet. Trevligt att se dig igen. 3. Arbete och utbildning",
-          "model_fi": ""
+          "model_sv": ""
         }
       ],
       "reagera": [
@@ -1077,17 +1077,17 @@
         {
           "num": 1,
           "prompt_sv": "Du vill registrera ditt äktenskap och går till den digitala byrån. Tjänsteman: Samhälle MODELL: Dialog 1. Samhället Du vill registrera ditt äktenskap och går till den digitala byrån. Tjänsteman: Hej, vad kan jag hjälpa dig med? Okej. Är båda parter myndiga? Kan du ge mig ditt personnummer? Jag behöver den här. Tack. När du har fyllt i formuläret ska du ta med det hit så kan vi bestämma en tid för registrering. Det kostar inget att registrera här på registret, men om du vill registrera det på annat håll måste du betala resekostnaderna. Och ingen av er är gift, har ett registrerat partnerskap eller är släkt med varandra? Då kan utredningen av hindren börja. Det finns en blankett för begäran om utredning på kansliets webbplats som du kan skriva ut och fylla i. Jag kan också skriva ut den här om du vill. Samhälle\n\n(Hälsa och berätta om ditt ärende.)\n(Svara jakande.)\n(Svara nekande.)\n(Svara.)\n(Svara.)\n(Fråga efter priset.)\n(Tacka och avsluta samtalet.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 2,
           "prompt_sv": "Ett problem har uppstått i ditt hem (hitta själv på vad) och du vill göra anspråk på din hemförsäkring. Tjänsteman: (Tacka och avslutar samtalet). (Svara och säg att du har haft problem med posten.) Samhälle\n\n(Hälsa och berätta om ditt ärende)\n(Svara.)\n(Svara.)\n(Svara och säg att du inte har fått räkningen.)\n(Svara och tala om när du kan komma in.)",
-          "model_fi": ""
+          "model_sv": ""
         },
         {
           "num": 2,
           "prompt_sv": "Ett problem har uppstått i ditt hem (hitta själv på vad) och du vill göra anspråk på din hemförsäkring. Tjänsteman: Försäkringsbolag Turvanasi Hur kan jag hjälpa dig? Oj, vad synd. När och hur fick du reda på det? Okej. Kan du berätta ditt namn och din adress igen, så ska jag leta efter din försäkringsinformation. Okej. Jag ska anteckna det i kalendern. Vi ses då. Tack, jag hittade informationen. Lyssna, det är så olyckligt att den senaste räkningen för hemförsäkringen är obetald, så hemförsäkringen har inte varit giltig på ett par månader. Verkligen? Vi har här information om att räkningen skickades ut för exakt två månader sedan och att påminnelsen om betalning kom om tre veckor senare. Ja. Postkontoret har varit riktigt opålitligt på sistone. Jag har också förlorat många paket. Jag ser också att du har varit kund hos oss i tio år och att du alltid har betalat dina räkningar i tid, så låt oss försöka lösa detta så att vi kan ge dig en återbetalning från din hemförsäkring. Detta kan dock inte hanteras via telefon, så kan du komma till vårt kontor här? Samhälle",
-          "model_fi": ""
+          "model_sv": ""
         }
       ],
       "reagera": [

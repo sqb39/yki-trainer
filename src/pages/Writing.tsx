@@ -15,7 +15,7 @@ export function Writing() {
   const chapterIds = getChapterIds()
   const [chapterId, setChapterId] = useState(chapterIds[0] ?? 1)
   const [activeTask, setActiveTask] = useState<WritingEntry['taskType'] | null>(null)
-  const [contentFi, setContentFi] = useState('')
+  const [contentSv, setContentSv] = useState('')
   const [checklist, setChecklist] = useState<Record<string, boolean>>({})
   const [, setEntryId] = useState<number | null>(null)
   const [completedAt, setCompletedAt] = useState<number | null>(null)
@@ -37,12 +37,12 @@ export function Writing() {
     const existing = savedEntries?.find((e) => e.taskType === activeTask)
     if (existing) {
       setEntryId(existing.id ?? null)
-      setContentFi(existing.contentFi)
+      setContentSv(existing.contentSv)
       setChecklist(existing.checklist)
       setCompletedAt(existing.completedAt)
     } else {
       setEntryId(null)
-      setContentFi('')
+      setContentSv('')
       setChecklist(emptyChecklist(activeTask))
       setCompletedAt(null)
     }
@@ -60,7 +60,7 @@ export function Writing() {
         chapterId,
         taskType: activeTask,
         promptSv: task.prompt_sv,
-        contentFi,
+        contentSv,
         checklist,
         completedAt,
       })
@@ -74,7 +74,7 @@ export function Writing() {
     if (!activeTask || !chapter || completedAt) return
     const task = tasks.find((t) => t.type === activeTask)
     if (!task) return
-    if (!contentFi.trim() || !checklistComplete(activeTask, checklist)) return
+    if (!contentSv.trim() || !checklistComplete(activeTask, checklist)) return
 
     setSaving(true)
     try {
@@ -82,7 +82,7 @@ export function Writing() {
         chapterId,
         taskType: activeTask,
         promptSv: task.prompt_sv,
-        contentFi,
+        contentSv,
         checklist,
         completedAt: null,
       })
@@ -103,7 +103,7 @@ export function Writing() {
   const activeTaskDef = activeTask ? tasks.find((t) => t.type === activeTask) : null
   const canComplete =
     activeTask &&
-    contentFi.trim().length > 0 &&
+    contentSv.trim().length > 0 &&
     checklistComplete(activeTask, checklist) &&
     !completedAt
 
@@ -136,18 +136,18 @@ export function Writing() {
 
         <div>
           <label className="text-sm font-semibold text-slate-900">
-            Ditt svar (finska)
+            Ditt svar (svenska)
           </label>
           <textarea
-            value={contentFi}
-            onChange={(e) => setContentFi(e.target.value)}
+            value={contentSv}
+            onChange={(e) => setContentSv(e.target.value)}
             disabled={!!completedAt}
             rows={12}
-            placeholder="Skriv ditt svar på finska här…"
+            placeholder="Skriv ditt svar på svenska här…"
             className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 disabled:bg-slate-50"
           />
           <p className="mt-1 text-xs text-slate-400">
-            {contentFi.trim().split(/\s+/).filter(Boolean).length} ord
+            {contentSv.trim().split(/\s+/).filter(Boolean).length} ord
           </p>
         </div>
 
@@ -240,7 +240,7 @@ export function Writing() {
         {tasks.map((task) => {
           const saved = savedEntries?.find((e) => e.taskType === task.type)
           const done = saved?.completedAt != null
-          const started = saved && saved.contentFi.trim().length > 0
+          const started = saved && saved.contentSv.trim().length > 0
           return (
             <li key={task.type}>
               <button

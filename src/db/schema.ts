@@ -6,7 +6,7 @@ export interface Card {
   chapterId: number
   type: 'vocab' | 'verb' | 'dialogue' | 'speaking' | 'writing'
   frontSv: string
-  backFi: string
+  backSv: string
   /** Optional extra context (e.g. dialogue scenario) */
   contextSv?: string
   /** SM-2 state */
@@ -67,7 +67,7 @@ export interface WritingEntry {
   chapterId: number
   taskType: 'meddelande' | 'e-post' | 'klagomål'
   promptSv: string
-  contentFi: string
+  contentSv: string
   checklist: Record<string, boolean>
   completedAt: number | null
   createdAt: number
@@ -144,6 +144,27 @@ export class YkiDatabase extends Dexie {
           syncReminderHours: settings.syncReminderHours ?? 24,
           syncReminderDismissedUntil: settings.syncReminderDismissedUntil ?? null,
         })
+      }
+    })
+
+    this.version(4).stores({}).upgrade(async (tx) => {
+      const cards = await tx.table('cards').toArray()
+      for (const card of cards) {
+        const legacy = card as Record<string, unknown>
+        if (legacy.backFi != null && legacy.backSv == null) {
+          await tx.table('cards').update(card.id, {
+            backSv: String(legacy.backFi),
+          })
+        }
+      }
+      const entries = await tx.table('writingEntries').toArray()
+      for (const entry of entries) {
+        const legacy = entry as Record<string, unknown>
+        if (legacy.contentFi != null && legacy.contentSv == null) {
+          await tx.table('writingEntries').update(entry.id, {
+            contentSv: String(legacy.contentFi),
+          })
+        }
       }
     })
   }
