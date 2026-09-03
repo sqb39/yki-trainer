@@ -1,0 +1,1116 @@
+{
+  "chapters": [
+    {
+      "id": 1,
+      "title_sv": "Människan och omgivningen",
+      "vocabulary": [
+        "SINGEL",
+        "ENSAM",
+        "PÅ TUMANHAND",
+        "MORFÖRÄLDRAR",
+        "FARFÖRÄLDRAR",
+        "SKILD",
+        "GRAVID",
+        "SVÄRMOR",
+        "OGIFT",
+        "RING",
+        "ATT FRIA TILL NÅGON",
+        "BARNLÖS",
+        "ATT FÖRLOVA SIG",
+        "NY FAMILJ",
+        "FÖRÄLDRAR",
+        "ETT PAR",
+        "MAKA/MAKE",
+        "SAMBO",
+        "ENSAMSTÅENDE FÖRÄLDER",
+        "ATT SÄLLSKAPA",
+        "BRÖLLOP",
+        "ÄNKA, ÄNKLING",
+        "ATT SKILJA SIG",
+        "ATT FLYTTA IHOP",
+        "KÄRNFAMILJ",
+        "ATT TA HAND OM NÅGON",
+        "STAMBYTE",
+        "RÖR",
+        "TAK",
+        "VATTENSKADA",
+        "FASTIGHETSFÖRVALTARE / DISPONENT",
+        "KRAN",
+        "LÄCKA",
+        "AVLOPP",
+        "VARA IGENTÄPPT",
+        "BLI TÄPPT",
+        "UNDERHÅLLSFÖRETAG",
+        "SÄKRING",
+        "BRANDALARM",
+        "TJUVALARM",
+        "FASTNAT",
+        "FUNGERAR INTE",
+        "FEL",
+        "KORTSLUTNING",
+        "LAMINAT",
+        "MÅL",
+        "MATERIAL",
+        "REPARERA",
+        "BYTA",
+        "BRÅDSKANDE",
+        "SERVICE",
+        "ALLMÄN NYCKEL",
+        "TAPET",
+        "BATTERI",
+        "UPPVÄRMNING",
+        "GAS"
+      ],
+      "verbs": [
+        {
+          "sv": "FÖDAS",
+          "prompt_sv": "var"
+        },
+        {
+          "sv": "BO",
+          "prompt_sv": "var"
+        },
+        {
+          "sv": "VARA I DAGVÅRD",
+          "prompt_sv": "var"
+        },
+        {
+          "sv": "FYLLA ÅR",
+          "prompt_sv": "hur många år, när"
+        },
+        {
+          "sv": "FÅ ETT JOBB",
+          "prompt_sv": "var"
+        },
+        {
+          "sv": "STUDERA",
+          "prompt_sv": "var, vad"
+        },
+        {
+          "sv": "JOBBA / ARBETA",
+          "prompt_sv": "var, jag"
+        },
+        {
+          "sv": "SLUTA",
+          "prompt_sv": "vad"
+        },
+        {
+          "sv": "GÅ TILL ARMÉN",
+          "prompt_sv": "när, vart"
+        },
+        {
+          "sv": "FÖRLOVA SIG",
+          "prompt_sv": "med vem, när"
+        },
+        {
+          "sv": "GIFTA SIG",
+          "prompt_sv": "med vem, var, när"
+        },
+        {
+          "sv": "SKILJA SIG",
+          "prompt_sv": "från vem, när"
+        },
+        {
+          "sv": "FÅ BARN",
+          "prompt_sv": "med vem, var, när"
+        },
+        {
+          "sv": "GIFTA OM SIG",
+          "prompt_sv": "med vem, var, när"
+        },
+        {
+          "sv": "DÖ",
+          "prompt_sv": "i vad"
+        },
+        {
+          "sv": "BLI ÄNKA/ÄNKLING",
+          "prompt_sv": "när"
+        },
+        {
+          "sv": "FÅ BARNBARN",
+          "prompt_sv": ""
+        },
+        {
+          "sv": "GÅ I PENSION",
+          "prompt_sv": "när"
+        },
+        {
+          "sv": "BLI SJUK",
+          "prompt_sv": "i vad"
+        },
+        {
+          "sv": "SÖKA",
+          "prompt_sv": "vart?"
+        },
+        {
+          "sv": "BLI UTEXAMINERAD",
+          "prompt_sv": "varifrån"
+        },
+        {
+          "sv": "KOMMA IN",
+          "prompt_sv": "vart"
+        },
+        {
+          "sv": "FÖRÄNDRAS",
+          "prompt_sv": "från vad, till vad"
+        },
+        {
+          "sv": "LEKA",
+          "prompt_sv": "med vem, var, med vad"
+        },
+        {
+          "sv": "BÖRJA",
+          "prompt_sv": "vad"
+        },
+        {
+          "sv": "TRÄFFA",
+          "prompt_sv": "vem, var, hur"
+        },
+        {
+          "sv": "BLI KÄR/BLI FÖRÄLSKAD",
+          "prompt_sv": "i vem"
+        },
+        {
+          "sv": "DEJTA",
+          "prompt_sv": "med vem"
+        },
+        {
+          "sv": "GÖRA SLUT",
+          "prompt_sv": "när, var?"
+        },
+        {
+          "sv": "GÅ I SKOLA",
+          "prompt_sv": "var, hur många år"
+        },
+        {
+          "sv": "HA (vad som) HOBBY",
+          "prompt_sv": ""
+        }
+      ],
+      "vilket_ord": [
+        {
+          "question_sv": "En kvinna som gifter sig är sådan. Hon bär vanligtvis en vit klänning.",
+          "answer_sv": "brud"
+        },
+        {
+          "question_sv": "Namnet på festen när man gifter sig.",
+          "answer_sv": "bröllop"
+        },
+        {
+          "question_sv": "Före festen måste gästerna få veta var och när festen är. Du skickar en sådan per post.",
+          "answer_sv": "inbjudan"
+        },
+        {
+          "question_sv": "Om du inte vill ta med ett paket till festen och din vän redan har allt, kan du ta med dig ett sådant här paket till dem. Du kan köpa den till exempel för en massage, en butik, en film, en teater osv.",
+          "answer_sv": "presentkort"
+        },
+        {
+          "question_sv": "När du säger: «Grattis på födelsedagen!» eller «Grattis!», vad gör du då?",
+          "answer_sv": "gratulera"
+        },
+        {
+          "question_sv": "Du ordnar en fest. Du vill inte laga mat till festen. Du kan anlita den här.",
+          "answer_sv": "cateringföretag"
+        },
+        {
+          "question_sv": "En fest som ordnas när gymnasiet, yrkesskolan eller universitetet är slut.",
+          "answer_sv": "examen"
+        },
+        {
+          "question_sv": "En fest som äger rum när någon flyttar bort eller byter jobb.",
+          "answer_sv": "farväl"
+        },
+        {
+          "question_sv": "Detta är den sista festen som en person någonsin kommer att ha.",
+          "answer_sv": "begravning"
+        },
+        {
+          "question_sv": "Människor som är inbjudna till en fest är sådana här.",
+          "answer_sv": "gäster"
+        }
+      ],
+      "dialogues": [
+        {
+          "num": 1,
+          "prompt_sv": "En vän kommer på besök.\n\n(Svara.)\n(Svara jakande)\n(Svara och bjud din vän på något att dricka.)\n(Svara och berätta hur ditt hem ser ut.)\n(Svara och berätta vad som är bra i lägenheten och vad som skulle kunna vara bättre.)\n(Svara.)",
+          "model_fi": "Hei! Kiva nähdä sinut taas.\nOlen todella iloinen, että olet täällä. Haluatko juotavaa?\nKyllä, minulla on kahvia. Teen sinulle kupin kahvia.\nOlen iloinen, että pidät asunnostani. Vaimoni ja minä olemme aina halunneet tämänkaltaisen asunnon. Asuntoni on kahdeksankymmentä neliötä.\nMuutimme uuteen asuntoomme kolme kuukautta sitten, tammikuussa.\nOlemme tyytyväisiä asuntoon. Alue on siisti ja lähellä on kaunis puisto. Mutta täytyy ostaa auto, jos haluaa asua täällä."
+        },
+        {
+          "num": 2,
+          "prompt_sv": "En vän har varit på besök hos dig och åker nu.\n\n(Svara och fråga din vän om deras planer för de kommande dagarna.)\n(Svara nekande och förklara varför tidpunkten inte är lämplig.)\n(Erbjud din vän skjuts.)\n(Svara.)",
+          "model_fi": "Mitä sinulla on suunnitelmissa lähiaikoina? Entä ensi lauantai, tulisitko meille?\nValitettavasti lauantai ei sovi minulle, minulla on silloin työmeno.\nHaluatko kyydin? Voin viedä sinut keskustaan autolla.\nEi se mitään vaivaa. Ole hyvä vain!"
+        },
+        {
+          "num": 3,
+          "prompt_sv": "Du har hört att din vän har fått ett nytt jobb. Ring och gratulera dem.\n\n(Presentera dig själv och berätta vad du vill säga.)\n(Fråga något om det nya jobbet.)\n(Svara och berätta vilken tid du kan bli uppringd.)\n(Svara och avsluta samtal.)",
+          "model_fi": "Hei, tässä Pekka. Soitan onnitellakseni sinua uudesta työpaikasta! Kuulin siitä eilen.\nMillaista uusi työ on? Oletko tyytyväinen?\nSoita minulle tänä iltana kello seitsemän, se sopii minulle hyvin.\nHienoa, puhutaan lisää illalla. Mukavaa päivää!"
+        },
+        {
+          "num": 4,
+          "prompt_sv": "Du har blivit inbjuden till en stor fest. Din kollega ringer och vill veta hur man ska klä sig till festen.\n\n(Svara.)\n(Svara.)\n(Svara.)\n(Berätta din åsikt.)",
+          "model_fi": "Hei! Yrityksen juhlissa lukee tumma puku, eli parhaat vaatteet päälle.\nMiehillä se tarkoittaa tummaa pukua ja naisilla pitkää iltapukua.\nLyhyttä mekkoa ei kannata valita, se ei ole tarpeeksi juhlallinen.\nVoit ostaa puvun Stockmannilta tai Sokokselta. Voin tulla mukaan sovittamaan, jos haluat."
+        },
+        {
+          "num": 5,
+          "prompt_sv": "Din vän ser trött ut. Du är orolig för honom/henne.\n\n(Berätta för din vän hur hen ser ut.)\n(Erbjud dig att hjälpa din vän. Ta reda på själv vad du kan göra.)\n(Ge din vän råd om hur hen kan sova bättre.)\n(Svara.)",
+          "model_fi": "Huomenta. Näytät todella väsyneeltä tänään, silmäsi ovat punaiset.\nVoinko auttaa jotenkin? Ehkä voin hoitaa lapset hetken, jotta saat levätä.\nKokeile mennä nukkumaan aikaisemmin ja välttää kofeiinia illalla. Myös kävely ennen nukkumaanmenoa auttaa.\nKiitos, yritän. On hyvä, että minulla on ystävä kuten sinä."
+        },
+        {
+          "num": 6,
+          "prompt_sv": "Du träffar en ny person. Hen vill träffa dig igen, men du är inte intresserad av det.\n\n(Tacka och kommentera mötet.)\n(Tacka artigt nej.)\n(Svara och berätta varför du inte längre vill träffas.)\n(Trösta bekanta och berätta något positivt om dem.)",
+          "model_fi": "Kiitos, oli mukava tavata sinut. Olet mielenkiintoinen ihminen.\nKiitos kutsusta, mutta en valitettavasti voi tulla illalliselle.\nOlen pahoillani, mutta en etsi parisuhdetta juuri nyt. Minulla on paljon töitä.\nÄlä ota sitä henkilökohtaisesti. Olet todella mukava ja varmasti löydät sopivan kumppanin."
+        },
+        {
+          "num": 7,
+          "prompt_sv": "Din vän har skiljt sig. Hen är ledsen och upprörd.\n\n(Reagera på ett sätt som är lämpligt i förhållande till situationen.)\n(Reagera och fråga något om barnen.)\n(Du har bråttom. Avsluta samtalet på ett artigt sätt.)\n(Fråga om din väns mående.)\n(Erbjuda att hjälpa din vän.)",
+          "model_fi": "Olen todella pahoillani kuullessani tästä. Tämä on varmasti vaikeaa sinulle.\nMiten lapset voivat? Missä he asuvat nyt?\nMinun täytyy nyt lähteä töihin, mutta soitetaan pian uudelleen.\nMiten sinä voit? Oletko nukkunut yöllä?\nVoin tulla luoksesi viikonloppuna ja auttaa vaikka ruoanlaitossa."
+        },
+        {
+          "num": 8,
+          "prompt_sv": "Du organiserar en fest (du bestämmer vad som ska firas). Ring en vän och bjud in dem till festen.\n\n(Berätta varför du ringer.)\n(Svara på frågan.)\n(Tacka artigt nej och avsluta samtalet.)\n(Svara.)\n(Svara.)",
+          "model_fi": "Hei! Soitan kutsuakseni sinut syntymäpäiväjuhliini ensi lauantaina.\nJuhlat ovat kotona meillä kello kuudelta, osoitteessa Mannerheimintie 12.\nTulen mielelläni! Tarvitsetko apua järjestelyissä?\nVahvistan osallistumiseni viimeistään perjantaina.\nLahjaa ei tarvitse tuoda, pelkkä läsnäolosi riittää."
+        },
+        {
+          "num": 9,
+          "prompt_sv": "Du vill renovera ditt kök. Du ringer till affären och ber om en offert.\n\n(Hälsa och berätta varför du ringer.)\n(Svara och berätta vad du vill renovera.)\n(Svara och be om ett pris.)\n(Svara nekande och förklara varför. Föreslå en ny tid.)\n(Svara.)\n(Svara.)\n(Tacka och avsluta samtalet.)",
+          "model_fi": "Hei, soitan Remont-Alexista. Haluaisin tarjouksen keittiöremontista.\nHaluaisin uudet kaapit, työtasot ja uuden liesituulettimen. Keittiö on noin kymmenen neliötä.\nPaljonko remontti suunnilleen maksaisi?\nPerjantai aamu ei sovi, mutta maanantai aamupäivä sopisi hyvin.\nBudjettini on noin viisitoista tuhatta euroa.\nHaluaisin remontin valmiiksi ennen joulua.\nKiitos paljon, kuulemiin!"
+        },
+        {
+          "num": 10,
+          "prompt_sv": "När du kommer hem väntar detta meddelande på dig:\n«Hej! Det finns ett paket till dig som inte ryms i din brevlåda. Vi försökte leverera den till dig i dag, mutta du var inte hemma. Kan du ringa tillbaka så kan vi komma överens om en tid då jag kan hämta paketet.»\n\n(Presentera dig själv och berätta din situation.)\n(Svara på frågan.)\n(Svara på frågan.)\n(Svara på frågan.)\n(Avsluta samtalet artigt.)",
+          "model_fi": "Hei, tässä Matti Virtanen, Mannerheimintie 5 B 12. Soitan paketin toimituksesta.\nKyllä, olin töissä tänään. Milloin voitte tuoda paketin uudelleen?\nHuomenna iltapäivä sopii hyvin, olen kotona kello kolmesta eteenpäin.\nKyllä, tästä numerosta tavoitatte minut ennen toimitusta.\nKiitos, kuulemiin!"
+        },
+        {
+          "num": 11,
+          "prompt_sv": "En granne har klagat på oljud från din lägenhet. Disponenten kommer att ringa dig om det. OBS! Börja samtalet genom att svara i telefonen.\n\n(Svara i telefonen.)\n(Svara på frågan.)\n(Svara på frågan.)\n(Svara på frågan.)\n(Du håller inte med.)\n(Svara och berätta vilken typ av fest du anordnade.)\n(Svara.)",
+          "model_fi": "Virtanen, hei.\nKyllä, meillä oli pienet syntymäpäiväjuhlat lauantaina.\nVieraat lähtivät kello yhdentoista, en kello viiteen.\nEn ole aiemmin saanut valituksia naapureilta.\nAsun vuokralla tässä asunnossa.\nJuhlat olivat pienet, vain lähimmät ystävät ja perhe. Musiikki ei ollut kovaa.\nYmmärrän huolen. Ensi kerralla ilmoitan naapureille etukäteen."
+        }
+      ],
+      "reagera": [
+        "Din avlägsna vän/släkting kommer på besök för första gången. Berätta för din granne vad du ska visa dem i din hemstad.",
+        "Din grannes hem besöks av någon, men grannen är inte hemma. Berätta för din granne hur besökaren såg ut.",
+        "Du ser två pojkar på gatan som retas med en skolkamrat. Gå in och berätta för pojkarna varför det inte är okej att mobba andra.",
+        "Din vän berättar att hens far har dött. Din vän är verkligen ledsen. Vad säger du?",
+        "Du besöker en vän i en by. Vännen erbjuder dig mat eller dryck som du inte kan äta/dricka (fundera själv på varför). Tacka artigt nej.",
+        "En vän kommer på besök. Hen har en riktigt stor och dyr present till dig. Vad säger du?",
+        "Du och din vän bråkade dagen innan om en liten sak. Du ringer din vän och vill bli sams. Lämna ett röstmeddelande till din vän.",
+        "Din bil har gått sönder och du behöver skjuts av en vän (bestäm var och när).",
+        "Du träffar en gammal vän på stan som du inte har sett på länge. Vad säger du till honom/henne?",
+        "Din kollega bjuder in dig att besöka honom/henne. Du vill inte åka. Tacka artigt nej och förklara varför.",
+        "Ett litet barn gråter ensam på parkeringen till en affär. Du ser inte föräldrarna. Vad säger du till honom/henne?",
+        "Din vän är verkligen vacker/snygg idag och välklädd. Ge honom/henne en komplimang.",
+        "Du vill berätta för någon hur viktig hen är för dig. Berätta också varför hen är viktig för dig.",
+        "Du har hört din vän säga dåliga saker om dig bakom din rygg. Vad säger du till honom/henne?",
+        "Din väninna berättar för dig att hon snart ska få barn.",
+        "Din vän har blivit allvarligt sjuk.",
+        "Du ska gå på bröllop, men du har glömt att köpa en bröllopspresent. Vad säger du till paret?",
+        "Din vän har bjudit in dig till sin stuga för midsommarhelgen. Du vet inte vad du ska packa. Be en kollega om råd."
+      ],
+      "beratta": [
+        "A. En person jag aldrig kommer att glömma\nBerätta om en person som du aldrig kommer att glömma. Varför kan du inte glömma honom eller henne?\nVar träffades ni? Vad hände?",
+        "B. Ett gräl rensar luften.\nHur argumenterar du? Vem argumenterar du med? Om vad?\nTycker du att det är bra eller dåligt att argumentera? Varför?\nHur vet du om du är arg?\nVad blir du arg över? Varför?",
+        "C. Jag och mina kläder.\nHur klär du dig? Har du en egen stil?\nFöljer du mode? Varför/varför inte?\nVad gillar du med ditt utseende? Vad gillar du inte?\nSkulle du vara villig att genomgå skönhetsoperationer? Varför/varför inte?",
+        "D. Berätta om en vän eller släktings liv.\nTill exempel:\nVar och när föddes hen?\nHur såg hens barndom ut?\nVad gjorde hen som ung eller vuxen?\nVar är hen nu?\nVarför ville du berätta om honom/henne?"
+      ],
+      "asikt": [
+        "A. Svenska/finlandssvenska fester är tråkiga.\n• Vad tycker du om svenska/finländska fester?\n• Vad gör man på svenska/finländska fester?\n• Varför är de tråkiga/inte tråkiga?",
+        "B. Man får inte glömma födelsedagar.\n• Tycker du att födelsedagar är viktiga helgdagar? Varför/varför inte?\n• Vems födelsedag kommer du definitivt inte att glömma?\n• Vilken typ av present köper du till dina nära och kära på deras födelsedag?",
+        "D. Bästa sättet att bo\n• Vad tycker du är det bästa sättet att bo: egnahemshus, radhus, höghus? Varför?\n• Vilket är bäst? Att äga eller hyra bostad? Varför?",
+        "E. Ett bra förhållande kräver arbete\n• Vad är ett bra förhållande? Hur kan du ta hand om ditt förhållande?\n• Hur ser den ideala maken ut?\n• Vad är det du älskar / hatar / tolererar / önskar / vill ha hos din partner?",
+        "F. Lycka är ett personligt val.\n• Hur mycket kan en person påverka om hen är lycklig eller inte?\n• Vilka saker kan en person inte ändra?\n• Kan positivt tänkande förändra en person? Hur? Varför/varför inte?",
+        "G. Sociala medier förstör relationer.\n• Människor tillbringar mer tid på sociala medier än med vänner och familj. Folk är tillsammans men tittar på sina telefoner. Hur förändrar sociala medier vänskap och relationer? Vilka är för- och nackdelarna?",
+        "H. Funktionalitet är viktigare än mode.\n• Vad är viktigast för dig: stil eller komfort? Varför?\n• Vad är viktigt för dig när du köper nya kläder?\n• Kan man se bra ut på vintern? Hur?",
+        "I. Finländarna vet inte hur man klär sig.\n• Finländarna har ibland kallats «vindsockelfolket». Hur tror du att finländarna klär sig?\n• Hur klär sig finländarna jämfört med andra länder?\n• I vilket land tycker du att människor klär sig stiligast? Varför?",
+        "J. Människor stressar i onödan över hur de ser ut.\n• Spelar det någon roll vad du har på dig eller hur du ser ut? Varför/varför inte?\n• Vilka problem kan uppstå om du tänker för mycket på hur du ser ut eller inte ser ut?",
+        "K. Släktingar är viktigare än vänner\n• På finska säger man att blod är tjockare än vatten. Det betyder att släktingar är viktigare än vänner. Vad tycker du?",
+        "L. Återförening - bra eller dåligt?\n• I Finland slutar nästan 50 procent av äktenskapen med skilsmässa. Varför?\n• Vad borde göras? Eller borde man göra något?\n• Hur växer ett barn upp om det har många föräldrar eller två hem?"
+      ],
+      "writing": [
+        {
+          "type": "meddelande",
+          "prompt_sv": "Något viktigt har hänt din vän (hitta själv på vad). Du vill gratulera honom/henne.\n\nSkriv ett meddelande till honom/henne med följande text:\n• berätta vad som har hänt och var du har hört om det\n• gratulera honom eller henne och berätta vad du tycker om det som hänt\n• berätta hur du vill fira tillsammans med honom/henne"
+        },
+        {
+          "type": "e-post",
+          "prompt_sv": "Du letar efter en ny lägenhet. Du har hittat en fastighetsmäklare som kan hjälpa dig.\n\nSkriv ett e-postmeddelande till honom/henne:\n• tala om vilken typ av bostad du letar efter\n• vad som är viktigt med fastighetens läge\n• hur mycket hyran/försäljningspriset kan vara\n• när du vill flytta och varför vid den tidpunkten"
+        },
+        {
+          "type": "klagomål",
+          "prompt_sv": "Det hyreshus där du bor har många problem. Du är trött på problemen och vill att bostadsrättsföreningen ska åtgärda dem.\n\nSkriv ett klagomål till bostadsrättsföreningens styrelse och berätta för dem:\n• vilka problem huset har\n• vad bör göras åt problemen och inom vilken tidsperiod\n• vad du kommer att göra om saker och ting inte förändras"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title_sv": "Vardagsliv",
+      "vocabulary": [
+        "RAKT",
+        "VÄNSTER",
+        "HÖGER",
+        "BAKÅT",
+        "SVÄNG",
+        "FORTSÄTT",
+        "STANNA",
+        "KORSNING",
+        "GATUHÖRN",
+        "TROTTOAR",
+        "ÖVERGÅNGSSTÄLLE",
+        "ÖVER",
+        "UNDER",
+        "BAKOM",
+        "MITTEMOT",
+        "BREVID",
+        "PÅ HÖGER",
+        "SIDA",
+        "PÅ VÄNSTER",
+        "FÖRBI",
+        "TITTA",
+        "RONDELL",
+        "VÄG",
+        "GATA",
+        "PARKERINGSPLATS",
+        "HITTA",
+        "GÅ VILSE",
+        "NAVIGERA",
+        "NAVIGATOR",
+        "KART-",
+        "APP"
+      ],
+      "verbs": [],
+      "vilket_ord": [],
+      "dialogues": [
+        {
+          "num": 1,
+          "prompt_sv": "Rita en bild av dig själv som konsument och berätta om den. Vilka är dina konsumtionsvanor? Var köper du mat/kläder/andra saker och hur ofta? Vad går dina pengar till? Är du sparsam eller slösaktig? Är pengar viktiga för dig? Hur skulle du ändra dina vanor om du kunde? Du har varit på gymmet och glömt något (hitta själv på vad). Ring till gymmet och fråga om det glömda föremålet. Kvinna: 20 sek 10 sek 15 sek 10 sek 20 sek (Svara på frågan, ange minst två egenskaper hos saken.) Vardagsliv MODELL: Dialog 1. Vardagsliv Olet ollut liikuntahallilla ja unohtanut sinne jotain (keksi itse, mitä). Soita hallille ja tiedustele unohtunutta tavaraa. Nainen Sinä Ilona Idrottscentrum, hur kan jag hjälpa till? Vad synd! Kan du vara mer specifik om hurdan den är? Hmm. Den här kundtjänsten har i alla fall inte tagit in sådana saker nu. När tappade du den? Okej. Jag sätter upp en lapp och hoppas att den dyker upp. Okej, den kanske fortfarande finns kvar. Jag kan sätta upp en lapp på anslagstavlan om att en av dessa har försvunnit. Skulle det vara okej för dig? Vem kontaktar vi om vi gör det? Vardagsliv\n\n(Presentera dig själv och förklara varför du ringer)\n(Svara på frågan.)\n(Svara ja och ge dina kontaktuppgifter.)\n(Avsluta samtalet artigt.)",
+          "model_fi": ""
+        },
+        {
+          "num": 2,
+          "prompt_sv": "Du befinner dig i en frisörsalong. Du vill klippa och färga ditt hår. Frisör: (Du håller inte med. Berätta varför frisyren på bilden inte passar dig.) 10 sek 20 sek 10 sek 10 sek 10 sek 25 sek (Svara och berätta vilken slags frisyr du vill ha.) Vardagsliv\n\n(Säg hej och svara på frågan.)\n(Svara.)\n(Svara och berätta vad du vill göra.)\n(Svara.)",
+          "model_fi": ""
+        },
+        {
+          "num": 2,
+          "prompt_sv": "Du befinner dig i en frisörsalong. Du vill klippa och färga ditt hår. Frisör: Hej! Ni har visst en tid bokad hos mig. Kom hit och sätt dig. Är det här första gången du är här? Okej. Vad tänkte du att vi skulle göra i dag? Okej, jag ska se. Här är ett exempel i denna tidning. Skulle det vara bra? Ah, ja. Nu tror jag att jag förstår. Vill du ha något att dricka? Okej. På bordet där borta finns några tidningar att läsa och vi har Wi-Fi här om du vill surfa. Ja, ja. Jag ska gå och hämta lite redskap och sedan kan vi börja. Vardagsliv",
+          "model_fi": ""
+        },
+        {
+          "num": 3,
+          "prompt_sv": "Du befinner dig på ett kafé. Det är något fel på kaffet (hitta själv på vad). (Svara nekande och berätta vad problemet med kaffet är.) (Svara och be om en annan dryck från listan.) 15 sek 15 sek 10 sek 15 sek 10 sek 20 sek (Svara nekande och berätta varför du inte vill ha en kopp till.) Vardagsliv\n\n(Berätta vad du tycker om bullen.)\n(Tacka och beröm betjäningen.)\n(Avsluta samtalet artigt.)",
+          "model_fi": ""
+        },
+        {
+          "num": 3,
+          "prompt_sv": "Du befinner dig på ett kafé. Det är något fel på kaffet (hitta själv på vad). Hej! Smakar kaffet bra? Ah, äsch då! Jag är ledsen. Jag kan givetvis byta ut kaffet och ge dig ett nytt i stället. Ja, det är förstås förståeligt. Skulle en annan dryck vara bättre? Okej, jag tar en av dem. Jag är verkligen ledsen för kaffet. Vi har färska bullar här också, får jag ge dig en gratis? Tack för att du säger det. Många kunder dricker bara det dåliga kaffet och kommer sedan aldrig tillbaka eller talar illa om kaféet till andra. Kundernas feedback är mycket viktig för oss. Okej, här är den här drinken. Och jag ber om ursäkt för det som hände. Vardagsliv",
+          "model_fi": ""
+        },
+        {
+          "num": 4,
+          "prompt_sv": "Du har gått vilse i en främmande stad. Ta reda på själv vilken plats du söker. Du ber om råd på gatan. Man: (Be om hjälp av personen som kommer emot dig.) (Berätta vilken färgs byggnad du ser.) 10 sek 10 sek 15 sek 10 sek 10 sek Vardagsliv Man: Ja, självklart. Vart är du på väg? Tur att du är i närheten. Ser du den stora byggnaden där borta? Ja, det är det. Först går du rakt fram hela vägen till den byggnaden. Sväng sedan till vänster och gå två kvarter rakt fram så är du framme. Jag är säker på att du hittar dit. Det är inte långt bort, kanske ungefär en halv kilometer härifrån. Det var så lite så!\n\n(Svara.)\n(Svara och upprepa instruktionen.)\n(Svara och tacka.)",
+          "model_fi": ""
+        },
+        {
+          "num": 4,
+          "prompt_sv": "Du har gått vilse i en främmande stad. Ta reda på själv vilken plats du söker. Du ber om råd på gatan. Vardagsliv",
+          "model_fi": ""
+        },
+        {
+          "num": 5,
+          "prompt_sv": "Du har köpt en hushållsapparat (hitta själv på vilken). Det är något fel på den och du returnerar den till butiken. (Du vill inte ha samma produkt. Berätta varför.) (Svara och tala om vilken produkt du vill ha som ersättning.) Vardagsliv\n\n(Svara och berätta din situation.)\n(Svara och ge kvittot.)\n(Svara och tacka.)",
+          "model_fi": ""
+        },
+        {
+          "num": 5,
+          "prompt_sv": "Du har köpt en hushållsapparat (hitta själv på vilken). Det är något fel på den och du returnerar den till butiken. Säljare: Finns det något jag kan hjälpa dig med? Åh ja! Har du kvittot? Ja, tack. Som tur är gäller garantin fortfarande, så det finns inga problem. Jag kan ge dig en ny produkt som ersätter den. Ah. Ja, det kan man förstå. Tyvärr kan jag inte betala tillbaka pengarna, men finns det något annat från den här tillverkaren som du skulle kunna vara intresserad av? Ja, så länge det är samma märke kan ett utbyte göras. Vi går till denna avdelning och ser vilken typ av modell som skulle vara bra. Vardagsliv",
+          "model_fi": ""
+        }
+      ],
+      "reagera": [
+        "Du går till ett café, men alla bord är smutsiga. Klaga till servitören.",
+        "En vän har lånat din bil. Hen har förbrukat all bensin och har inte fyllt på. Berätta för honom/henne vad du tycker om hens beteende.",
+        "Du vill anlita en städare för ditt hem. Berätta för din vän varför du inte längre vill städa huset själv.",
+        "Du har köpt en lampa från Ikea som har fallit ner från taket. Om lampan hade fallit på någons huvud hade det varit farligt. Klaga till Ikea och kräv ersättning.",
+        "Du har köpt en möbel (hitta själv på vilken). Du har försökt sätta ihop den, men alla delar finns inte i paketet.",
+        "Du är på Ikea och vill prova en säng. Någon sover i sängen och du kan inte prova den. Du kan inte heller se priset på sängen. Vad säger du?",
+        "Du vill köpa två identiska stolar. Det finns dock bara två stolar kvar och den andra stolen är hos en annan kund. Vad säger du för att få stolen?",
+        "Du ska köpa något dyrt (hitta själv på vad) Du vill pruta på produkten. Vad säger du och hur motiverar du det?",
+        "Du går till en blomsteraffär och vill köpa blommor i present. Berätta för butiksbiträdet vem blommorna är till och vad det är för tillfälle.",
+        "Du sitter på en restaurang och vid bordet bredvid sitter en familj med barn som beter sig illa. Vad säger du till föräldrarna?",
+        "Servicen i restaurangen är mycket långsam. Klaga till servitören.",
+        "Det finns en hund i en varm bil på parkeringen till en affär. Berätta för hundägaren vad du tycker.",
+        "Det är något fel på din bärbara dator. Garantin är fortfarande giltig. Ring till butiken.",
+        "Du har sett en annons om en begagnad tvättmaskin. Ring säljaren och be om mer information. Vardagsliv",
+        "Berätta för din vän hur hen kan ta sig till ditt hem med buss.",
+        "Du sitter på bussen men känner inte till rutten. Berätta för föraren var du vill kliva av och be om hjälp.",
+        "Du sitter på bussen men känner inte till rutten. Berätta för föraren var du vill kliva av och be om hjälp."
+      ],
+      "beratta": [],
+      "asikt": [],
+      "writing": []
+    },
+    {
+      "id": 3,
+      "title_sv": "Natur och miljö",
+      "vocabulary": [
+        "PAFF",
+        "ORGANISKT",
+        "AVFALL",
+        "FÖRORENING",
+        "SORTERING",
+        "ÅTERVINNING",
+        "SOPTIPP",
+        "SOPKORG",
+        "ÄMBARE",
+        "SORTERA",
+        "BLANDAVFALL",
+        "MATAVFALL",
+        "ENERGIAVFALL",
+        "PAPPERSINSAMLING",
+        "BATTERIER",
+        "METALLAVFALL",
+        "MULL",
+        "ÅTERVINNA",
+        "SOPSÄCK",
+        "GLASINSAMLING",
+        "KLÄDINSAMLING",
+        "LOPPMARKNAD",
+        "DONERA",
+        "ANVÄND",
+        "FÖRPACKNING",
+        "PLASTPÅSE",
+        "LÖPELD",
+        "HURRIKAN",
+        "STORM",
+        "JORDBÄVNING",
+        "VULKANUTBROTT",
+        "TORKA",
+        "TSUNAMI",
+        "BRAND",
+        "EVAKUERA",
+        "ÅSKVÄDER",
+        "ÖVERSVÄMNING",
+        "TYFON",
+        "JORDSKRED",
+        "LAVIN",
+        "SKOGSBRAND",
+        "FROST",
+        "ORKAN",
+        "VIND",
+        "EBOLA",
+        "KRAFTIGT REGN",
+        "FÖRSVUNNEN",
+        "KAOS",
+        "LERSKRED",
+        "DRICKSVATTENI",
+        "SMUTS",
+        "BLI UNDER",
+        "FÖRSVINNA",
+        "RÄDDA",
+        "VARA RÄDD",
+        "VÄRME",
+        "GROV",
+        "KRAFTFULL",
+        "LIDA",
+        "ÖSREGNA",
+        "FÖRSTÖRAS",
+        "SORG",
+        "ORO",
+        "RÄDSLA",
+        "SPLITTER",
+        "ÄTERVINNA",
+        "ELEKTRO-",
+        "NIK",
+        "SPARA",
+        "SKYDDA",
+        "PANT",
+        "METALL",
+        "KARTONG",
+        "PAPPER",
+        "BURK",
+        "DEPONI"
+      ],
+      "verbs": [],
+      "vilket_ord": [],
+      "dialogues": [
+        {
+          "num": 1,
+          "prompt_sv": "Du har gått vilse i skogen. Du ringer en vän. Natur och miljö (Svara nekande och berätta vilka kläder du har.)\n\n(Säg hej och berätta vad ditt problem är.)\n(Svara på frågan.)\n(Svara på frågan.)\n(Tacka och lägg på.)",
+          "model_fi": ""
+        },
+        {
+          "num": 2,
+          "prompt_sv": "Du vill fiska, men du har inget fisketillstånd. Du ringer och frågar. Tjänsteman: Natur och miljö\n\n(Säg hej och berätta vad du har att säga.)\n(Svara på frågan.)\n(Fråga efter priset.)\n(Fråga efter adressen till webbplatsen.)\n(Tacka och avsluta samtalet.)",
+          "model_fi": ""
+        },
+        {
+          "num": 2,
+          "prompt_sv": "Du vill fiska, men du har inget fisketillstånd. Du ringer och frågar. Tjänsteman: Skogsförvaltningen, hur kan jag hjälpa dig? Ja, ja. Var ska du fiska? Jaså. Priset för tillståndet beror också på syftet med fisket och vilka redskap du använder. Ett fritidsfisketillstånd för ett vattenområde kostar cirka 63 euro per år, men sedan behövs ett separat fisketillstånd för ett lockbete, vars pris beror på fiskarens ålder. Det är en ganska komplicerad process i telefonen, men du kan köpa tillstånd på nätet. Till exempel är fisketillstand.net en bra adress. Du kan se vilken utrustning som är avgiftsbelagd. Fiske på vintern kräver ingen licens. Natur och miljö",
+          "model_fi": ""
+        }
+      ],
+      "reagera": [
+        "Du hittar en soffa, ett kylskåp och massor av sopsäckar i skogen. Du ringer till soptippen och rapporterar situationen.",
+        "Du befinner dig vid stranden av en sjö där det finns ankor. Mormor matar ankorna med choklad. Vad säger du till mormor?",
+        "Du är i en butik och vill köpa bra skor för en skogspromenad. Du ber butiksbiträdet om hjälp.",
+        "Du är ute på en promenad. Du ser någon kasta ett begagnat kylskåp i skogen. Vad säger du?",
+        "Du flyttar till ett nytt hem. Du vill skänka några av dina gamla saker (hitta själv på vad) till en vän. Vad säger du?",
+        "Du letar efter en ny bostad. Mäklaren frågar dig vad som är viktigt för dig i din boendemiljö. Vad säger du?",
+        "En vän som bor utomlands frågar dig hur naturen ser ut i Finland. Vad säger du?",
+        "Du ser en man på gatan som sparkar ett djur (vilket?). Vad säger du?",
+        "Du ser en man på gatan som sparkar ett djur (vilket?). Vad säger du?"
+      ],
+      "beratta": [
+        "A. Berätta vad naturen och livsmiljön betyder för dig.\nVad är det för plats du bor på?\nVilka möjligheter finns det att komma ut i naturen?\nVad betyder naturen och att vara nära naturen för dig?\nVilken typ av natur/miljö tycker du bäst om?",
+        "B. Berätta om naturskydd.\nVad tycker du om att skydda naturen?\nHur kan vi skydda naturen?\nÄr du själv miljövänlig? Hur och på vilket sätt?\nNatur och miljö",
+        "C. Mitt landskap\nMänniskor kan ha ett landskap som är viktigt för dem. För en person\nkan det vara stranden av en sjö, för en annan en skog, för en tredje en\nmiljonstad.\nBeskriv ett landskap som är viktigt för dig. Varför är det viktigt för dig?"
+      ],
+      "asikt": [
+        "A. Cykel eller bil?\n• Föredrar du cykel eller bil? Varför?\n• Vilket föredrar du? Varför? I vilken situation?\n• Vilka är fördelarna med bilen/cykeln?\n• Vilka är nackdelarna med bilen/cykeln?\n• Varför ska människor använda bil/cykel mer?",
+        "B. Folk köper för mycket onödiga saker.\n• Människor har ofta många saker. Vad är onödigt och vad är\nnödvändigt?\n• Har du onödiga saker? Vad?\n• Varför köper människor onödiga saker?",
+        "C. Kollektivtrafiken bör vara gratis.\n• Vad tycker du om priserna på kollektivtrafiken (tåg, buss, metro,\nspårvagn) i Finland?\n• Vad skulle fördelarna med billig kollektivtrafik vara?\nNatur och miljö"
+      ],
+      "writing": []
+    },
+    {
+      "id": 4,
+      "title_sv": "Hälsa och välbefinnande",
+      "vocabulary": [
+        "EN TABLETT",
+        "ETT PILLER",
+        "VARA",
+        "GRAVID",
+        "OLYCKA",
+        "NÖDSITUATION",
+        "MEDICIN MOT",
+        "HALSBRÄNNA",
+        "FÖRSTOPPNING",
+        "VITAMINER",
+        "ÖGONDROPPAR",
+        "SALVA",
+        "GELER",
+        "MEDVETEN",
+        "MEDVETSLÖS",
+        "EN VÄRK",
+        "ATT VÄRKA",
+        "ATT",
+        "MISSHANDLA",
+        "ETT RÅN",
+        "ETT VAPEN",
+        "HAR KROCKAT",
+        "SJUKDOMSATTACK",
+        "DEPRESSION",
+        "UTMATTNING",
+        "JAG SOVER",
+        "DÅLIGT",
+        "ALLERGI",
+        "PLÅSTER",
+        "GÖRA ONT",
+        "CANCER",
+        "EN ALLVARLIG",
+        "SJUKDOM",
+        "OBOTLIG",
+        "NACKE OCH",
+        "AXLAR ÄR",
+        "STELA",
+        "DET GÖR ONT",
+        "BLI FRISK",
+        "SKADA",
+        "ÅKSJUKA",
+        "VACCIN",
+        "HAR FALLIT",
+        "EXEM",
+        "ETT SÅR",
+        "EN KÄNSLA"
+      ],
+      "verbs": [],
+      "vilket_ord": [],
+      "dialogues": [
+        {
+          "num": 1,
+          "prompt_sv": "Du ser en ung kvinna ligga på gatan. Du försöker väcka henne, men hon svarar inte. Du ringer nödnumret. Tjänsteman Ge råd till din vän när: • Det känns som om hen blir trött när läraren talar • Hen gråter • Hen är irriterad på chefen på jobbet. • Hen har svindel och huvudvärk. • Hen har tråkigt på jobbet. • Hen är rädd för döden. • Hen är törstig, men det finns inget att dricka. • Hen är arg för att hen betalade så mycket. • Hen är deprimerad på grund av vintern. • Hen har en dålig syn. • Hen har en “mans förkylning” • Hen har hård mage eller förstoppning • Hen har mycket övervikt • Hen är på väg på operation. 1. Hälsa och välmående\n\n(Presentera dig själv och förklara varför du ringer.)\n(Svara och ange om kvinnan har några skador.)\n(Svara.)\n(Svara.)",
+          "model_fi": ""
+        },
+        {
+          "num": 1,
+          "prompt_sv": "Du ser en ung kvinna ligga på gatan. Du försöker väcka henne, men hon svarar inte. Du ringer nödnumret. Tjänsteman: 112, hur kan jag hjälpa dig? Andas personen? Blöder hen? Vet du vad som hände? Vi skickar hjälp dit. Kan du ge oss adressen igen? Tack för att du ringde. Vänligen vänta utan att lägga på. Hjälp är på väg. Hälsa och välmående\n\n(Svara.)",
+          "model_fi": ""
+        },
+        {
+          "num": 2,
+          "prompt_sv": "Du har hört att din vän har varit med om en olycka och nu ligger på sjukhus. Du ringer honom/henne. 1. Hälsa och välmående\n\n(Presentera dig och förklara varför du ringer.)\n(Reagera och frågar något mer)\n(Erbjud vännen hjälp.)\n(Svara och be platsen.)",
+          "model_fi": ""
+        },
+        {
+          "num": 2,
+          "prompt_sv": "Du har hört att din vän har varit med om en olycka och nu ligger på sjukhus. Du ringer honom/henne. Maija Ja, det var jag. Jag cyklade till jobbet och var på Algatan då en bil körde på mig på övergångsstället. Ja, tack. Det skulle vara bra. Du är en riktigt bra vän. När kan du komma på besök? Jag är här på universitetssjukhuset. Avdelning 10. Tack så mycket och vi ses snart. Tja, jag vet inte än, men min arm är bruten och tydligen är det något fel på ryggen, för den är riktigt öm. De kommer att göra en magnetröntgenundersökning i dag. Som tur var hade jag en hjälm på mig. Hälsa och välmående",
+          "model_fi": ""
+        }
+      ],
+      "reagera": [
+        "Du behöver något från apoteket och ber en vän om hjälp.",
+        "Du har sett en bilolycka. Polisen frågar dig vad som hände. Svara polisen.",
+        "Du joggar och ser en ung kvinna som ligger på gatan. Vad säger du till henne?",
+        "Du står på ett övergångsställe och en bil kör nästan på dig. Vad säger du till föraren?",
+        "Du går till laboratoriet, men du är rädd för injektioner.",
+        "Du ser en flicka, kanske 10 år gammal, som röker en cigarett på gården. Vad säger du till henne?",
+        "En berusad förare kommer in på parkeringen vid ditt hus. Du identifierar personen. Du ringer polisen.",
+        "Du får veta att din vän har bröstcancer. Vad säger du till henne?",
+        "Du är rädd att du har problem med minnet. Du glömmer ofta saker. Fråga din sjuksköterska om mer information.",
+        "Du har bokat ett möte med en vän, men du är sjuk och kan inte träffa honom eller henne.",
+        "Du har feber och måste hämta ditt barn från dagis. Be en vän om hjälp.",
+        "Du står på vågen och märker att din vikt har ökat med 10 kg.",
+        "Du går till gymmet och vill ha ett kost- och träningsprogram. 1. Hälsa och välmående",
+        "A. En olycka eller sjukdom kan förändra hela ditt liv."
+      ],
+      "beratta": [],
+      "asikt": [
+        "A. Fysisk hälsa är också viktig för den psykiska hälsan.\n• Tycker du att fysisk och psykisk hälsa är lika viktiga? Varför?\n• Hur tar du hand om din fysiska och psykiska hälsa?\n• Finland har en hög förekomst av depressioner och självmord. Vad\ntror du att detta beror på?",
+        "B. Idrott och doping\n• Vad tycker du om doping?\n• Kan en toppidrottare klara sig utan doping? Varför/varför inte?",
+        "C. Hälsovården i Finland\n• Vad tycker du om sjukvården i Finland?\n• Vilka är för- och nackdelarna med den finska sjukvården?\n• Är sjukhusen och hälsocentralerna tillräckligt bemannade?\n• Vad är annorlunda i ditt hemland?",
+        "D. Droger i Finland\n• Vad tycker du om missbruk i Finland (missbruk = alkohol, tobak,\ndroger, drogmissbruk)?\n• I vilka situationer är det tillåtet med missbruk?\n• Vilka problem kan missbruk orsaka?\n• Vad anser du om att minderåriga (under 18 år) använder droger?\n1.\nHälsa och välmående"
+      ],
+      "writing": []
+    },
+    {
+      "id": 5,
+      "title_sv": "Fritid och hobbyer",
+      "vocabulary": [
+        "LÅNA",
+        "RESERVERA",
+        "INTERCITY-LÅN",
+        "RETURNERA",
+        "BETALA",
+        "BÖTER",
+        "DECKARE",
+        "DIKT",
+        "SAGA",
+        "FÖRSENAD",
+        "BOKNING",
+        "LITTERATUR",
+        "SKRIVA UT",
+        "LYSSNA",
+        "ROMAN",
+        "FÖRSENINGSAVGIFT",
+        "NY LÅN",
+        "LÅNETID",
+        "FÖRFATTARE",
+        "MUSIKAVDELNING",
+        "NYHET",
+        "VERK",
+        "BIBLIOTEKSKORT",
+        "VARA",
+        "NÄRVARANDE /",
+        "VARA UTLÅNAD",
+        "HÄMTNING",
+        "AV DATA",
+        "DAGSTIDNING",
+        "RÖRA PÅ SIG",
+        "MOTION",
+        "GÅ NER I VIKT",
+        "GÅ UPP I VIKT",
+        "KONDITION",
+        "TA HAND ON SIG",
+        "SJÄLV",
+        "ÅTERHÄMTA",
+        "SIG",
+        "TÄNJA/STRE",
+        "TCHA",
+        "MUSKLER",
+        "STARK",
+        "BLI ANDFÅDD",
+        "TRÄNA",
+        "TRÄNING",
+        "SPELA",
+        "SPEL",
+        "VINNA",
+        "FÖRLORA",
+        "LAG",
+        "TRÄNARE",
+        "FÖLJA",
+        "GREN",
+        "HOBBY",
+        "HA SOM",
+        "GYM",
+        "PULS",
+        "HYRA EN",
+        "STUGA",
+        "SOVA I",
+        "HOTELL",
+        "SOVA",
+        "LÄNGE",
+        "LÄSA EN BOK",
+        "SOVA I TÄLT",
+        "VARA PÅ",
+        "SEMESTER",
+        "RESA MED",
+        "TÅG",
+        "ÄTA PÅ",
+        "RESTAURANG",
+        "BESÖKA",
+        "ETT SPA",
+        "EN BÅT",
+        "CYKLA",
+        "ÅKA PÅ",
+        "KRYSSNING",
+        "ÄTA",
+        "GLASS",
+        "KÖPA KAFFE",
+        "GE TURISTER",
+        "RÅD",
+        "GÅ VILSE PÅ EN",
+        "FRÄMMANDE",
+        "PLATS",
+        "GRILLA MAT",
+        "GÅ I BASTU",
+        "LÅNA EN BOK",
+        "FRÅN",
+        "BIBLIOTEKET",
+        "SE PÅ FILM",
+        "SIMMA I EN SJÖ",
+        "ELLER I HAVET",
+        "NÅGON",
+        "BAKA EN",
+        "KAKA",
+        "RINGA DIN",
+        "MAMMA / PAPPA /",
+        "SLÄKTING",
+        "SKRATTA MED",
+        "VATTEN I",
+        "ÖGONEN",
+        "SHOPPA",
+        "SLAPPNA AV",
+        "GÅ PÅ",
+        "MASSAGE",
+        "HYRA EN BIL",
+        "FLYGPLAN",
+        "PROGRAM",
+        "NÄT",
+        "APP",
+        "CHAT",
+        "SOCIAL",
+        "MEDIA",
+        "FILM",
+        "SERIE",
+        "SURFA PÅ",
+        "NÄTET",
+        "FÖRDEL",
+        "NACKDEL",
+        "NYTTA",
+        "NYTTIG",
+        "MINDERÅRIG",
+        "ÅLDERSGRÄNS",
+        "KÄNDIS",
+        "KÄND",
+        "POPULÄR",
+        "ABONNEMANG",
+        "SALDOGRÄNS",
+        "UNDERHÅLLNING",
+        "KANAL",
+        "DIREKTSÄNDNING",
+        "REALITY-TV",
+        "TIDNING",
+        "NOTIS",
+        "ANNONS",
+        "FORTSÄTTER",
+        "SPARA",
+        "KONSTNÄR",
+        "BILDKONST",
+        "MÅLNING",
+        "SKÅDESPELARE",
+        "INSTRUKTÖR PRESENTATION",
+        "PRELIMINÄR",
+        "PERIOD",
+        "MODERN KONST",
+        "RÖRANDE",
+        "VIKTIG",
+        "SÅNG",
+        "LÅT",
+        "STYCKE",
+        "MANUSKRIPT",
+        "TILLVERKARE",
+        "GIG/SPELNING",
+        "KONSERT",
+        "KOMPOSITÖR",
+        "TEXTFÖRFATTARE",
+        "INTRÄDESBILJETT",
+        "DRA TILLBAKA",
+        "BYTA",
+        "FÖRESTÄLLNING EVENEMANG",
+        "UTSTÄLLNING",
+        "FRÄMRE RADEN"
+      ],
+      "verbs": [],
+      "vilket_ord": [],
+      "dialogues": [],
+      "reagera": [
+        "Du vill lämna tillbaka en bok till biblioteket, men den är trasig. Förklara vad som hände.",
+        "Du läser en bok på biblioteket när någon talar högt i telefon. Påpeka det för dem.",
+        "Du har väntat länge på service i baren. En man kommer upp bredvid dig och får omedelbart servering. Vad säger du till bartendern?",
+        "Dörrvakten släpper inte in dig och säger att du ser minderårig ut. Vad säger du?",
+        "Din vän vill börja med en ny sport. Föreslå en lämplig sport för honom/henne.",
+        "Du försökte gå till gymmet tidigt på morgonen, men ditt kort fungerade inte. Anmäl det till gymmet.",
+        "Du glömde något på gymmet. Berätta vad du glömde och när du glömde det.",
+        "Du vill boka en taxi till flygplatsen. Be om hjälp i receptionen. Berätta när och var flyget avgår.",
+        "Du sitter på ett tåg. Du har en biljett, men någon sitter på din sittplats.",
+        "Du är tillsammans med en vän. Hen tittar hela tiden på sin telefon och talar inte med dig. Vad säger du?",
+        "Du reser i en buss. En ung person sitter bredvid dig och spelar högljudd musik. Du har huvudvärk. Vad säger du till den unga personen?",
+        "Din vän fyller 50 år. Du ger honom/henne en konstgåva (hitta själv på vad). Vad säger du när du ger gåvan?",
+        "Du är på en biograf och personen bredvid dig äter popcorn högljutt.",
+        "Din bil går sönder och du vet att din granne är på väg till samma ställe som du. Be om en hiss. Fritid och hobbyer",
+        "Du ser ett litet skolbarn i cafeterian. Skolbarnet tittar på ett program som inte passar barn på en surfplatta. Berätta för honom/henne varför programmet är dåligt och varför hen inte ska titta på det.",
+        "Du har köpt en produkt i en sportbutik (hitta själv på vilken). Det är något fel på produkten. Återlämna produkten till butiken och förklara varför du vill återlämna den.",
+        "Du promenerar på stan när en journalist frågar dig vad du tycker om din hemstad. Vad säger du till honom/henne?",
+        "Du ser ungdomar i din lokala park som är där varje dag efter skolan. Ungdomar skräpar ner i parken och gör mycket oväsen. Föreslå ungdomarna vad de skulle kunna göra utöver att vara i parken.",
+        "Du ser ungdomar i din lokala park som är där varje dag efter skolan. Ungdomar skräpar ner i parken och gör mycket oväsen. Föreslå ungdomarna vad de skulle kunna göra utöver att vara i parken."
+      ],
+      "beratta": [
+        "A. Välj ett verk (bok, pjäs, film, dikt, ...) som är viktigt för dig.\nTill exempel:\nVilket verk är det? Vem har skrivit den?\nVilken typ av verk är det?\nVarför är det viktigt för dig?",
+        "B. Vad betyder barkultur för dig?\nGår du någonsin till en bar? Varför/varför inte?\nVilken åldersgrupp passar barkulturen för? Varför?\nVad är bra och dåligt med att människor går på barer?",
+        "C. Utseende - vacker eller ful?\nVad betyder utseende för dig?\nHur tar du hand om dig själv?\nVarför är utseendet viktigt för dig?\nTänker människor för mycket på utseendet? Varför/varför inte?",
+        "D. En bra semester\nVad är en bra semester? Vad gör du då?\nNär hade du senast semester? Vad gjorde du?\nÄr en bra semester hemma eller på resande fot? Varför?\nFritid och hobbyer",
+        "E. Det är trevligt i stugan\nHar du/din familj/en vän en stuga? Var? Vilken typ?\nHur ofta åker du till stugan? Varför?\nVad är trevligt med stugan? Vad är hemskt?",
+        "F. Att spendera pengar på resor\nBerätta till exempel:\nVad spenderar du dina pengar på när du reser?\nVem bestämmer vad pengarna ska användas till?\nÄr det viktigt att ha mycket pengar med sig på resan? Gillar du\nshopping eller äventyr? Varför?",
+        "G. Jag och sociala medier (Facebook, Twitter, Instagram, Snapchat...)\nVilka sociala medier använder du och hur mycket?\nVilka är för- och nackdelarna med sociala medier?\nVarför tycker du om eller ogillar sociala medier?",
+        "H. Husdjur\nHar du ett husdjur? Hurdan? Berätta om den.\nVarför har människor husdjur?\nVarför är ett husdjur ofta viktigt?\nVad kan ett husdjur lära ett barn?",
+        "I. Min hobby\nBerätta om din hobby. Vad är det? Hur länge har du gjort det?\nVilka är fördelarna och nackdelarna?\nVilken utrustning behöver du?\nHur mycket kostar det?\nVem skulle du rekommendera den till?\nFritid och hobbyer"
+      ],
+      "asikt": [
+        "A. Motion är ett måste, inte ett alternativ.\n• Gillar du att träna? Varför/varför inte?\n• Vilka är fördelarna med träning? Kan det vara skadligt?\n• Kan man tvinga människor att träna? Vem kan tvinga dig?\nLäkare/mamma/chef?\n• Hur kan man uppmuntra människor att motionera?",
+        "B. De nordiska länderna är bra turistmål.\n• Vad finns det att se i de nordiska länderna för turister?\n• Till vem skulle du rekommendera de nordiska länderna som\nturistmål? Varför?\n• Tycker du att det finns tillräckligt många turister som besöker de\nnordiska länderna? Varför/varför inte?",
+        "C. Föräldrarna måste kontrollera sina barns internetanvändning.\n• Vad kan barn göra på internet?\n• Kan internet vara farligt för barn? På vilket sätt?\n• Hur mycket kan ett barn leka/surfa?\n• Vilka är fördelarna och nackdelarna med internetanvändning för\nbarn?",
+        "D. Min åsikt om konsten i mitt nya land jämfört med konsten i mitt\ngamla hemland.\n• Vilken typ av konst gillar du? Varför?\n• Följer du aktivt konstvärlden?\n• Hur skiljer sig finsk konst från konsten i ditt hemland?",
+        "E. Det är upp till barnet att bestämma vad det ska göra.\n• Tror du att ditt barn kan göra vad det vill? Varför/varför inte?\n• Vad tycker du är en bra hobby för ett barn? Varför?\n• Hur mycket kan barnet göra?\n• Kan hobbyn vara skadlig? Vilka?\nFritid och hobbyer"
+      ],
+      "writing": []
+    },
+    {
+      "id": 6,
+      "title_sv": "Arbete och utbildning",
+      "vocabulary": [
+        "LÖN",
+        "SEMESTER",
+        "KONTO",
+        "ARBETSKONTRAKT",
+        "CHEF",
+        "KOLLEGA",
+        "HÖGSTA",
+        "LEDNINGEN",
+        "SAMARBETSPARTNER",
+        "ARBETSOMRÅDE",
+        "KAFFERUM",
+        "REGLER",
+        "ARBETSTID",
+        "ÖVERVAKNING",
+        "AV ARBETSTIDEN",
+        "PAUS",
+        "LUNCHTID",
+        "MÖTE",
+        "ÖVERTID",
+        "SÄGA UPP SIG",
+        "SÄGA UPP",
+        "VÄLJA",
+        "FÅ EN",
+        "ÖVERENSKOMMELSE",
+        "PROJEKT",
+        "SÖKA",
+        "VIKARIERA",
+        "INTRODUCERA",
+        "TJÄNA",
+        "DEADLINE",
+        "FÄRDIG",
+        "PRESENTATION",
+        "FÖRELÄSNING",
+        "FÖRTRYCK",
+        "TALARE/",
+        "FÖRELÄSARE",
+        "KUNNA",
+        "LÄRA SIG",
+        "STUDERA",
+        "LÄRA",
+        "GÖRA",
+        "ANTECKNINGAR",
+        "PRESENTATION/",
+        "FÖRESTÄLLNING",
+        "PUBLIK",
+        "DISKUSSION",
+        "EXAMEN",
+        "ÅHÖRARE",
+        "ÖVA",
+        "VETA",
+        "FÖRSTÅ",
+        "DEBATTÖR",
+        "DEBATT",
+        "KONVERSATION MEMORANDUM",
+        "DAGPENNING",
+        "BEGRIPA",
+        "HÅLLA EN",
+        "ARBETSVÄG",
+        "FÖRKLARA",
+        "FÖRESLÅ",
+        "BEHANDLA"
+      ],
+      "verbs": [],
+      "vilket_ord": [],
+      "dialogues": [
+        {
+          "num": 1,
+          "prompt_sv": "Du är sjuk. Berätta för din chef. Chef: (Presentera dig själv och berätta vad du har att säga.) Arbete och utbildning\n\n(Svara.)\n(Svara.)\n(Svara.)",
+          "model_fi": ""
+        },
+        {
+          "num": 1,
+          "prompt_sv": "Du är sjuk. Berätta för din chef. Chef: Nieminen. Ah... ja, det går inte att hjälpa. Har du ringt företagshälsovården än? Okej. Har du något viktigt arbete att utföra och behöver en ersättare? Okej. Krya på dig nu snart. Säg till när du vet hur lång din sjukskrivning blir. 3. Arbete och utbildning",
+          "model_fi": ""
+        },
+        {
+          "num": 2,
+          "prompt_sv": "Du sitter på ett seminarium tillsammans med en kollega och lyssnar på presentationer. Under pausen talar du med din kollega om vad du tyckte om dagens presentationer. (Kommentera och fråga efter tid och plats för nästa presentation.) Arbete och utbildning\n\n(Svara. Berätta vad du tyckte om presentationen.)\n(Svara.)\n(Svara.)\n(Svara.)",
+          "model_fi": ""
+        },
+        {
+          "num": 2,
+          "prompt_sv": "Du sitter på ett seminarium tillsammans med en kollega och lyssnar på presentationer. Under pausen talar du med din kollega om vad du tyckte om dagens presentationer. Vilken bra prestation den andra var i dag! Gillade du den? Jag kommer inte ihåg hens namn. Jag vet inte vad hen heter. Vänta lite. Minns du vilken tid hens show var? Ja, här! Helena Roihu. Hon är en riktigt bra talare! Hon är en mycket trevlig talare. I Jag blev i alla fall inspirerad när jag lyssnade. Hur är det med dig? Den tredje talaren var också bra, men ämnet var inte så intressant. Ja! Vänta, det är där borta i rum 3. Presentationen börjar klockan om fem minuter. Ska vi hämta lite kaffe med till den? 3. Arbete och utbildning",
+          "model_fi": ""
+        },
+        {
+          "num": 3,
+          "prompt_sv": "Din kollega vill boka ett möte. (Svara och berätta varför du är upptagen på jobbet.) Arbete och utbildning\n\n(Svara och föreslå en tid under nästa vecka.)\n(Svara nekande och förklara varför.)\n(Svara.)\n(Svara jakande och föreslå en tid.)",
+          "model_fi": ""
+        },
+        {
+          "num": 3,
+          "prompt_sv": "Din kollega vill boka ett möte. Lyssna, vi måste träffas och prata om det här projektet. När har du tid? Jag har en fulltecknad kalender, men låt mig kolla. Hmmm. Det är det passar inte. Inte en chans. Vad sägs om fredag morgon? Det passar för mig vilken tid som helst. Då kommer den att flyttas fram ett par veckor. Vad sägs om tisdag den tjugofemte? Ja, det går bra. Vad det är svårt att hitta en tidpunkt som passar oss båda. Det måste vara den mest hektiska tiden på året. Ja, det är så det är. Men det är i alla fall bra att ha en tid i kalendern nu. Jag bokar en bil åt oss och skickar ett meddelande till dig om var vi kan träffas. 3. Arbete och utbildning",
+          "model_fi": ""
+        },
+        {
+          "num": 4,
+          "prompt_sv": "Du har varit på affärsresa. Du talar med dina kollegor i kafferummet efter din affärsresa. Arbete och utbildning\n\n(Svara och berätta var du var på affärsresa.)\n(Svara och berätta vad du gjorde på din affärsresa.)\n(Svara.)\n(Svara.)\n(Svara.)",
+          "model_fi": ""
+        },
+        {
+          "num": 4,
+          "prompt_sv": "Du har varit på affärsresa. Du talar med dina kollegor i kafferummet efter din affärsresa. Det var länge sedan vi sågs. Var har du varit? Ja, ja. Hur var din resa? Det stämmer. Var det ett bra arrangemang? Hotell och sådant? Det låter bra! Hur var frukosten på hotellet? Det är trevligt att åka på resa ibland, men affärsresor är också ganska jobbiga. Hur känner du dig nu? Japp, japp. Men nu måste jag återgå till arbetet. Trevligt att se dig igen. 3. Arbete och utbildning",
+          "model_fi": ""
+        }
+      ],
+      "reagera": [
+        "Du behöver tala med en kollega och du går till honom eller henne. Hen är dock inte på sin arbetsplats. Skicka ett röstmeddelande till honom/ henne på WhatsApp och berätta vad du tänker på.",
+        "En ny anställd har kommit till din arbetsplats. Hen vet inte vad hen ska göra. Hjälp hen.",
+        "Du har haft en anställningsintervju. Du ringer intervjuaren för att du fortfarande har några frågor som du vill ställa. (Hitta på frågorna själv.)",
+        "Det finns fel i din lön (hitta själv på vad). Du ringer till löneadministratören.",
+        "Din kollega är på väg att fylla 50 år. Du vill organisera program. Föreslå din kollega hur ni kan fira.",
+        "Du har fått ett nytt jobb och måste säga upp dig. Berätta om situationen för din chef.",
+        "Du vet en riktigt bra medarbetare för ditt projekt. Rekommendera honom/henne till din chef.",
+        "Du måste boka ett mötesrum. Berätta när du behöver det och hur stort mötesrum du behöver.",
+        "Din kollega har inte gjort det överenskomna (hitta själv på vad). Du är arg på honom/henne. Förklara vad du tycker om det faktum att hen inte gjorde det som överenskommits.",
+        "Du har för mycket att göra och är riktigt trött. Föreslå din chef hur du kan underlätta din arbetsbörda.",
+        "Din kollega ska gå på mammaledighet. Vad säger du?",
+        "Din vän har fått sparken. Vad säger du?",
+        "Din vän har fått ett nytt, riktigt bra jobb. Vad säger du?",
+        "Din chef meddelar att det kommer att ske en stor förändring i Arbete och utbildning",
+        "A. Skolan i mitt hemland"
+      ],
+      "beratta": [],
+      "asikt": [
+        "A. Arbetet ska vara roligt.\n• Ska du trivas med ditt jobb eller är det bara ett sätt att tjäna pengar?\n• Varför/varför ska inte arbete vara roligt?\n• Vilken typ av arbete tycker du om? Vad är tråkigt?",
+        "B. Det är alltid värt att studera.\n• Varför är det viktigt att studera/inte viktigt att studera?\n• Vilka saker är bra att studera? Vad är meningslöst?\n• Världen förändras. Kommer skolan att förändras?",
+        "C. Numera har alla alltid bråttom.\n• Har människors användning av tiden förändrats? Hur?\n• Varför verkar det som om alla har bråttom?\n• Vad är nackdelen/fördelen med att ha fullt upp?",
+        "D. I framtiden kommer robotar att göra människans arbete.\n• Tror du att robotar kommer att ta över människors jobb? Varför/\nvarför inte?\n• Vilka är fördelarna och nackdelarna med automatisering i arbetet?\n• Hur kan artificiell intelligens (AI) hjälpa oss?\n• Vilka är riskerna med artificiell intelligens?",
+        "E. Skoluniformer är bra.\n• Har ni en skoluniform i ditt hemland?\n• Vilka är skadorna och fördelarna?\n• Vilken typ av klädsel är lämplig i skolan?",
+        "F. Utbildningen av barn i de nordiska länderna är bra/dålig.\n• Finns det skillnader mellan hur barn uppfostras i ditt nuvarande\nhemland och hur de uppfostrades i ditt förra hemland?\n• Vilka är för- och nackdelarna med båda?",
+        "G. Finland behöver mer arbetskraft från utlandet.\n• Hur kan ni locka fler människor att arbeta i Finland?\n• Vilken typ av jobb tror du att Finland behöver fler människor för?\n• Vilka är utmaningarna eller problemen med att anställa personer\ndirekt från utlandet?\nArbete och utbildning"
+      ],
+      "writing": [
+        {
+          "type": "meddelande",
+          "prompt_sv": "Du vill byta skift med en kollega. Hen är inte här just nu, men du har bråttom och vet inte hens telefonnummer. Du lämnar ett meddelande på hens skrivbord. Börja och avsluta meddelandet på lämpligt sätt. Du vill skicka ett tackbrev till din egen eller ditt barns lärare. Skriv åtminstone: Välj A eller B. A. Det nordiska skolsystemet är det bästa i världen. B. I de nordiska länderna är det obligatoriskt att tala landets officiella språk.\n• vad hen har lärt dig/ditt barn som hen har lärt dig/ditt barn\n• vilken slags lärare du tycker att hen är\n• vad du alltid kommer att minnas\n• vad du önskar att hen skulle komma ihåg"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title_sv": "Samhälle",
+      "vocabulary": [
+        "UPPEHÅLLSTILLSTÅND PERMANENT",
+        "TILLFÄLLIG",
+        "GILTIG",
+        "LOV",
+        "MEDBORGARSKAP",
+        "ASYL",
+        "FLYKTING",
+        "PLIKT",
+        "SÄKERHET",
+        "RÄTT",
+        "CIVILSTÅND",
+        "OLAGLIG",
+        "LAGLIG",
+        "INVANDRING",
+        "EMIGRATION",
+        "TA HAND OM",
+        "SAKER",
+        "VISUM",
+        "FLYTTA SIG",
+        "BEFOLKNING",
+        "SELVITYS",
+        "BROTT",
+        "MOTIVERA",
+        "PERSONUPPGIFTER",
+        "MINDERÅRIG",
+        "MÅLSMAN",
+        "AVGÅ",
+        "MINORITET",
+        "BÖTE",
+        "MYNDIGHTER",
+        "SKATTEÅTERBÄRING",
+        "JÄMLIKHET",
+        "DISKRIMINERA",
+        "ENLIGT LAGEN",
+        "RESTSKATT",
+        "LAG",
+        "FUNGERA",
+        "SKATT",
+        "VARNING"
+      ],
+      "verbs": [],
+      "vilket_ord": [],
+      "dialogues": [
+        {
+          "num": 1,
+          "prompt_sv": "Du vill registrera ditt äktenskap och går till den digitala byrån. Tjänsteman: Samhälle MODELL: Dialog 1. Samhället Du vill registrera ditt äktenskap och går till den digitala byrån. Tjänsteman: Hej, vad kan jag hjälpa dig med? Okej. Är båda parter myndiga? Kan du ge mig ditt personnummer? Jag behöver den här. Tack. När du har fyllt i formuläret ska du ta med det hit så kan vi bestämma en tid för registrering. Det kostar inget att registrera här på registret, men om du vill registrera det på annat håll måste du betala resekostnaderna. Och ingen av er är gift, har ett registrerat partnerskap eller är släkt med varandra? Då kan utredningen av hindren börja. Det finns en blankett för begäran om utredning på kansliets webbplats som du kan skriva ut och fylla i. Jag kan också skriva ut den här om du vill. Samhälle\n\n(Hälsa och berätta om ditt ärende.)\n(Svara jakande.)\n(Svara nekande.)\n(Svara.)\n(Svara.)\n(Fråga efter priset.)\n(Tacka och avsluta samtalet.)",
+          "model_fi": ""
+        },
+        {
+          "num": 2,
+          "prompt_sv": "Ett problem har uppstått i ditt hem (hitta själv på vad) och du vill göra anspråk på din hemförsäkring. Tjänsteman: (Tacka och avslutar samtalet). (Svara och säg att du har haft problem med posten.) Samhälle\n\n(Hälsa och berätta om ditt ärende)\n(Svara.)\n(Svara.)\n(Svara och säg att du inte har fått räkningen.)\n(Svara och tala om när du kan komma in.)",
+          "model_fi": ""
+        },
+        {
+          "num": 2,
+          "prompt_sv": "Ett problem har uppstått i ditt hem (hitta själv på vad) och du vill göra anspråk på din hemförsäkring. Tjänsteman: Försäkringsbolag Turvanasi Hur kan jag hjälpa dig? Oj, vad synd. När och hur fick du reda på det? Okej. Kan du berätta ditt namn och din adress igen, så ska jag leta efter din försäkringsinformation. Okej. Jag ska anteckna det i kalendern. Vi ses då. Tack, jag hittade informationen. Lyssna, det är så olyckligt att den senaste räkningen för hemförsäkringen är obetald, så hemförsäkringen har inte varit giltig på ett par månader. Verkligen? Vi har här information om att räkningen skickades ut för exakt två månader sedan och att påminnelsen om betalning kom om tre veckor senare. Ja. Postkontoret har varit riktigt opålitligt på sistone. Jag har också förlorat många paket. Jag ser också att du har varit kund hos oss i tio år och att du alltid har betalat dina räkningar i tid, så låt oss försöka lösa detta så att vi kan ge dig en återbetalning från din hemförsäkring. Detta kan dock inte hanteras via telefon, så kan du komma till vårt kontor här? Samhälle",
+          "model_fi": ""
+        }
+      ],
+      "reagera": [
+        "Du har problem med ditt uppehållstillstånd (hitta själv på hur). Ring invandrarmyndigheten.",
+        "Du har fått resultaten av YKI-testet. Du vill ansöka om medborgarskap, men du har frågor. Ring invandrarmyndigheten.",
+        "Du har väntat i 16 månader på ett nytt pass. Du vill ställa fler frågor. Ring invandrarmyndigheten.",
+        "Presidentens kansli ringer dig och bjuder in dig till firandet av självständighetsdagen den 6 december eftersom du har varit en mycket flitig studerande i finska. Din lärare har rekommenderat dig. Vad säger du?",
+        "Din mobiltelefon har gått sönder (hitta själv på hur). Du frågar om din hemförsäkring täcker det.",
+        "Din arbetssituation har förändrats (hitta själv på hur) och du behöver ändra din skattesats. Ring skattekontoret.",
+        "Du har ett problem med socialförsäkringssystemet (hitta själv på vad). Ring FPA.",
+        "Du har blivit utsatt för ett brott (hitta själv på vad som har hänt). Anmäl det till polisen.",
+        "A. Det är viktigt för mig var jag kommer ifrån."
+      ],
+      "beratta": [],
+      "asikt": [
+        "A. Mitt nuvarande hemland är inte ett jämställt land.\n• Hur återspeglas jämlikhet/ojämlikhet i ditt hemland?\n• Vilka är jämlika?\n• På vilket sätt är ditt hemland inte jämställt?",
+        "B. Människor bryr sig inte om varandra nuförtiden.",
+        "C. Det finns för få invandrare i politiken i de nordiska länderna.\n• Vilka frågor kan invandrare bidra till?\n• Varför bör invandrare delta mer aktivt i politiken?",
+        "D. Skatterna i hemland är för höga.\n• Vad tycker du om skatterna i ditt hemland?\n• Hur är beskattningen i ditt nuvarande hemland jämfört med\nbeskattningen i ditt gamla hemland?\nSamhälle\nÖvning 2.\nÖvning 3.\nDu har ansökt till en svenskkurs men inte blivit antagen eftersom\ntjänstemannen säger att du har tillräckliga språkkunskaper.\nSkriv ett klagomål till tjänstemannen där du berättar:\n• varför du bör få fortsätta din språkundervisning\n• vad du kommer att göra när dina språkkunskaper förbättras\n• hur det avslagna beslutet kommer att påverka ditt liv\nVälj A eller B.",
+        "A. Invandrare lämnar Finland/Sverige för att de inte hittar\narbete.",
+        "B. En egen bil är för dyr."
+      ],
+      "writing": []
+    }
+  ]
+}
