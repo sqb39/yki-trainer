@@ -6,38 +6,60 @@ import {
   type QuizAttempt,
   type WritingEntry,
 } from '../db/schema'
-import { DAILY_QUESTS, syncProgressState } from './gamification'
+import { DAILY_QUESTS, syncProgressState, type DailyQuestId } from './gamification'
 import { scheduleReview, type Sm2Rating } from './sm2'
 import { markStudyActivity } from './sync'
-import { levelFromXp, todayIso, daysBetween, XP_REWARDS } from './xp'
+import {
+  DEFAULT_STUDY_SECONDS,
+  levelFromXp,
+  todayIso,
+  daysBetween,
+  startOfLocalDayMs,
+  XP_REWARDS,
+} from './xp'
 
 const FLASHCARD_QUEST_TARGET = 20
 const FLASHCARD_QUEST_BONUS = 100
 const ALL_QUESTS_BONUS = 25
 
-type DailyQuestId = (typeof DAILY_QUESTS)[number]['id']
+function normalizeQuestIds(ids: string[]): string[] {
+  return ids.map((id) => (id === 'dialogue' ? 'practice' : id))
+}
 
 async function applyStudyProgress(
   xpAmount: number,
   questId?: DailyQuestId,
+  studySeconds = 0,
 ): Promise<{ xpGained: number }> {
   let xpGained = xpAmount
 
-  await db.transaction('rw', [db.progress], async () => {
+  await db.transaction('rw', [db.progress, db.settings], async () => {
     const progress = await db.progress.get('main')
+    const settings = await db.settings.get('main')
     const today = todayIso()
+    const minSeconds = Math.max(1, settings?.minStudyMinutes ?? 15) * 60
+
     let xp = (progress?.xp ?? 0) + xpAmount
     let streakDays = progress?.streakDays ?? 0
     let lastStudyDate = progress?.lastStudyDate ?? null
-    let dailyQuestsCompleted = [...(progress?.dailyQuestsCompleted ?? [])]
+    let dailyQuestsCompleted = normalizeQuestIds([...(progress?.dailyQuestsCompleted ?? [])])
     let dailyQuestsDate = progress?.dailyQuestsDate ?? null
+    let studySecondsToday = progress?.studySecondsToday ?? 0
+    let studySecondsDate = progress?.studySecondsDate ?? null
 
     if (dailyQuestsDate !== today) {
       dailyQuestsCompleted = []
       dailyQuestsDate = today
     }
 
-    if (lastStudyDate !== today) {
+    if (studySecondsDate !== today) {
+      studySecondsToday = 0
+      studySecondsDate = today
+    }
+    studySecondsToday += Math.max(0, studySeconds)
+
+    const alreadyStreakToday = lastStudyDate === today
+    if (!alreadyStreakToday && studySecondsToday >= minSeconds) {
       if (!lastStudyDate) {
         streakDays = 1
       } else {
@@ -52,9 +74,109 @@ async function applyStudyProgress(
     }
 
     const allQuestsDone = DAILY_QUESTS.every((q) => dailyQuestsCompleted.includes(q.id))
-    const hadAllQuests = DAILY_QUESTS.every((q) =>
-      (progress?.dailyQuestsCompleted ?? []).includes(q.id),
-    )
+    const hadAllQuests =
+      progress?.dailyQuestsDate === today &&
+      DAILY_QUESTS.every((q) =>
+        normalizeQuestIds(progress?.dailyQuestsCompleted ?? []).includes(q.id),
+      )
+    if (allQuestsDone && !hadAllQuests && dailyQuestsDate === today) {
+      xp += ALL_QUESTS_BONUS
+      xpGained += ALL_QUESTS_BONUS
+    }
+
+    await db.progress.put({
+      ...DEFAULT_PROGRESS,
+      ...progress,
+      id: 'main',
+      xp,
+      level: levelFromXp(xp),
+      streakDays,
+      lastStudyDate,
+      dailyQuestsCompleted,
+      dailyQuestsDate,
+      studySecondsToday,
+      studySecondsDate,
+    })
+  })
+
+  await syncProgressState()
+  await markStudyActivity()
+  return { xpGained }
+}
+
+export async function recordFlashcardReview(
+  cardId: number,
+  rating: Sm2Rating,
+  card: Card,
+  studySeconds?: number,
+): Promise<{ xpGained: number }> {
+  const now = Date.now()
+  const result = scheduleReview(card, rating, now)
+  let xpGained = XP_REWARDS.flashcard
+  const elapsed = studySeconds ?? DEFAULT_STUDY_SECONDS.flashcard
+
+  await db.transaction('rw', [db.cards, db.reviews, db.progress, db.settings], async () => {
+    await db.cards.update(cardId, {
+      easeFactor: result.easeFactor,
+      interval: result.interval,
+      repetitions: result.repetitions,
+      nextReview: result.nextReview,
+      updatedAt: now,
+    })
+
+    await db.reviews.add({ cardId, rating, reviewedAt: now })
+
+    const progress = await db.progress.get('main')
+    const settings = await db.settings.get('main')
+    const today = todayIso()
+    const minSeconds = Math.max(1, settings?.minStudyMinutes ?? 15) * 60
+    let xp = (progress?.xp ?? 0) + XP_REWARDS.flashcard
+    let streakDays = progress?.streakDays ?? 0
+    let lastStudyDate = progress?.lastStudyDate ?? null
+    let dailyQuestsCompleted = normalizeQuestIds([...(progress?.dailyQuestsCompleted ?? [])])
+    let dailyQuestsDate = progress?.dailyQuestsDate ?? null
+    let studySecondsToday = progress?.studySecondsToday ?? 0
+    let studySecondsDate = progress?.studySecondsDate ?? null
+
+    if (dailyQuestsDate !== today) {
+      dailyQuestsCompleted = []
+      dailyQuestsDate = today
+    }
+
+    if (studySecondsDate !== today) {
+      studySecondsToday = 0
+      studySecondsDate = today
+    }
+    studySecondsToday += Math.max(0, elapsed)
+
+    if (lastStudyDate !== today && studySecondsToday >= minSeconds) {
+      if (!lastStudyDate) {
+        streakDays = 1
+      } else {
+        const gap = daysBetween(lastStudyDate, today)
+        streakDays = gap === 1 ? streakDays + 1 : 1
+      }
+      lastStudyDate = today
+    }
+
+    const startOfDay = startOfLocalDayMs(today)
+    const reviewsToday = await db.reviews.where('reviewedAt').aboveOrEqual(startOfDay).count()
+
+    if (
+      reviewsToday >= FLASHCARD_QUEST_TARGET &&
+      !dailyQuestsCompleted.includes('flashcards')
+    ) {
+      dailyQuestsCompleted.push('flashcards')
+      xp += FLASHCARD_QUEST_BONUS
+      xpGained += FLASHCARD_QUEST_BONUS
+    }
+
+    const allQuestsDone = DAILY_QUESTS.every((q) => dailyQuestsCompleted.includes(q.id))
+    const hadAllQuests =
+      progress?.dailyQuestsDate === today &&
+      DAILY_QUESTS.every((q) =>
+        normalizeQuestIds(progress?.dailyQuestsCompleted ?? []).includes(q.id),
+      )
     if (allQuestsDone && !hadAllQuests) {
       xp += ALL_QUESTS_BONUS
       xpGained += ALL_QUESTS_BONUS
@@ -70,79 +192,8 @@ async function applyStudyProgress(
       lastStudyDate,
       dailyQuestsCompleted,
       dailyQuestsDate,
-    })
-  })
-
-  await syncProgressState()
-  await markStudyActivity()
-  return { xpGained }
-}
-
-export async function recordFlashcardReview(
-  cardId: number,
-  rating: Sm2Rating,
-  card: Card,
-): Promise<{ xpGained: number }> {
-  const now = Date.now()
-  const result = scheduleReview(card, rating, now)
-  let xpGained = XP_REWARDS.flashcard
-
-  await db.transaction('rw', [db.cards, db.reviews, db.progress], async () => {
-    await db.cards.update(cardId, {
-      easeFactor: result.easeFactor,
-      interval: result.interval,
-      repetitions: result.repetitions,
-      nextReview: result.nextReview,
-      updatedAt: now,
-    })
-
-    await db.reviews.add({ cardId, rating, reviewedAt: now })
-
-    const progress = await db.progress.get('main')
-    const today = todayIso()
-    let xp = (progress?.xp ?? 0) + XP_REWARDS.flashcard
-    let streakDays = progress?.streakDays ?? 0
-    let lastStudyDate = progress?.lastStudyDate ?? null
-    let dailyQuestsCompleted = [...(progress?.dailyQuestsCompleted ?? [])]
-    let dailyQuestsDate = progress?.dailyQuestsDate ?? null
-
-    if (dailyQuestsDate !== today) {
-      dailyQuestsCompleted = []
-      dailyQuestsDate = today
-    }
-
-    if (lastStudyDate !== today) {
-      if (!lastStudyDate) {
-        streakDays = 1
-      } else {
-        const gap = daysBetween(lastStudyDate, today)
-        streakDays = gap === 1 ? streakDays + 1 : 1
-      }
-      lastStudyDate = today
-    }
-
-    const startOfDay = new Date(today).getTime()
-    const reviewsToday = await db.reviews.where('reviewedAt').aboveOrEqual(startOfDay).count()
-
-    if (
-      reviewsToday >= FLASHCARD_QUEST_TARGET &&
-      !dailyQuestsCompleted.includes('flashcards')
-    ) {
-      dailyQuestsCompleted.push('flashcards')
-      xp += FLASHCARD_QUEST_BONUS
-      xpGained += FLASHCARD_QUEST_BONUS
-    }
-
-    await db.progress.put({
-      ...DEFAULT_PROGRESS,
-      ...progress,
-      id: 'main',
-      xp,
-      level: levelFromXp(xp),
-      streakDays,
-      lastStudyDate,
-      dailyQuestsCompleted,
-      dailyQuestsDate,
+      studySecondsToday,
+      studySecondsDate,
     })
   })
 
@@ -153,6 +204,12 @@ export async function recordFlashcardReview(
 
 export async function recordBossComplete(chapterId: number): Promise<{ xpGained: number }> {
   const now = Date.now()
+  const prior = await db.bossSessions
+    .where('chapterId')
+    .equals(chapterId)
+    .filter((s) => s.completedAt != null)
+    .count()
+
   await db.bossSessions.add({
     chapterId,
     dialogueDone: true,
@@ -161,7 +218,9 @@ export async function recordBossComplete(chapterId: number): Promise<{ xpGained:
     completedAt: now,
     createdAt: now,
   })
-  return applyStudyProgress(XP_REWARDS.boss)
+
+  const xpAmount = prior > 0 ? XP_REWARDS.bossRepeat : XP_REWARDS.boss
+  return applyStudyProgress(xpAmount, undefined, DEFAULT_STUDY_SECONDS.boss)
 }
 
 export async function updateCardBack(cardId: number, backSv: string): Promise<void> {
@@ -171,18 +230,20 @@ export async function updateCardBack(cardId: number, backSv: string): Promise<vo
 
 export async function recordQuizAttempt(
   attempt: Omit<QuizAttempt, 'id' | 'attemptedAt'>,
+  studySeconds = DEFAULT_STUDY_SECONDS.quiz,
 ): Promise<{ xpGained: number }> {
   const now = Date.now()
   const xpAmount = attempt.correct ? XP_REWARDS.quiz : Math.floor(XP_REWARDS.quiz / 2)
 
   await db.quizAttempts.add({ ...attempt, attemptedAt: now })
-  return applyStudyProgress(xpAmount)
+  return applyStudyProgress(xpAmount, 'practice', studySeconds)
 }
 
 export async function recordDialogueSession(
   session: Omit<DialogueSession, 'id' | 'createdAt' | 'completedAt'> & {
     selfRating: 1 | 2 | 3 | 4 | 5
   },
+  studySeconds = DEFAULT_STUDY_SECONDS.dialogue,
 ): Promise<{ xpGained: number }> {
   const now = Date.now()
 
@@ -195,11 +256,33 @@ export async function recordDialogueSession(
     createdAt: now,
   })
 
-  return applyStudyProgress(XP_REWARDS.dialogue, 'dialogue')
+  return applyStudyProgress(XP_REWARDS.dialogue, 'practice', studySeconds)
 }
 
-export async function recordSpeakingComplete(): Promise<{ xpGained: number }> {
-  return applyStudyProgress(XP_REWARDS.speaking, 'speaking')
+export async function recordSpeakingComplete(
+  studySeconds?: number,
+  match?: { chapterId: number; prompt: string },
+): Promise<{ xpGained: number }> {
+  if (match) {
+    const cards = await db.cards.where('chapterId').equals(match.chapterId).toArray()
+    const card = cards.find((c) => c.type === 'speaking' && c.frontSv === match.prompt)
+    if (card?.id) {
+      const now = Date.now()
+      const result = scheduleReview(card, 3, now)
+      await db.cards.update(card.id, {
+        easeFactor: result.easeFactor,
+        interval: result.interval,
+        repetitions: result.repetitions,
+        nextReview: result.nextReview,
+        updatedAt: now,
+      })
+    }
+  }
+  return applyStudyProgress(
+    XP_REWARDS.speaking,
+    'speaking',
+    studySeconds ?? DEFAULT_STUDY_SECONDS.speaking,
+  )
 }
 
 export async function saveWritingEntry(
@@ -210,7 +293,7 @@ export async function saveWritingEntry(
     .where('chapterId')
     .equals(entry.chapterId)
     .toArray()
-  const existing = chapterEntries.find((e) => e.taskType === entry.taskType)
+  const existing = chapterEntries.find((e) => e.promptSv === entry.promptSv)
 
   if (existing?.id) {
     await db.writingEntries.update(existing.id, {
@@ -218,6 +301,7 @@ export async function saveWritingEntry(
       checklist: entry.checklist,
       completedAt: entry.completedAt,
       updatedAt: now,
+      promptSv: entry.promptSv,
     })
     await markStudyActivity()
     return existing.id
@@ -247,5 +331,5 @@ export async function completeWritingEntry(entryId: number): Promise<{ xpGained:
     updatedAt: now,
   })
 
-  return applyStudyProgress(XP_REWARDS.writing)
+  return applyStudyProgress(XP_REWARDS.writing, undefined, DEFAULT_STUDY_SECONDS.writing)
 }

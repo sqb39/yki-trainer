@@ -6,12 +6,17 @@ export type CardTypeFilter = 'all' | 'vocab' | 'verb' | 'dialogue'
 export async function getDueCards(
   chapterId: number | 'all',
   typeFilter: CardTypeFilter,
+  unlockedChapters?: number[],
 ): Promise<Card[]> {
   const now = Date.now()
   let cards: Card[]
 
   if (chapterId === 'all') {
     cards = await db.cards.toArray()
+    if (unlockedChapters) {
+      const allowed = new Set(unlockedChapters)
+      cards = cards.filter((c) => allowed.has(c.chapterId))
+    }
   } else {
     cards = await db.cards.where('chapterId').equals(chapterId).toArray()
   }

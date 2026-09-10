@@ -7,9 +7,19 @@ export const XP_REWARDS = {
   speaking: 12,
   writing: 20,
   boss: 50,
+  bossRepeat: 10,
 } as const
 
 export const XP_PER_LEVEL = 500
+
+export const DEFAULT_STUDY_SECONDS = {
+  flashcard: 20,
+  quiz: 25,
+  dialogue: 90,
+  speaking: 60,
+  writing: 180,
+  boss: 300,
+} as const
 
 export function levelFromXp(xp: number): number {
   return Math.floor(xp / XP_PER_LEVEL) + 1
@@ -26,26 +36,25 @@ export function xpProgressInLevel(xp: number): { current: number; max: number; p
   }
 }
 
-export function todayIso(): string {
-  return new Date().toISOString().slice(0, 10)
+/** Local calendar date YYYY-MM-DD (not UTC). */
+export function todayIso(now = new Date()): string {
+  const y = now.getFullYear()
+  const m = String(now.getMonth() + 1).padStart(2, '0')
+  const d = String(now.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
+}
+
+export function startOfLocalDayMs(isoDate = todayIso()): number {
+  const [y, m, d] = isoDate.split('-').map(Number)
+  return new Date(y, m - 1, d).getTime()
 }
 
 export function daysBetween(a: string, b: string): number {
-  const ms = new Date(b).getTime() - new Date(a).getTime()
+  const ms = startOfLocalDayMs(b) - startOfLocalDayMs(a)
   return Math.round(ms / 86_400_000)
-}
-
-/** Update streak given last study date and today */
-export function nextStreak(lastStudyDate: string | null, today: string): number {
-  if (!lastStudyDate) return 1
-  const gap = daysBetween(lastStudyDate, today)
-  if (gap === 0) return 0 // caller should keep existing streak
-  if (gap === 1) return 1 // increment by 1
-  return 1 // reset to 1
 }
 
 export function daysUntilExam(examDate: string | null): number | null {
   if (!examDate) return null
-  const today = todayIso()
-  return daysBetween(today, examDate)
+  return daysBetween(todayIso(), examDate)
 }

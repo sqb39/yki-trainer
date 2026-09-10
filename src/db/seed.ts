@@ -1,4 +1,5 @@
 import { db, DEFAULT_PROGRESS, DEFAULT_SETTINGS, type Card } from './schema'
+import { todayIso } from '../lib/xp'
 
 export interface BookChapter {
   id: number
@@ -10,15 +11,32 @@ export interface BookChapter {
   reagera: string[]
   beratta: string[]
   asikt: string[]
-  writing: Array<{ type: 'meddelande' | 'e-post' | 'klagomål'; prompt_sv: string }>
+  writing: Array<{
+    type: 'meddelande' | 'e-post' | 'klagomål' | 'övrigt'
+    prompt_sv: string
+  }>
 }
 
 export interface BookData {
   chapters: BookChapter[]
 }
 
-function todayIso(): string {
-  return new Date().toISOString().slice(0, 10)
+function normalize(value: string): string {
+  return value.trim().toLowerCase().replace(/\s+/g, ' ')
+}
+
+function vocabBack(chapter: BookChapter, word: string): string {
+  const needle = normalize(word)
+  const hit = chapter.vilket_ord.find((item) => {
+    const answer = normalize(item.answer_sv)
+    return needle === answer || needle.includes(answer) || answer.includes(needle)
+  })
+  if (hit) return hit.question_sv
+  return `Förklara ordet och använd det i en mening:\n${word}`
+}
+
+function cardKey(card: Pick<Card, 'chapterId' | 'type' | 'frontSv' | 'contextSv'>): string {
+  return `${card.chapterId}|${card.type}|${card.frontSv}|${card.contextSv ?? ''}`
 }
 
 function cardsFromChapter(chapter: BookChapter): Omit<Card, 'id'>[] {
@@ -35,23 +53,23 @@ function cardsFromChapter(chapter: BookChapter): Omit<Card, 'id'>[] {
   const vocabCards: Omit<Card, 'id'>[] = chapter.vocabulary.map((word) => ({
     ...base,
     chapterId: chapter.id,
-    type: 'vocab',
+    type: 'vocab' as const,
     frontSv: word,
-    backSv: '',
+    backSv: vocabBack(chapter, word),
   }))
 
   const verbCards: Omit<Card, 'id'>[] = chapter.verbs.map((verb) => ({
     ...base,
     chapterId: chapter.id,
-    type: 'verb',
+    type: 'verb' as const,
     frontSv: `${verb.sv} — ${verb.prompt_sv}`,
-    backSv: '',
+    backSv: `Berätta kort: ${verb.sv.toLowerCase()} (${verb.prompt_sv})`,
   }))
 
   const dialogueCards: Omit<Card, 'id'>[] = chapter.dialogues.map((d) => ({
     ...base,
     chapterId: chapter.id,
-    type: 'dialogue',
+    type: 'dialogue' as const,
     frontSv: d.prompt_sv,
     backSv: d.model_sv,
     contextSv: `Dialog ${d.num}`,
@@ -66,9 +84,9 @@ function cardsFromChapter(chapter: BookChapter): Omit<Card, 'id'>[] {
   const speakingCards: Omit<Card, 'id'>[] = speakingPrompts.map((p) => ({
     ...base,
     chapterId: chapter.id,
-    type: 'speaking',
+    type: 'speaking' as const,
     frontSv: p.text,
-    backSv: '',
+    backSv: 'Tala fritt enligt prompten. Jämför sedan med egna anteckningar.',
     contextSv: p.kind,
   }))
 
@@ -98,17 +116,32 @@ export async function seedDatabase(book: BookData): Promise<void> {
   await syncBookChapters(book)
 }
 
-/** Add cards for chapters present in book.json but not yet in IndexedDB */
+/** Add missing cards and fill empty backs from book.json without overwriting notes. */
 export async function syncBookChapters(book: BookData): Promise<number> {
-  const existingChapterIds = new Set(
-    (await db.cards.toArray()).map((c) => c.chapterId),
-  )
-  const missing = book.chapters.filter((ch) => !existingChapterIds.has(ch.id))
-  if (missing.length === 0) return 0
+  const existing = await db.cards.toArray()
+  const existingKeys = new Set(existing.map((c) => cardKey(c)))
+  const wanted = book.chapters.flatMap(cardsFromChapter)
+  const toAdd = wanted.filter((card) => !existingKeys.has(cardKey(card)))
 
-  const newCards = missing.flatMap(cardsFromChapter)
-  await db.cards.bulkAdd(newCards as Card[])
-  return missing.length
+  if (toAdd.length > 0) {
+    await db.cards.bulkAdd(toAdd as Card[])
+  }
+
+  const wantedByKey = new Map(wanted.map((card) => [cardKey(card), card]))
+  for (const card of existing) {
+    if (!card.id) continue
+    const fresh = wantedByKey.get(cardKey(card))
+    if (!fresh) continue
+    const empty = !card.backSv.trim()
+    const canFillDialogue = card.type === 'dialogue' && fresh.backSv && card.backSv !== fresh.backSv && empty
+    if (empty && fresh.backSv) {
+      await db.cards.update(card.id, { backSv: fresh.backSv, updatedAt: Date.now() })
+    } else if (canFillDialogue) {
+      await db.cards.update(card.id, { backSv: fresh.backSv, updatedAt: Date.now() })
+    }
+  }
+
+  return toAdd.length
 }
 
 export async function resetSeed(): Promise<void> {

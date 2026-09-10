@@ -1,10 +1,12 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useState } from 'react'
 import { db } from '../db/schema'
-import { getChapter, getChapterIds } from '../lib/book'
+import { getChapter } from '../lib/book'
 import { recordDialogueSession } from '../lib/progress'
 import { XP_REWARDS } from '../lib/xp'
+import { ChapterSelect } from '../components/ChapterSelect'
 import { ProgressBar } from '../components/ProgressBar'
+import { Timer } from '../components/Timer'
 
 type Phase = 'list' | 'practice' | 'rate' | 'done'
 
@@ -17,8 +19,7 @@ const RATING_LABELS: Record<1 | 2 | 3 | 4 | 5, string> = {
 }
 
 export function Dialogues() {
-  const chapterIds = getChapterIds()
-  const [chapterId, setChapterId] = useState(chapterIds[0] ?? 1)
+  const [chapterId, setChapterId] = useState(1)
   const [dialogueIndex, setDialogueIndex] = useState(0)
   const [phase, setPhase] = useState<Phase>('list')
   const [revealed, setRevealed] = useState(false)
@@ -110,7 +111,7 @@ export function Dialogues() {
 
         <div className="rounded-2xl border border-slate-200 bg-white p-6">
           <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
-            MODELL (svenska)
+            MODELL
           </p>
           <p className="mt-3 whitespace-pre-wrap text-slate-800">{current.model_sv}</p>
         </div>
@@ -163,6 +164,8 @@ export function Dialogues() {
           <p className="mt-3 whitespace-pre-wrap text-lg text-slate-900">{current.prompt_sv}</p>
         </div>
 
+        <Timer key={current.num} duration={120} autoStart label="Svara högt" />
+
         {!revealed ? (
           <div className="space-y-3 text-center">
             <p className="text-sm text-slate-600">
@@ -199,21 +202,7 @@ export function Dialogues() {
       </header>
 
       <section className="rounded-xl border border-slate-200 bg-white p-6">
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-semibold text-slate-900">Kapitel</span>
-          <select
-            value={chapterId}
-            onChange={(e) => setChapterId(Number(e.target.value))}
-            className="rounded-lg border border-slate-300 px-3 py-2"
-          >
-            {chapterIds.map((id) => (
-              <option key={id} value={id}>
-                Kapitel {id}
-                {getChapter(id) ? `: ${getChapter(id)!.title_sv}` : ''}
-              </option>
-            ))}
-          </select>
-        </label>
+        <ChapterSelect value={chapterId} onChange={setChapterId} />
 
         <div className="mt-4">
           <ProgressBar

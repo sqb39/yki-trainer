@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react'
-import { getChapter, getChapterIds } from '../lib/book'
+import { getChapter } from '../lib/book'
 import { recordQuizAttempt } from '../lib/progress'
 import { buildQuizQuestions, isCorrectAnswer, type QuizQuestion } from '../lib/quiz'
 import { XP_REWARDS } from '../lib/xp'
+import { ChapterSelect } from '../components/ChapterSelect'
 import { ProgressBar } from '../components/ProgressBar'
 
 type Phase = 'setup' | 'quiz' | 'summary'
@@ -14,8 +15,7 @@ interface QuizResult {
 }
 
 export function Quiz() {
-  const chapterIds = getChapterIds()
-  const [chapterId, setChapterId] = useState(chapterIds[0] ?? 1)
+  const [chapterId, setChapterId] = useState(1)
   const [phase, setPhase] = useState<Phase>('setup')
   const [questions, setQuestions] = useState<QuizQuestion[]>([])
   const [index, setIndex] = useState(0)
@@ -213,21 +213,7 @@ export function Quiz() {
       </header>
 
       <section className="rounded-xl border border-slate-200 bg-white p-6">
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-semibold text-slate-900">Kapitel</span>
-          <select
-            value={chapterId}
-            onChange={(e) => setChapterId(Number(e.target.value))}
-            className="rounded-lg border border-slate-300 px-3 py-2"
-          >
-            {chapterIds.map((id) => (
-              <option key={id} value={id}>
-                Kapitel {id}
-                {getChapter(id) ? `: ${getChapter(id)!.title_sv}` : ''}
-              </option>
-            ))}
-          </select>
-        </label>
+        <ChapterSelect value={chapterId} onChange={setChapterId} />
 
         <p className="mt-4 text-sm text-slate-600">
           {chapter?.vilket_ord.length ?? 0} frågor i detta kapitel

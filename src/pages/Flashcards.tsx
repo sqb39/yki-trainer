@@ -10,6 +10,7 @@ import {
 } from '../lib/flashcards'
 import { recordFlashcardReview, updateCardBack } from '../lib/progress'
 import type { Sm2Rating } from '../lib/sm2'
+import { speakSv } from '../lib/tts'
 import { XP_REWARDS } from '../lib/xp'
 import { ProgressBar } from '../components/ProgressBar'
 
@@ -30,10 +31,17 @@ export function Flashcards() {
   const [sessionXp, setSessionXp] = useState(0)
   const [editingBack, setEditingBack] = useState(false)
   const [backDraft, setBackDraft] = useState('')
+  const [cardShownAt, setCardShownAt] = useState(() => Date.now())
 
+  const progress = useLiveQuery(() => db.progress.get('main'))
   const dueCards = useLiveQuery(
-    () => getDueCards(chapterFilter, typeFilter),
-    [chapterFilter, typeFilter],
+    () =>
+      getDueCards(
+        chapterFilter,
+        typeFilter,
+        chapterFilter === 'all' ? (progress?.unlockedChapters ?? [1]) : undefined,
+      ),
+    [chapterFilter, typeFilter, progress?.unlockedChapters],
   )
 
   const current = queue[index]
@@ -49,6 +57,7 @@ export function Flashcards() {
     setSessionXp(0)
     setLastXp(null)
     setSessionActive(true)
+    setCardShownAt(Date.now())
   }, [dueCards])
 
   const endSession = useCallback(() => {
@@ -65,11 +74,23 @@ export function Flashcards() {
       if (!card?.id || rating) return
       setRating(true)
       try {
-        const { xpGained } = await recordFlashcardReview(card.id, sm2Rating, card)
+        const elapsed = Math.max(8, Math.round((Date.now() - cardShownAt) / 1000))
+        const { xpGained } = await recordFlashcardReview(card.id, sm2Rating, card, elapsed)
         setLastXp(xpGained)
         setSessionXp((prev) => prev + xpGained)
         setFlipped(false)
         setEditingBack(false)
+        setCardShownAt(Date.now())
+
+        if (sm2Rating === 1) {
+          setQueue((q) => {
+            const copy = [...q]
+            const [again] = copy.splice(index, 1)
+            copy.push(again)
+            return copy
+          })
+          return
+        }
 
         if (index + 1 >= queue.length) {
           setSessionActive(false)
@@ -81,7 +102,7 @@ export function Flashcards() {
         setRating(false)
       }
     },
-    [queue, index, rating],
+    [queue, index, rating, cardShownAt],
   )
 
   async function saveBack() {
@@ -162,6 +183,16 @@ export function Flashcards() {
               {current.contextSv && (
                 <p className="mt-2 text-sm text-slate-500">{current.contextSv}</p>
               )}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  speakSv(current.frontSv)
+                }}
+                className="mt-3 text-sm text-indigo-600 hover:text-indigo-800"
+              >
+                Lyssna
+              </button>
               <p className="mt-6 text-center text-sm text-slate-400">
                 Klicka eller tryck mellanslag för att vända
               </p>
@@ -313,8 +344,10 @@ export function Flashcards() {
               }
               className="rounded-lg border border-slate-300 px-3 py-2"
             >
-              <option value="all">Alla kapitel</option>
-              {(chapters ?? []).map((id) => (
+              <option value="all">Upplåsta kapitel</option>
+              {(chapters ?? [])
+                .filter((id) => (progress?.unlockedChapters ?? [1]).includes(id))
+                .map((id) => (
                 <option key={String(id)} value={String(id)}>
                   Kapitel {String(id)}
                 </option>

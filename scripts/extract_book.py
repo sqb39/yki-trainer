@@ -42,6 +42,8 @@ CHAPTER_TITLES: dict[int, str] = {
 # PDF sometimes uses alternate spellings on title pages
 CHAPTER_TITLE_ALIASES: dict[int, list[str]] = {
     4: ["Hälsa och välmående"],
+    5: ["Fritid"],
+    7: ["Samhället"],
 }
 
 WATERMARK_RE = re.compile(r"Omistaja Viet Dang.*", re.IGNORECASE)
@@ -157,28 +159,36 @@ def extract_verbs(text: str) -> list[dict[str, str]]:
 def extract_vilket_ord(text: str) -> list[dict[str, str]]:
     items: list[dict[str, str]] = []
     in_section = False
-    questions: list[str] = []
+    questions: dict[int, str] = {}
     answers: dict[int, str] = {}
+    current_q: int | None = None
 
     for line in text.splitlines():
         if line.strip() == "Vilket ord?":
             in_section = True
             continue
-        if in_section:
-            if SECTION_HEADER_RE.match(line) and "Vilket ord" not in line:
-                break
-            qm = re.match(r"^(\d+)\.\s+(.+)$", line)
-            if qm and not re.match(r"^\d+\.\s+\w+\s+\d+\.", line):
-                questions.append(qm.group(2).strip())
-            am = re.match(r"^(\d+)\.\s+(\S+)", line)
-            if "brud" in line or "bröllop" in line or re.search(r"\d+\.\s+\w+\s+\d+\.", line):
-                for part in re.findall(r"(\d+)\.\s+([^\d]+?)(?=\s+\d+\.|$)", line):
-                    num, ans = int(part[0]), part[1].strip().rstrip(")")
-                    answers[num] = re.sub(r"\s*\(.*\)$", "", ans).strip()
+        if not in_section:
+            continue
+        if SECTION_HEADER_RE.match(line) and "Vilket ord" not in line:
+            break
 
-    for i, q in enumerate(questions, start=1):
-        if i in answers:
-            items.append({"question_sv": q, "answer_sv": answers[i]})
+        key_parts = re.findall(r"(\d+)\.\s+([^\d]+?)(?=\s+\d+\.|$)", line)
+        if len(key_parts) >= 3:
+            current_q = None
+            for num_s, ans in key_parts:
+                answers[int(num_s)] = re.sub(r"\s*\(.*\)$", "", ans.strip().rstrip(")")).strip()
+            continue
+
+        qm = re.match(r"^(\d+)\.\s+(.+)$", line)
+        if qm:
+            current_q = int(qm.group(1))
+            questions[current_q] = qm.group(2).strip()
+        elif current_q is not None and line.strip():
+            questions[current_q] = questions[current_q] + " " + line.strip()
+
+    for i in sorted(questions):
+        if i in answers and answers[i]:
+            items.append({"question_sv": questions[i], "answer_sv": answers[i]})
     return items
 
 
@@ -266,53 +276,95 @@ def extract_dialogues(text: str, chapter_id: int) -> list[dict]:
             prompt += "\n\n" + "\n".join(hints)
         dialogues.append({"num": num, "prompt_sv": prompt, "model_sv": ""})
 
+    models = extract_models(text)
+    for d in dialogues:
+        if d["num"] in models:
+            d["model_sv"] = models[d["num"]]
+
     dialogues.sort(key=lambda d: d["num"])
     return dialogues
 
 
+MODELL_HEADER_RE = re.compile(r"^MODELL:?\s*Dialog\s*(\d+)\.?\s*(.*)$", re.IGNORECASE)
+
+
+def extract_models(text: str) -> dict[int, str]:
+    """Parse MODELL Dialog N blocks into {num: model text}."""
+    models: dict[int, str] = {}
+    parts = re.split(r"(?=MODELL:?\s*Dialog\s*\d+)", text)
+    for part in parts:
+        lines = [ln.strip() for ln in part.splitlines() if ln.strip()]
+        if not lines:
+            continue
+        header = MODELL_HEADER_RE.match(lines[0])
+        if not header:
+            continue
+        num = int(header.group(1))
+        body: list[str] = []
+        for ln in lines[1:]:
+            if re.match(r"^Dialog\s+\d+", ln) and not ln.upper().startswith("MODELL"):
+                break
+            if ln == "***":
+                continue
+            if ln in CHAPTER_TITLES.values() or ln in {"Fritid", "Samhället"}:
+                continue
+            body.append(ln)
+        model = "\n".join(body).strip()
+        if model:
+            models[num] = model
+    return models
+
+
+def _writing_type(title: str) -> str:
+    lower = title.lower()
+    if "klagomål" in lower:
+        return "klagomål"
+    if "e-post" in lower or "brev" in lower:
+        return "e-post"
+    if "meddelande" in lower or "inbjudan" in lower:
+        return "meddelande"
+    return "övrigt"
+
+
 def extract_writing(text: str) -> list[dict[str, str]]:
     tasks: list[dict[str, str]] = []
-    type_map = {
-        "Övning 1. Meddelande": "meddelande",
-        "Övning 2. E-post": "e-post",
-        "Övning 3. Klagomål": "klagomål",
-    }
     in_section = False
     current_type: str | None = None
-    bullets: list[str] = []
+    buf: list[str] = []
+    ovning_re = re.compile(r"^Övning\s+(\d+)\s*[.:]?\s*(.*)$")
+
+    def flush() -> None:
+        nonlocal current_type, buf
+        prompt = "\n".join(buf).strip()
+        if current_type and len(prompt) > 40:
+            tasks.append({"type": current_type, "prompt_sv": prompt})
+        current_type = None
+        buf = []
 
     for line in text.splitlines():
-        if line.strip() == "Att skriva":
+        stripped = line.strip()
+        if stripped == "Att skriva":
             in_section = True
             continue
-        if in_section:
-            if line.strip() in CHAPTER_TITLES.values():
-                break
-            for label, ttype in type_map.items():
-                if line.strip() == label:
-                    if current_type and bullets:
-                        tasks.append(
-                            {
-                                "type": current_type,
-                                "prompt_sv": "\n".join(bullets).strip(),
-                            }
-                        )
-                    current_type = ttype
-                    bullets = []
-                    break
+        if not in_section:
+            continue
+        if stripped in CHAPTER_TITLES.values() or stripped in {"Fritid", "Samhället"}:
+            break
+        ov = ovning_re.match(stripped)
+        if ov:
+            flush()
+            current_type = _writing_type(ov.group(2) or f"Övning {ov.group(1)}")
+            title = ov.group(2).strip()
+            if title:
+                buf = [title]
             else:
-                if current_type and line.strip().startswith("•"):
-                    bullets.append(line.strip())
-                elif current_type and line.strip() and not line.startswith("Övning"):
-                    if not bullets:
-                        bullets.append(line.strip())
-                    elif not line.strip().startswith("•"):
-                        bullets[0] = bullets[0] + " " + line.strip()
+                buf = []
+            continue
+        if current_type and stripped:
+            buf.append(stripped)
 
-    if current_type and bullets:
-        tasks.append({"type": current_type, "prompt_sv": "\n".join(bullets).strip()})
-
-    return tasks
+    flush()
+    return tasks[:3]
 
 
 def extract_chapter(pages: list[str], chapter_id: int) -> dict:
@@ -330,16 +382,47 @@ def extract_chapter(pages: list[str], chapter_id: int) -> dict:
         "vocabulary": extract_vocab_grids(text),
         "verbs": extract_verbs(text),
         "vilket_ord": extract_vilket_ord(text),
-        "dialogues": extract_dialogues(text, chapter_id),
+        "dialogues": dedupe_dialogues(extract_dialogues(text, chapter_id)),
         "reagera": extract_numbered_prompts(text, "Reagera"),
         "beratta": extract_letter_prompts(text, "Berätta"),
         "asikt": extract_letter_prompts(text, "Din åsikt"),
-        "writing": extract_writing(text),
+        "writing": split_writing_tasks(extract_writing(text)),
         "_meta": {
             "page_range": [start + 1, end],
             "needs_curation": True,
         },
     }
+
+
+def dedupe_dialogues(dialogues: list[dict]) -> list[dict]:
+    by_num: dict[int, dict] = {}
+    for d in dialogues:
+        num = d["num"]
+        prev = by_num.get(num)
+        if prev is None:
+            by_num[num] = d
+            continue
+        prompt = d["prompt_sv"] if len(d["prompt_sv"]) >= len(prev["prompt_sv"]) else prev["prompt_sv"]
+        model = (
+            d["model_sv"]
+            if len(d.get("model_sv") or "") >= len(prev.get("model_sv") or "")
+            else prev.get("model_sv") or ""
+        )
+        by_num[num] = {"num": num, "prompt_sv": prompt, "model_sv": model}
+    return [by_num[k] for k in sorted(by_num)]
+
+
+def split_writing_tasks(tasks: list[dict[str, str]]) -> list[dict[str, str]]:
+    if len(tasks) >= 3:
+        return tasks[:3]
+    if not tasks:
+        return []
+    blob = "\n".join(t["prompt_sv"] for t in tasks)
+    chunks = re.split(r"(?=\n(?:Du har |Skriv |Välj tema|Välj A))", "\n" + blob)
+    chunks = [c.strip() for c in chunks if len(c.strip()) > 50]
+    if len(chunks) < 2:
+        return tasks[:3]
+    return [{"type": _writing_type(chunk.split("\n", 1)[0]), "prompt_sv": chunk} for chunk in chunks[:3]]
 
 
 def merge_curated(base: dict, curated_path: Path | None) -> dict:

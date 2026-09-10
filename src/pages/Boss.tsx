@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getChapter } from '../lib/book'
 import { getChapterTitle, isChapterUnlocked } from '../lib/chapters'
-import { recordBossComplete } from '../lib/progress'
+import { recordBossComplete, saveWritingEntry } from '../lib/progress'
 import { XP_REWARDS } from '../lib/xp'
 import { Timer } from '../components/Timer'
 import { useLiveQuery } from 'dexie-react-hooks'
@@ -46,6 +46,7 @@ export function Boss() {
   const [timerKey, setTimerKey] = useState(0)
   const [lastXp, setLastXp] = useState(0)
   const [saving, setSaving] = useState(false)
+  const [writingDraft, setWritingDraft] = useState('')
 
   const locked =
     chapterId > 1 &&
@@ -92,13 +93,24 @@ export function Boss() {
     )
     setStep('dialogue')
     setRevealed(false)
+    setWritingDraft('')
     setTimerKey((k) => k + 1)
   }
 
   async function finishBoss() {
-    if (saving) return
+    if (saving || writingDraft.trim().length < 20) return
     setSaving(true)
     try {
+      const writingType =
+        chapter?.writing.find((task) => task.prompt_sv === writingPrompt)?.type ?? 'övrigt'
+      await saveWritingEntry({
+        chapterId,
+        taskType: writingType,
+        promptSv: writingPrompt ?? '',
+        contentSv: writingDraft,
+        checklist: {},
+        completedAt: null,
+      })
       const { xpGained } = await recordBossComplete(chapterId)
       setLastXp(xpGained)
       setStep('done')
@@ -148,7 +160,7 @@ export function Boss() {
     return (
       <div className="mx-auto max-w-2xl space-y-6">
         <p className="text-sm font-medium text-amber-700">Steg 1/3 — Dialog</p>
-        <Timer key={timerKey} duration={STEP_TIMERS.dialogue} onComplete={() => {}} />
+        <Timer key={timerKey} duration={STEP_TIMERS.dialogue} autoStart onComplete={() => {}} />
         <div className="rounded-xl border border-slate-200 bg-white p-6">
           <p className="whitespace-pre-wrap text-slate-800">{dialoguePrompt}</p>
         </div>
@@ -186,7 +198,7 @@ export function Boss() {
     return (
       <div className="mx-auto max-w-2xl space-y-6">
         <p className="text-sm font-medium text-amber-700">Steg 2/3 — Din åsikt</p>
-        <Timer key={timerKey} duration={STEP_TIMERS.opinion} onComplete={() => {}} />
+        <Timer key={timerKey} duration={STEP_TIMERS.opinion} autoStart onComplete={() => {}} />
         <div className="rounded-xl border border-slate-200 bg-white p-6">
           <p className="whitespace-pre-wrap text-slate-800">{opinionPrompt}</p>
         </div>
@@ -208,17 +220,22 @@ export function Boss() {
     return (
       <div className="mx-auto max-w-2xl space-y-6">
         <p className="text-sm font-medium text-amber-700">Steg 3/3 — Skriva</p>
-        <Timer key={timerKey} duration={STEP_TIMERS.writing} onComplete={() => {}} />
+        <Timer key={timerKey} duration={STEP_TIMERS.writing} autoStart onComplete={() => {}} />
         <div className="rounded-xl border border-slate-200 bg-white p-6">
           <p className="whitespace-pre-wrap text-slate-800">{writingPrompt}</p>
         </div>
-        <p className="text-sm text-slate-600">
-          Skriv på svenska i Skriv-läget eller på papper. Markera klar när du är färdig.
-        </p>
+        <textarea
+          value={writingDraft}
+          onChange={(e) => setWritingDraft(e.target.value)}
+          rows={10}
+          placeholder="Skriv ditt svar här…"
+          className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900"
+        />
+        <p className="text-sm text-slate-600">Minst 20 tecken innan du kan avsluta.</p>
         <button
           type="button"
           onClick={finishBoss}
-          disabled={saving}
+          disabled={saving || writingDraft.trim().length < 20}
           className="rounded-xl bg-amber-500 px-6 py-3 font-semibold text-white hover:bg-amber-600 disabled:opacity-50"
         >
           {saving ? 'Sparar…' : 'Boss klar!'}

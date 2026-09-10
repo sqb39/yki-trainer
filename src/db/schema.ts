@@ -42,6 +42,9 @@ export interface Progress {
   /** Daily quest completion for today */
   dailyQuestsCompleted: string[]
   dailyQuestsDate: string | null
+  /** Seconds of timed/active study accumulated for `studySecondsDate` */
+  studySecondsToday: number
+  studySecondsDate: string | null
 }
 
 /** App settings */
@@ -65,7 +68,7 @@ export interface Settings {
 export interface WritingEntry {
   id?: number
   chapterId: number
-  taskType: 'meddelande' | 'e-post' | 'klagomål'
+  taskType: 'meddelande' | 'e-post' | 'klagomål' | 'övrigt'
   promptSv: string
   contentSv: string
   checklist: Record<string, boolean>
@@ -167,6 +170,17 @@ export class YkiDatabase extends Dexie {
         }
       }
     })
+
+    this.version(5).stores({}).upgrade(async (tx) => {
+      const progress = await tx.table('progress').get('main')
+      if (progress) {
+        await tx.table('progress').put({
+          ...progress,
+          studySecondsToday: progress.studySecondsToday ?? 0,
+          studySecondsDate: progress.studySecondsDate ?? null,
+        })
+      }
+    })
   }
 }
 
@@ -183,6 +197,8 @@ export const DEFAULT_PROGRESS: Progress = {
   badges: [],
   dailyQuestsCompleted: [],
   dailyQuestsDate: null,
+  studySecondsToday: 0,
+  studySecondsDate: null,
 }
 
 export const DEFAULT_SETTINGS: Settings = {

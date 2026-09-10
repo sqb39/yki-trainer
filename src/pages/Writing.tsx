@@ -1,20 +1,20 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useEffect, useState } from 'react'
-import { db, type WritingEntry } from '../db/schema'
-import { getChapter, getChapterIds } from '../lib/book'
+import { db } from '../db/schema'
+import { getChapter } from '../lib/book'
 import { completeWritingEntry, saveWritingEntry } from '../lib/progress'
 import {
   checklistComplete,
+  checklistItemsForTask,
   emptyChecklist,
   TASK_TYPE_LABELS,
-  WRITING_CHECKLISTS,
 } from '../lib/writing'
 import { XP_REWARDS } from '../lib/xp'
+import { ChapterSelect } from '../components/ChapterSelect'
 
 export function Writing() {
-  const chapterIds = getChapterIds()
-  const [chapterId, setChapterId] = useState(chapterIds[0] ?? 1)
-  const [activeTask, setActiveTask] = useState<WritingEntry['taskType'] | null>(null)
+  const [chapterId, setChapterId] = useState(1)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [contentSv, setContentSv] = useState('')
   const [checklist, setChecklist] = useState<Record<string, boolean>>({})
   const [, setEntryId] = useState<number | null>(null)
@@ -24,6 +24,7 @@ export function Writing() {
 
   const chapter = getChapter(chapterId)
   const tasks = chapter?.writing ?? []
+  const activeTaskDef = activeIndex != null ? tasks[activeIndex] : undefined
 
   const savedEntries = useLiveQuery(
     () => db.writingEntries.where('chapterId').equals(chapterId).toArray(),
@@ -33,8 +34,8 @@ export function Writing() {
   const completedCount = savedEntries?.filter((e) => e.completedAt != null).length ?? 0
 
   useEffect(() => {
-    if (!activeTask) return
-    const existing = savedEntries?.find((e) => e.taskType === activeTask)
+    if (!activeTaskDef) return
+    const existing = savedEntries?.find((e) => e.promptSv === activeTaskDef.prompt_sv)
     if (existing) {
       setEntryId(existing.id ?? null)
       setContentSv(existing.contentSv)
@@ -43,23 +44,21 @@ export function Writing() {
     } else {
       setEntryId(null)
       setContentSv('')
-      setChecklist(emptyChecklist(activeTask))
+      setChecklist(emptyChecklist(activeTaskDef.type, activeTaskDef.prompt_sv))
       setCompletedAt(null)
     }
     setLastXp(null)
-  }, [activeTask, savedEntries, chapterId])
+  }, [activeIndex, activeTaskDef, savedEntries, chapterId])
 
   async function persistDraft() {
-    if (!activeTask || !chapter) return
-    const task = tasks.find((t) => t.type === activeTask)
-    if (!task) return
+    if (!activeTaskDef || !chapter) return
 
     setSaving(true)
     try {
       const id = await saveWritingEntry({
         chapterId,
-        taskType: activeTask,
-        promptSv: task.prompt_sv,
+        taskType: activeTaskDef.type,
+        promptSv: activeTaskDef.prompt_sv,
         contentSv,
         checklist,
         completedAt,
@@ -71,17 +70,20 @@ export function Writing() {
   }
 
   async function markComplete() {
-    if (!activeTask || !chapter || completedAt) return
-    const task = tasks.find((t) => t.type === activeTask)
-    if (!task) return
-    if (!contentSv.trim() || !checklistComplete(activeTask, checklist)) return
+    if (!activeTaskDef || !chapter || completedAt) return
+    if (
+      !contentSv.trim() ||
+      !checklistComplete(activeTaskDef.type, checklist, activeTaskDef.prompt_sv)
+    ) {
+      return
+    }
 
     setSaving(true)
     try {
       const id = await saveWritingEntry({
         chapterId,
-        taskType: activeTask,
-        promptSv: task.prompt_sv,
+        taskType: activeTaskDef.type,
+        promptSv: activeTaskDef.prompt_sv,
         contentSv,
         checklist,
         completedAt: null,
@@ -100,19 +102,19 @@ export function Writing() {
     setChecklist((prev) => ({ ...prev, [id]: !prev[id] }))
   }
 
-  const activeTaskDef = activeTask ? tasks.find((t) => t.type === activeTask) : null
   const canComplete =
-    activeTask &&
+    activeTaskDef &&
     contentSv.trim().length > 0 &&
-    checklistComplete(activeTask, checklist) &&
+    checklistComplete(activeTaskDef.type, checklist, activeTaskDef.prompt_sv) &&
     !completedAt
 
-  if (activeTask && activeTaskDef) {
+  if (activeTaskDef) {
+    const items = checklistItemsForTask(activeTaskDef.type, activeTaskDef.prompt_sv)
     return (
       <div className="mx-auto max-w-2xl space-y-6">
         <button
           type="button"
-          onClick={() => setActiveTask(null)}
+          onClick={() => setActiveIndex(null)}
           className="text-sm text-slate-500 hover:text-slate-800"
         >
           ← Tillbaka till uppgifter
@@ -120,7 +122,7 @@ export function Writing() {
 
         <header>
           <span className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-800">
-            {TASK_TYPE_LABELS[activeTask]}
+            {TASK_TYPE_LABELS[activeTaskDef.type]}
           </span>
           <h2 className="mt-2 text-xl font-bold text-slate-900">
             Kapitel {chapterId} — skrivuppgift
@@ -129,21 +131,19 @@ export function Writing() {
 
         <div className="rounded-2xl border border-slate-200 bg-white p-6">
           <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
-            Uppgift (svenska)
+            Uppgift
           </p>
           <p className="mt-3 whitespace-pre-wrap text-slate-800">{activeTaskDef.prompt_sv}</p>
         </div>
 
         <div>
-          <label className="text-sm font-semibold text-slate-900">
-            Ditt svar (svenska)
-          </label>
+          <label className="text-sm font-semibold text-slate-900">Ditt svar</label>
           <textarea
             value={contentSv}
             onChange={(e) => setContentSv(e.target.value)}
             disabled={!!completedAt}
             rows={12}
-            placeholder="Skriv ditt svar på svenska här…"
+            placeholder="Skriv ditt svar här…"
             className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 disabled:bg-slate-50"
           />
           <p className="mt-1 text-xs text-slate-400">
@@ -154,7 +154,7 @@ export function Writing() {
         <div className="rounded-xl border border-slate-200 bg-white p-6">
           <p className="text-sm font-semibold text-slate-900">YKI-checklista</p>
           <ul className="mt-3 space-y-2">
-            {WRITING_CHECKLISTS[activeTask].map((item) => (
+            {items.map((item) => (
               <li key={item.id}>
                 <label className="flex cursor-pointer items-start gap-3 text-sm">
                   <input
@@ -210,42 +210,26 @@ export function Writing() {
     <div className="space-y-8">
       <header>
         <h1 className="text-2xl font-bold text-slate-900">Skriva</h1>
-        <p className="mt-1 text-slate-600">
-          Skrivuppgifter per kapitel med YKI-checklista
-        </p>
+        <p className="mt-1 text-slate-600">Skrivuppgifter per kapitel med YKI-checklista</p>
       </header>
 
       <section className="rounded-xl border border-slate-200 bg-white p-6">
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-semibold text-slate-900">Kapitel</span>
-          <select
-            value={chapterId}
-            onChange={(e) => setChapterId(Number(e.target.value))}
-            className="rounded-lg border border-slate-300 px-3 py-2"
-          >
-            {chapterIds.map((id) => (
-              <option key={id} value={id}>
-                Kapitel {id}
-                {getChapter(id) ? `: ${getChapter(id)!.title_sv}` : ''}
-              </option>
-            ))}
-          </select>
-        </label>
+        <ChapterSelect value={chapterId} onChange={setChapterId} />
         <p className="mt-4 text-sm text-slate-600">
           {completedCount} av {tasks.length} uppgifter klara
         </p>
       </section>
 
       <ul className="space-y-3">
-        {tasks.map((task) => {
-          const saved = savedEntries?.find((e) => e.taskType === task.type)
+        {tasks.map((task, index) => {
+          const saved = savedEntries?.find((e) => e.promptSv === task.prompt_sv)
           const done = saved?.completedAt != null
           const started = saved && saved.contentSv.trim().length > 0
           return (
-            <li key={task.type}>
+            <li key={`${task.type}-${index}`}>
               <button
                 type="button"
-                onClick={() => setActiveTask(task.type)}
+                onClick={() => setActiveIndex(index)}
                 className="flex w-full items-start gap-3 rounded-xl border border-slate-200 bg-white p-5 text-left transition hover:border-indigo-200 hover:shadow-sm"
               >
                 <span

@@ -166,6 +166,14 @@ export function isChapterUnlocked(
   return prevProgress >= UNLOCK_THRESHOLD
 }
 
+export function unlockedChapterIds(
+  allIds: number[],
+  unlockedChapters: number[],
+  chapterProgress: Record<number, number>,
+): number[] {
+  return allIds.filter((id) => isChapterUnlocked(id, unlockedChapters, chapterProgress))
+}
+
 export function nextChapterToUnlock(chapterProgress: Record<number, number>): number {
   for (let id = 2; id <= 7; id++) {
     const prev = chapterProgress[id - 1] ?? 0

@@ -11,9 +11,9 @@ export const DAILY_QUESTS = [
     xp: 100,
   },
   {
-    id: 'dialogue' as const,
-    title: '1 dialog',
-    description: 'Öva en dialog med MODELL-svar',
+    id: 'practice' as const,
+    title: '1 dialog eller quiz',
+    description: 'Öva en dialog med MODELL eller gör Vilket ord',
     xp: 15,
   },
   {
@@ -37,11 +37,13 @@ export async function computeChapterProgress(chapterId: number): Promise<number>
     db.quizAttempts.where('chapterId').equals(chapterId).toArray(),
   ])
 
+  const uniqueDialogues = new Set(dialogues.map((s) => s.dialogueNum)).size
   const dialogueTotal = chapter.dialogues.length || 1
-  const dialoguePct = Math.min(100, (dialogues.length / dialogueTotal) * 100)
+  const dialoguePct = Math.min(100, (uniqueDialogues / dialogueTotal) * 100)
 
-  const writingTotal = chapter.writing.length || 3
-  const writingPct = Math.min(100, (writingEntries.length / writingTotal) * 100)
+  const uniqueWriting = new Set(writingEntries.map((e) => e.taskType)).size
+  const writingTotal = Math.max(chapter.writing.length, 3)
+  const writingPct = Math.min(100, (uniqueWriting / writingTotal) * 100)
 
   const studyCards = cards.filter((c) => c.type === 'vocab' || c.type === 'verb')
   const masteredCards = studyCards.filter((c) => c.repetitions >= 1).length
@@ -52,18 +54,22 @@ export async function computeChapterProgress(chapterId: number): Promise<number>
   const uniqueQuiz = new Set(quizAttempts.map((a) => a.questionSv)).size
   const quizPct = chapter.vilket_ord.length > 0 ? Math.min(100, (uniqueQuiz / quizTotal) * 100) : 0
 
+  const speakingDone = cards.filter((c) => c.type === 'speaking' && c.repetitions >= 1).length
+  const speakingTotal = chapter.reagera.length + chapter.beratta.length + chapter.asikt.length
+  const speakingPct =
+    speakingTotal > 0 ? Math.min(100, (speakingDone / speakingTotal) * 100) : 0
+
   const weights = [
-    { pct: dialoguePct, weight: chapter.dialogues.length > 0 ? 0.35 : 0 },
-    { pct: writingPct, weight: chapter.writing.length > 0 ? 0.25 : 0 },
-    { pct: flashPct, weight: studyCards.length > 0 ? 0.25 : 0 },
+    { pct: dialoguePct, weight: chapter.dialogues.length > 0 ? 0.3 : 0 },
+    { pct: writingPct, weight: 0.2 },
+    { pct: flashPct, weight: studyCards.length > 0 ? 0.2 : 0 },
     { pct: quizPct, weight: chapter.vilket_ord.length > 0 ? 0.15 : 0 },
+    { pct: speakingPct, weight: speakingTotal > 0 ? 0.15 : 0 },
   ]
 
   const active = weights.filter((w) => w.weight > 0)
   if (active.length === 0) {
-    const speakingDone = cards.filter((c) => c.type === 'speaking' && c.repetitions >= 1).length
-    const speakingTotal = chapter.reagera.length + chapter.beratta.length + chapter.asikt.length
-    return speakingTotal > 0 ? Math.round((speakingDone / speakingTotal) * 100) : 0
+    return 0
   }
 
   const totalWeight = active.reduce((s, w) => s + w.weight, 0)

@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { getChapter, getChapterIds } from '../lib/book'
+import { getChapter } from '../lib/book'
 import { recordSpeakingComplete } from '../lib/progress'
 import { XP_REWARDS } from '../lib/xp'
+import { ChapterSelect } from '../components/ChapterSelect'
 import { Timer } from '../components/Timer'
 
 type SpeakingCategory = 'reagera' | 'berätta' | 'åsikt'
@@ -32,8 +33,7 @@ function pickRandom<T>(items: T[]): T | undefined {
 }
 
 export function Speaking() {
-  const chapterIds = getChapterIds()
-  const [chapterId, setChapterId] = useState(chapterIds[0] ?? 1)
+  const [chapterId, setChapterId] = useState(1)
   const [category, setCategory] = useState<SpeakingCategory>('reagera')
   const [duration, setDuration] = useState(120)
   const [prompt, setPrompt] = useState<string | null>(null)
@@ -112,7 +112,10 @@ export function Speaking() {
     if (saving) return
     setSaving(true)
     try {
-      const { xpGained } = await recordSpeakingComplete()
+      const { xpGained } = await recordSpeakingComplete(duration, {
+        chapterId,
+        prompt: prompt ?? '',
+      })
       setLastXp(xpGained)
       setPhase('done')
     } finally {
@@ -231,10 +234,10 @@ export function Speaking() {
         <button
           type="button"
           onClick={() => void completePractice()}
-          disabled={saving}
+          disabled={saving || !timerDone}
           className="w-full rounded-lg bg-indigo-600 py-3 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-50"
         >
-          Markera som klar
+          {timerDone ? 'Markera som klar' : 'Vänta tills tiden är slut'}
         </button>
       </div>
     )
@@ -252,21 +255,7 @@ export function Speaking() {
       </header>
 
       <section className="rounded-xl border border-slate-200 bg-white p-6 space-y-4">
-        <label className="flex flex-col gap-1 text-sm">
-          <span className="font-semibold text-slate-900">Kapitel</span>
-          <select
-            value={chapterId}
-            onChange={(e) => setChapterId(Number(e.target.value))}
-            className="rounded-lg border border-slate-300 px-3 py-2"
-          >
-            {chapterIds.map((id) => (
-              <option key={id} value={id}>
-                Kapitel {id}
-                {getChapter(id) ? `: ${getChapter(id)!.title_sv}` : ''}
-              </option>
-            ))}
-          </select>
-        </label>
+        <ChapterSelect value={chapterId} onChange={setChapterId} />
 
         <div>
           <p className="text-sm font-semibold text-slate-900">Typ</p>

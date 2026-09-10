@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yki-trainer-v1'
+const CACHE_NAME = 'yki-trainer-v2'
 const SHELL = [
   '/',
   '/index.html',

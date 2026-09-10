@@ -1,8 +1,8 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { Link } from 'react-router-dom'
 import { db } from '../db/schema'
-import { isDue } from '../lib/sm2'
-import { daysUntilExam, levelFromXp, xpProgressInLevel } from '../lib/xp'
+import { getDueCards } from '../lib/flashcards'
+import { daysUntilExam, levelFromXp, todayIso, xpProgressInLevel } from '../lib/xp'
 import { DAILY_QUESTS, getWeakCards } from '../lib/gamification'
 import { getChapterTitle, nextChapterToUnlock } from '../lib/chapters'
 import { ProgressBar } from '../components/ProgressBar'
@@ -15,9 +15,9 @@ export function Dashboard() {
   const progress = useLiveQuery(() => db.progress.get('main'))
   const settings = useLiveQuery(() => db.settings.get('main'))
   const dueCount = useLiveQuery(async () => {
-    const cards = await db.cards.toArray()
-    const now = Date.now()
-    return cards.filter((c) => isDue(c.nextReview, now)).length
+    const progressRow = await db.progress.get('main')
+    const due = await getDueCards('all', 'all', progressRow?.unlockedChapters ?? [1])
+    return due.length
   }, [])
   const weakCards = useLiveQuery(() => getWeakCards(5), [])
 
@@ -25,10 +25,17 @@ export function Dashboard() {
   const level = levelFromXp(xp)
   const xpBar = xpProgressInLevel(xp)
   const daysLeft = daysUntilExam(settings?.examDate ?? null)
-  const completedToday = new Set(progress?.dailyQuestsCompleted ?? [])
+  const completedToday = new Set(
+    progress?.dailyQuestsDate === todayIso()
+      ? (progress?.dailyQuestsCompleted ?? [])
+      : [],
+  )
   const currentChapter = nextChapterToUnlock(progress?.chapterProgress ?? {})
   const chapterPct = progress?.chapterProgress?.[currentChapter] ?? 0
   const allQuestsDone = DAILY_QUESTS.every((q) => completedToday.has(q.id))
+  const studySecondsToday =
+    progress?.studySecondsDate === todayIso() ? (progress.studySecondsToday ?? 0) : 0
+  const minStudy = settings?.minStudyMinutes ?? 15
 
   return (
     <div className="space-y-8">
@@ -54,6 +61,9 @@ export function Dashboard() {
           <div className="mt-2">
             <StreakBadge days={progress?.streakDays ?? 0} />
           </div>
+          <p className="mt-2 text-xs text-slate-500">
+            {Math.min(minStudy, Math.floor(studySecondsToday / 60))} / {minStudy} min idag
+          </p>
         </div>
 
         <div className="rounded-xl border border-slate-200 bg-white p-4">
