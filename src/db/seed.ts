@@ -11,6 +11,7 @@ export interface BookChapter {
   reagera: string[]
   beratta: string[]
   asikt: string[]
+  warmup: string[]
   writing: Array<{
     type: 'meddelande' | 'e-post' | 'klagomål' | 'övrigt'
     prompt_sv: string
@@ -76,6 +77,7 @@ function cardsFromChapter(chapter: BookChapter): Omit<Card, 'id'>[] {
   }))
 
   const speakingPrompts = [
+    ...chapter.warmup.map((p) => ({ kind: 'uppvärmning' as const, text: p })),
     ...chapter.reagera.map((p) => ({ kind: 'reagera' as const, text: p })),
     ...chapter.beratta.map((p) => ({ kind: 'berätta' as const, text: p })),
     ...chapter.asikt.map((p) => ({ kind: 'åsikt' as const, text: p })),
@@ -116,7 +118,7 @@ export async function seedDatabase(book: BookData): Promise<void> {
   await syncBookChapters(book)
 }
 
-/** Add missing cards and fill empty backs from book.json without overwriting notes. */
+/** Add missing cards; refresh dialogue models from book.json; fill empty backs elsewhere. */
 export async function syncBookChapters(book: BookData): Promise<number> {
   const existing = await db.cards.toArray()
   const existingKeys = new Set(existing.map((c) => cardKey(c)))
@@ -131,12 +133,19 @@ export async function syncBookChapters(book: BookData): Promise<number> {
   for (const card of existing) {
     if (!card.id) continue
     const fresh = wantedByKey.get(cardKey(card))
-    if (!fresh) continue
+    if (!fresh?.backSv.trim()) continue
+
     const empty = !card.backSv.trim()
-    const canFillDialogue = card.type === 'dialogue' && fresh.backSv && card.backSv !== fresh.backSv && empty
-    if (empty && fresh.backSv) {
-      await db.cards.update(card.id, { backSv: fresh.backSv, updatedAt: Date.now() })
-    } else if (canFillDialogue) {
+
+    if (card.type === 'dialogue') {
+      if (card.backSv !== fresh.backSv) {
+        await db.cards.update(card.id, { backSv: fresh.backSv, updatedAt: Date.now() })
+      }
+    } else if (card.type === 'vocab') {
+      if (empty) {
+        await db.cards.update(card.id, { backSv: fresh.backSv, updatedAt: Date.now() })
+      }
+    } else if (empty) {
       await db.cards.update(card.id, { backSv: fresh.backSv, updatedAt: Date.now() })
     }
   }

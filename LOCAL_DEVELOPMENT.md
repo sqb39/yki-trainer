@@ -61,6 +61,21 @@ npm run seed
 
 Checks `data/book.json` structure and prints chapter/content counts. Does not modify the browser database.
 
+## Re-extract book content from PDF
+
+Requires a Python venv with PDF dependencies (see `scripts/extract_book.py`).
+
+```bash
+cd personal/yki-trainer
+.venv/bin/python scripts/extract_book.py \
+  --pdf "/path/to/swedish book.pdf" \
+  --out data/book.json \
+  --chapters 1,2,3,4,5,6,7 \
+  --raw
+```
+
+Merge curated fixes into `data/book.json` as needed, then run `npm run seed` to verify counts (target: 21 writing tasks, ~32 Berätta, ~38 åsikt, 34 dialogues with models).
+
 ## Regenerate icons only
 
 ```bash

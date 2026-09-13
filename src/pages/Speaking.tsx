@@ -1,23 +1,27 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getChapter } from '../lib/book'
 import { recordSpeakingComplete } from '../lib/progress'
 import { XP_REWARDS } from '../lib/xp'
 import { ChapterSelect } from '../components/ChapterSelect'
 import { Timer } from '../components/Timer'
 
-type SpeakingCategory = 'reagera' | 'berätta' | 'åsikt'
+type SpeakingCategory = 'reagera' | 'berätta' | 'åsikt' | 'uppvärmning'
 
 const CATEGORY_LABELS: Record<SpeakingCategory, string> = {
   reagera: 'Reagera',
   berätta: 'Berätta',
   åsikt: 'Din åsikt',
+  uppvärmning: 'Uppvärmning',
 }
 
 const CATEGORY_DESCRIPTIONS: Record<SpeakingCategory, string> = {
   reagera: 'Reagera på en situation — svara spontant på svenska',
   berätta: 'Berätta en historia eller erfarenhet',
   åsikt: 'Uttryck din åsikt och argumentera',
+  uppvärmning: 'Värm upp med enkla frågor innan du börjar',
 }
+
+const ALL_CATEGORIES: SpeakingCategory[] = ['reagera', 'berätta', 'åsikt', 'uppvärmning']
 
 const TIMER_OPTIONS = [
   { label: '1 min', seconds: 60 },
@@ -50,12 +54,27 @@ export function Speaking() {
 
   const chapter = getChapter(chapterId)
 
-  const promptsForCategory = useCallback((): string[] => {
-    if (!chapter) return []
-    if (category === 'reagera') return chapter.reagera
-    if (category === 'berätta') return chapter.beratta
-    return chapter.asikt
-  }, [chapter, category])
+  const promptsForCategory = useCallback(
+    (cat: SpeakingCategory = category): string[] => {
+      if (!chapter) return []
+      if (cat === 'reagera') return chapter.reagera
+      if (cat === 'berätta') return chapter.beratta
+      if (cat === 'åsikt') return chapter.asikt
+      return chapter.warmup
+    },
+    [chapter, category],
+  )
+
+  const availableCategories = useMemo(
+    () => ALL_CATEGORIES.filter((cat) => promptsForCategory(cat).length > 0),
+    [promptsForCategory],
+  )
+
+  useEffect(() => {
+    if (!availableCategories.includes(category)) {
+      setCategory(availableCategories[0] ?? 'reagera')
+    }
+  }, [chapterId, availableCategories, category])
 
   function startPractice() {
     const pool = promptsForCategory()
@@ -259,8 +278,8 @@ export function Speaking() {
 
         <div>
           <p className="text-sm font-semibold text-slate-900">Typ</p>
-          <div className="mt-2 grid gap-2 sm:grid-cols-3">
-            {(Object.keys(CATEGORY_LABELS) as SpeakingCategory[]).map((cat) => (
+          <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            {availableCategories.map((cat) => (
               <button
                 key={cat}
                 type="button"

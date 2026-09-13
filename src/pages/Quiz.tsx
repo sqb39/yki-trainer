@@ -215,21 +215,28 @@ export function Quiz() {
       <section className="rounded-xl border border-slate-200 bg-white p-6">
         <ChapterSelect value={chapterId} onChange={setChapterId} />
 
-        <p className="mt-4 text-sm text-slate-600">
-          {chapter?.vilket_ord.length ?? 0} frågor i detta kapitel
-        </p>
-        <p className="mt-1 text-sm text-slate-400">
-          +{XP_REWARDS.quiz} XP per rätt svar, +{Math.floor(XP_REWARDS.quiz / 2)} XP om fel
-        </p>
+        {(chapter?.vilket_ord.length ?? 0) > 0 ? (
+          <>
+            <p className="mt-4 text-sm text-slate-600">
+              {chapter?.vilket_ord.length} frågor i detta kapitel
+            </p>
+            <p className="mt-1 text-sm text-slate-400">
+              +{XP_REWARDS.quiz} XP per rätt svar, +{Math.floor(XP_REWARDS.quiz / 2)} XP om fel
+            </p>
 
-        <button
-          type="button"
-          onClick={startQuiz}
-          disabled={!chapter?.vilket_ord.length}
-          className="mt-6 rounded-lg bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50 min-h-12 active:scale-[0.98]"
-        >
-          Starta quiz
-        </button>
+            <button
+              type="button"
+              onClick={startQuiz}
+              className="mt-6 rounded-lg bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white hover:bg-indigo-700 min-h-12 active:scale-[0.98]"
+            >
+              Starta quiz
+            </button>
+          </>
+        ) : (
+          <p className="mt-4 text-sm text-slate-600">
+            Boken har inget Vilket ord? i detta kapitel
+          </p>
+        )}
       </section>
     </div>
   )

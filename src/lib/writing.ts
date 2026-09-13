@@ -1,5 +1,4 @@
 import type { WritingEntry } from '../db/schema'
-import type { BookChapter } from '../db/seed'
 
 export interface ChecklistItem {
   id: string
@@ -71,27 +70,4 @@ export function checklistComplete(
   promptSv = '',
 ): boolean {
   return checklistItemsForTask(taskType, promptSv).every((item) => checklist[item.id])
-}
-
-function fallbackPrompt(chapter: BookChapter, type: WritingEntry['taskType']): string {
-  const tema = chapter.title_sv
-  if (type === 'meddelande') {
-    return `Skriv ett meddelande till en vän om temat ${tema}.\n• berätta vad som hänt\n• vad du tycker om det\n• vad ni kan göra tillsammans`
-  }
-  if (type === 'e-post') {
-    return `Skriv ett e-postmeddelande till en myndighet eller arbetsplats om temat ${tema}.\n• vem du är\n• vad du behöver hjälp med\n• när du vill ha svar`
-  }
-  return `Skriv ett klagomål kopplat till temat ${tema}.\n• vad som är fel\n• vad som bör åtgärdas\n• när du vill ha det gjort`
-}
-
-export function ensureWritingTrio(chapter: BookChapter): BookChapter['writing'] {
-  const tasks = [...chapter.writing]
-  const needed: WritingEntry['taskType'][] = ['meddelande', 'e-post', 'klagomål']
-  for (const type of needed) {
-    if (tasks.length >= 3) break
-    if (!tasks.some((t) => t.type === type)) {
-      tasks.push({ type, prompt_sv: fallbackPrompt(chapter, type) })
-    }
-  }
-  return tasks.slice(0, 3)
 }
