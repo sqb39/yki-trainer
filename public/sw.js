@@ -1,12 +1,22 @@
-const CACHE_NAME = 'yki-trainer-v2'
+const CACHE_NAME = 'yki-trainer-v3'
+
+const BASE_PATH = (() => {
+  const match = self.location.pathname.match(/^(.*)\/sw\.js$/)
+  return match ? match[1] : ''
+})()
+
+function asset(path) {
+  return `${BASE_PATH}${path}`
+}
+
 const SHELL = [
-  '/',
-  '/index.html',
-  '/manifest.webmanifest',
-  '/icon.svg',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/apple-touch-icon.png',
+  asset('/'),
+  asset('/index.html'),
+  asset('/manifest.webmanifest'),
+  asset('/icon.svg'),
+  asset('/icon-192.png'),
+  asset('/icon-512.png'),
+  asset('/apple-touch-icon.png'),
 ]
 
 self.addEventListener('install', (event) => {
@@ -38,7 +48,7 @@ self.addEventListener('fetch', (event) => {
         return response
       })
       .catch(() =>
-        caches.match(event.request).then((cached) => cached ?? caches.match('/index.html')),
+        caches.match(event.request).then((cached) => cached ?? caches.match(asset('/index.html'))),
       ),
   )
 })

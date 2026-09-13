@@ -3,7 +3,7 @@ export function registerServiceWorker(): void {
   if (import.meta.env.DEV) return
 
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {
       // Offline shell is optional; ignore registration failures.
     })
   })
