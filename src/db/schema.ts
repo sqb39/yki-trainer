@@ -26,14 +26,14 @@ export interface Review {
   reviewedAt: number
 }
 
-/** User progress, XP, streaks, chapter unlocks */
+/** User progress, XP, streaks, chapter progress */
 export interface Progress {
   id: 'main'
   xp: number
   level: number
   streakDays: number
   lastStudyDate: string | null
-  /** Chapter IDs the user has unlocked (1 always unlocked) */
+  /** Legacy field kept for backup import; all chapters are always accessible. */
   unlockedChapters: number[]
   /** Chapter completion percentage 0–100 */
   chapterProgress: Record<number, number>

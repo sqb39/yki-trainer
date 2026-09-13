@@ -9,7 +9,7 @@ export function BadgeList({ badgeIds, compact = false }: BadgeListProps) {
   if (badgeIds.length === 0) {
     return (
       <p className="text-sm text-slate-500">
-        Inga märken ännu — fortsätt studera för att låsa upp dem!
+        Inga märken ännu — fortsätt studera för att tjäna dem!
       </p>
     )
   }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getChapter } from '../lib/book'
-import { getChapterTitle, isChapterUnlocked } from '../lib/chapters'
+import { getChapterTitle } from '../lib/chapters'
 import { recordBossComplete, saveWritingEntry } from '../lib/progress'
 import { XP_REWARDS } from '../lib/xp'
 import { Timer } from '../components/Timer'
@@ -27,7 +27,6 @@ export function Boss() {
   const navigate = useNavigate()
   const chapter = getChapter(chapterId)
 
-  const progress = useLiveQuery(() => db.progress.get('main'))
   const alreadyDone = useLiveQuery(
     () =>
       db.bossSessions
@@ -48,35 +47,12 @@ export function Boss() {
   const [saving, setSaving] = useState(false)
   const [writingDraft, setWritingDraft] = useState('')
 
-  const locked =
-    chapterId > 1 &&
-    !isChapterUnlocked(
-      chapterId,
-      progress?.unlockedChapters ?? [1],
-      progress?.chapterProgress ?? {},
-    )
-
   if (!chapter) {
     return (
       <div>
         <p className="text-slate-600">Kapitel hittades inte.</p>
         <Link to="/chapters" className="mt-4 text-indigo-600">
           Tillbaka
-        </Link>
-      </div>
-    )
-  }
-
-  if (locked) {
-    return (
-      <div className="mx-auto max-w-lg space-y-4 text-center">
-        <p className="text-4xl">🔒</p>
-        <h1 className="text-xl font-bold text-slate-900">Kapitel låst</h1>
-        <p className="text-slate-600">
-          Slutför 80 % av kapitel {chapterId - 1} för att låsa upp boss-provet.
-        </p>
-        <Link to="/chapters" className="text-indigo-600">
-          Till kapitelkartan
         </Link>
       </div>
     )

@@ -1,8 +1,4 @@
-import { useLiveQuery } from 'dexie-react-hooks'
-import { useEffect } from 'react'
-import { db } from '../db/schema'
 import { getChapter, getChapterIds } from '../lib/book'
-import { unlockedChapterIds } from '../lib/chapters'
 
 interface ChapterSelectProps {
   value: number
@@ -10,23 +6,13 @@ interface ChapterSelectProps {
 }
 
 export function ChapterSelect({ value, onChange }: ChapterSelectProps) {
-  const progress = useLiveQuery(() => db.progress.get('main'))
-  const ids = unlockedChapterIds(
-    getChapterIds(),
-    progress?.unlockedChapters ?? [1],
-    progress?.chapterProgress ?? {},
-  )
-  const selected = ids.includes(value) ? value : (ids[0] ?? 1)
-
-  useEffect(() => {
-    if (value !== selected) onChange(selected)
-  }, [selected, value, onChange])
+  const ids = getChapterIds()
 
   return (
     <label className="flex flex-col gap-1 text-sm">
       <span className="font-semibold text-slate-900">Kapitel</span>
       <select
-        value={selected}
+        value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className="rounded-lg border border-slate-300 px-3 py-2"
       >

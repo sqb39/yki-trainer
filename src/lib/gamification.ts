@@ -1,6 +1,6 @@
 import { db, DEFAULT_PROGRESS, type Progress } from '../db/schema'
 import { getChapter } from './book'
-import { UNLOCK_THRESHOLD } from './chapters'
+import { getAllChapterIds, UNLOCK_THRESHOLD } from './chapters'
 import { todayIso } from './xp'
 
 export const DAILY_QUESTS = [
@@ -89,13 +89,6 @@ export async function syncProgressState(): Promise<Progress> {
   const progress = (await db.progress.get('main')) ?? { ...DEFAULT_PROGRESS }
   const chapterProgress = await refreshAllChapterProgress()
 
-  const unlockedChapters = [1]
-  for (let id = 2; id <= 7; id++) {
-    if ((chapterProgress[id - 1] ?? 0) >= UNLOCK_THRESHOLD) {
-      unlockedChapters.push(id)
-    }
-  }
-
   const badges = await evaluateBadges(progress, chapterProgress)
 
   const updated: Progress = {
@@ -103,7 +96,7 @@ export async function syncProgressState(): Promise<Progress> {
     ...progress,
     id: 'main',
     chapterProgress,
-    unlockedChapters: [...new Set([...(progress.unlockedChapters ?? [1]), ...unlockedChapters])],
+    unlockedChapters: getAllChapterIds(),
     badges,
   }
 

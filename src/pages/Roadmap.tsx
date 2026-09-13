@@ -1,8 +1,29 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { Link } from 'react-router-dom'
 import { db } from '../db/schema'
-import { ROADMAP_WEEKS, UNLOCK_THRESHOLD } from '../lib/chapters'
+import { getAllChapterIds, ROADMAP_WEEKS, UNLOCK_THRESHOLD } from '../lib/chapters'
 import { ProgressBar } from '../components/ProgressBar'
+
+function suggestedWeek(chapterProgress: Record<number, number>): number | null {
+  for (const week of ROADMAP_WEEKS) {
+    if (week.chapterId == null) {
+      const allChaptersDone = getAllChapterIds().every(
+        (id) => (chapterProgress[id] ?? 0) >= UNLOCK_THRESHOLD,
+      )
+      if (allChaptersDone) {
+        const avg =
+          getAllChapterIds().reduce((s, id) => s + (chapterProgress[id] ?? 0), 0) /
+          getAllChapterIds().length
+        if (avg < 60) return week.week
+      }
+      continue
+    }
+    if ((chapterProgress[week.chapterId] ?? 0) < UNLOCK_THRESHOLD) {
+      return week.week
+    }
+  }
+  return null
+}
 
 export function Roadmap() {
   const progress = useLiveQuery(() => db.progress.get('main'))
@@ -14,34 +35,34 @@ export function Roadmap() {
 
   const chapterProgress = progress?.chapterProgress ?? {}
   const planStart = settings?.seededAt ?? new Date().toISOString().slice(0, 10)
+  const recommendedWeek = suggestedWeek(chapterProgress)
 
-  function weekStatus(week: number, chapterId: number | null): 'complete' | 'current' | 'upcoming' {
+  function weekStatus(
+    week: number,
+    chapterId: number | null,
+  ): 'complete' | 'suggested' | 'remaining' {
     if (week === 8) {
       const avg =
-        [1, 2, 3, 4, 5, 6, 7].reduce((s, id) => s + (chapterProgress[id] ?? 0), 0) / 7
+        getAllChapterIds().reduce((s, id) => s + (chapterProgress[id] ?? 0), 0) /
+        getAllChapterIds().length
       if (avg >= 60) return 'complete'
-      const allChaptersDone = [1, 2, 3, 4, 5, 6, 7].every(
-        (id) => (chapterProgress[id] ?? 0) >= UNLOCK_THRESHOLD,
-      )
-      return allChaptersDone ? 'current' : 'upcoming'
+      return week === recommendedWeek ? 'suggested' : 'remaining'
     }
     const pct = chapterProgress[chapterId ?? 0] ?? 0
     if (pct >= UNLOCK_THRESHOLD) return 'complete'
-    const prevDone =
-      chapterId === 1 || (chapterProgress[(chapterId ?? 1) - 1] ?? 0) >= UNLOCK_THRESHOLD
-    return prevDone ? 'current' : 'upcoming'
+    return week === recommendedWeek ? 'suggested' : 'remaining'
   }
 
   const statusStyles = {
     complete: 'border-emerald-200 bg-emerald-50',
-    current: 'border-indigo-300 bg-indigo-50 ring-2 ring-indigo-200',
-    upcoming: 'border-slate-200 bg-white opacity-75',
+    suggested: 'border-indigo-300 bg-indigo-50 ring-2 ring-indigo-200',
+    remaining: 'border-slate-200 bg-white',
   }
 
   const statusIcons = {
     complete: '✅',
-    current: '▶️',
-    upcoming: '⬜',
+    suggested: '▶️',
+    remaining: '⬜',
   }
 
   return (
@@ -49,7 +70,8 @@ export function Roadmap() {
       <header>
         <h1 className="text-2xl font-bold text-slate-900">Studieplan</h1>
         <p className="mt-2 text-slate-600">
-          8-veckors roadmap — ~45–60 min/dag, 6 dagar/vecka. Plan start: {planStart}
+          8-veckors roadmap — rekommenderad ordning, alla kapitel är öppna. Plan start:{' '}
+          {planStart}
         </p>
       </header>
 

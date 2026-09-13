@@ -3,11 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { db } from '../db/schema'
 import { getChapters } from '../lib/book'
-import {
-  getChapterTitle,
-  isChapterUnlocked,
-  UNLOCK_THRESHOLD,
-} from '../lib/chapters'
+import { getChapterTitle, UNLOCK_THRESHOLD } from '../lib/chapters'
 import { ProgressBar } from '../components/ProgressBar'
 
 export function ChapterMap() {
@@ -20,14 +16,13 @@ export function ChapterMap() {
 
   const chapters = getChapters()
   const chapterProgress = progress?.chapterProgress ?? {}
-  const unlocked = progress?.unlockedChapters ?? [1]
 
   return (
     <div className="space-y-8">
       <header>
         <h1 className="text-2xl font-bold text-slate-900">Kapitelkarta</h1>
         <p className="mt-2 text-slate-600">
-          7 teman — lås upp nästa kapitel efter {UNLOCK_THRESHOLD} % i föregående
+          7 teman — alla kapitel är öppna. {UNLOCK_THRESHOLD} % ger märke och markerar kapitlet som klart.
         </p>
       </header>
 
@@ -36,38 +31,33 @@ export function ChapterMap() {
         <div className="space-y-6">
           {chapters.map((chapter) => {
             const pct = chapterProgress[chapter.id] ?? 0
-            const locked = !isChapterUnlocked(chapter.id, unlocked, chapterProgress)
             const bossDone = bossCompleted?.has(chapter.id) ?? false
             const isSelected = selectedId === chapter.id
+            const cleared = pct >= UNLOCK_THRESHOLD
 
             return (
               <div
                 key={chapter.id}
                 className={`relative ml-0 rounded-xl border p-5 pl-14 transition-colors ${
-                  locked
-                    ? 'border-slate-200 bg-slate-50 opacity-60'
-                    : pct >= UNLOCK_THRESHOLD
-                      ? 'border-emerald-200 bg-emerald-50'
-                      : 'border-slate-200 bg-white'
+                  cleared
+                    ? 'border-emerald-200 bg-emerald-50'
+                    : 'border-slate-200 bg-white'
                 }`}
               >
                 <div
                   className={`absolute left-3 top-6 flex h-7 w-7 items-center justify-center rounded-full text-sm font-bold ${
-                    locked
-                      ? 'bg-slate-300 text-slate-600'
-                      : pct >= UNLOCK_THRESHOLD
-                        ? 'bg-emerald-500 text-white'
-                        : 'bg-indigo-500 text-white'
+                    cleared
+                      ? 'bg-emerald-500 text-white'
+                      : 'bg-indigo-500 text-white'
                   }`}
                 >
-                  {locked ? '🔒' : chapter.id}
+                  {chapter.id}
                 </div>
 
                 <button
                   type="button"
                   onClick={() => setSelectedId(isSelected ? null : chapter.id)}
                   className="w-full text-left"
-                  disabled={locked}
                 >
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
@@ -86,12 +76,10 @@ export function ChapterMap() {
                       )}
                     </div>
                   </div>
-                  {!locked && (
-                    <ProgressBar percent={pct} className="mt-3 max-w-md" />
-                  )}
+                  <ProgressBar percent={pct} className="mt-3 max-w-md" />
                 </button>
 
-                {isSelected && !locked && (
+                {isSelected && (
                   <div className="mt-4 flex flex-wrap gap-2 border-t border-slate-200 pt-4">
                     <Link
                       to="/flashcards"

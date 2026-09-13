@@ -4,7 +4,7 @@ import { db } from '../db/schema'
 import { getDueCards } from '../lib/flashcards'
 import { daysUntilExam, levelFromXp, todayIso, xpProgressInLevel } from '../lib/xp'
 import { DAILY_QUESTS, getWeakCards } from '../lib/gamification'
-import { getChapterTitle, nextChapterToUnlock } from '../lib/chapters'
+import { getChapterTitle, suggestedChapter } from '../lib/chapters'
 import { ProgressBar } from '../components/ProgressBar'
 import { StreakBadge } from '../components/StreakBadge'
 import { QuestCard } from '../components/QuestCard'
@@ -15,8 +15,7 @@ export function Dashboard() {
   const progress = useLiveQuery(() => db.progress.get('main'))
   const settings = useLiveQuery(() => db.settings.get('main'))
   const dueCount = useLiveQuery(async () => {
-    const progressRow = await db.progress.get('main')
-    const due = await getDueCards('all', 'all', progressRow?.unlockedChapters ?? [1])
+    const due = await getDueCards('all', 'all')
     return due.length
   }, [])
   const weakCards = useLiveQuery(() => getWeakCards(5), [])
@@ -30,7 +29,7 @@ export function Dashboard() {
       ? (progress?.dailyQuestsCompleted ?? [])
       : [],
   )
-  const currentChapter = nextChapterToUnlock(progress?.chapterProgress ?? {})
+  const currentChapter = suggestedChapter(progress?.chapterProgress ?? {})
   const chapterPct = progress?.chapterProgress?.[currentChapter] ?? 0
   const allQuestsDone = DAILY_QUESTS.every((q) => completedToday.has(q.id))
   const studySecondsToday =
@@ -82,7 +81,7 @@ export function Dashboard() {
       <section className="rounded-xl border border-indigo-200 bg-indigo-50 p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-sm font-medium text-indigo-700">Aktuellt kapitel</p>
+            <p className="text-sm font-medium text-indigo-700">Rekommenderat kapitel</p>
             <h2 className="text-lg font-bold text-slate-900">
               {currentChapter}. {getChapterTitle(currentChapter)}
             </h2>

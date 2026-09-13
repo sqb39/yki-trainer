@@ -33,15 +33,9 @@ export function Flashcards() {
   const [backDraft, setBackDraft] = useState('')
   const [cardShownAt, setCardShownAt] = useState(() => Date.now())
 
-  const progress = useLiveQuery(() => db.progress.get('main'))
   const dueCards = useLiveQuery(
-    () =>
-      getDueCards(
-        chapterFilter,
-        typeFilter,
-        chapterFilter === 'all' ? (progress?.unlockedChapters ?? [1]) : undefined,
-      ),
-    [chapterFilter, typeFilter, progress?.unlockedChapters],
+    () => getDueCards(chapterFilter, typeFilter),
+    [chapterFilter, typeFilter],
   )
 
   const current = queue[index]
@@ -344,10 +338,8 @@ export function Flashcards() {
               }
               className="rounded-lg border border-slate-300 px-3 py-2"
             >
-              <option value="all">Upplåsta kapitel</option>
-              {(chapters ?? [])
-                .filter((id) => (progress?.unlockedChapters ?? [1]).includes(id))
-                .map((id) => (
+              <option value="all">Alla kapitel</option>
+              {(chapters ?? []).map((id) => (
                 <option key={String(id)} value={String(id)}>
                   Kapitel {String(id)}
                 </option>

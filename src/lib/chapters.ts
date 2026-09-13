@@ -155,31 +155,24 @@ export function getAllChapterIds(): number[] {
   return getChapters().map((c) => c.id)
 }
 
+/** All chapters are always accessible; kept for backward compatibility. */
 export function isChapterUnlocked(
-  chapterId: number,
-  unlockedChapters: number[],
-  chapterProgress: Record<number, number>,
+  _chapterId: number,
+  _unlockedChapters?: number[],
+  _chapterProgress?: Record<number, number>,
 ): boolean {
-  if (chapterId === 1) return true
-  if (unlockedChapters.includes(chapterId)) return true
-  const prevProgress = chapterProgress[chapterId - 1] ?? 0
-  return prevProgress >= UNLOCK_THRESHOLD
+  return true
 }
 
-export function unlockedChapterIds(
-  allIds: number[],
-  unlockedChapters: number[],
-  chapterProgress: Record<number, number>,
-): number[] {
-  return allIds.filter((id) => isChapterUnlocked(id, unlockedChapters, chapterProgress))
+/** Returns all chapter IDs; chapters are never gated. */
+export function unlockedChapterIds(allIds: number[]): number[] {
+  return allIds
 }
 
-export function nextChapterToUnlock(chapterProgress: Record<number, number>): number {
-  for (let id = 2; id <= 7; id++) {
-    const prev = chapterProgress[id - 1] ?? 0
-    const current = chapterProgress[id] ?? 0
-    if (prev >= UNLOCK_THRESHOLD && current < UNLOCK_THRESHOLD) return id
-  }
-  const firstIncomplete = getAllChapterIds().find((id) => (chapterProgress[id] ?? 0) < UNLOCK_THRESHOLD)
-  return firstIncomplete ?? 1
+/** First chapter under 80%, or the last chapter if all are complete. */
+export function suggestedChapter(chapterProgress: Record<number, number>): number {
+  const allIds = getAllChapterIds()
+  const firstIncomplete = allIds.find((id) => (chapterProgress[id] ?? 0) < UNLOCK_THRESHOLD)
+  if (firstIncomplete != null) return firstIncomplete
+  return allIds[allIds.length - 1] ?? 1
 }
